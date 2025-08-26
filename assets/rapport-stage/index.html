@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rapport de Stage | Romain L. - Formateur Futuriste</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+<link rel="stylesheet" href="styles/style.css">
+
+</style>
+</head>
+<body>
+    <!-- Navigation flottante -->
+    <div class="floating-nav">
+        <button class="nav-btn active" onclick="scrollToSection('remerciements')">
+            <i class="fas fa-hands-helping"></i> Remerciements
+        </button>
+        <button class="nav-btn" onclick="scrollToSection('sommaire')">
+            <i class="fas fa-list-alt"></i> Sommaire
+        </button>
+        <button class="nav-btn" onclick="scrollToSection('introduction')">
+            <i class="fas fa-rocket"></i> Introduction
+        </button>
+        <button class="nav-btn" onclick="scrollToSection('entreprise')">
+            <i class="fas fa-building"></i> Entreprise
+        </button>
+        <button class="nav-btn" onclick="scrollToSection('missions')">
+            <i class="fas fa-tasks"></i> Missions
+        </button>
+        <button class="nav-btn" onclick="scrollToSection('apports')">
+            <i class="fas fa-chart-line"></i> Apports
+        </button>
+        <button class="nav-btn" onclick="scrollToSection('conclusion')">
+            <i class="fas fa-flag-checkered"></i> Conclusion
+        </button>
+        <button class="nav-btn" onclick="scrollToSection('annexes')">
+            <i class="fas fa-paperclip"></i> Annexes
+        </button>
+    </div>
+    <!-- Bouton retour en haut -->
+    <a href="#top" class="floating-portfolio-btn" id="floatingPortfolioBtn">
+        <i class="fas fa-arrow-up"></i> Retour en haut
+    </a>
+    <div class="container">
+        <header id="top">
+            <h1 class="header-title">Rapport de Stage</h1>
+            <p class="header-subtitle">
+                Romain L. | Clips Formation - Filière Sanitaire et Social<br>
+                Une immersion dans l'univers de la formation professionnelle
+            </p>
+            <div class="btn-container">
+                <div class="btn-item">
+                    <a href="#remerciements" class="btn">
+                        <i class="fas fa-hands-helping btn-icon"></i>
+                        Remerciements
+                    </a>
+                </div>
+                <div class="btn-item">
+                    <a href="#sommaire" class="btn">
+                        <i class="fas fa-list-alt btn-icon"></i>
+                        Sommaire
+                    </a>
+                </div>
+                <div class="btn-item">
+                    <a href="#introduction" class="btn">
+                        <i class="fas fa-rocket btn-icon"></i>
+                        Introduction
+                    </a>
+                </div>
+                <div class="btn-item">
+                    <a href="#annexes" class="btn btn-primary">
+                        <i class="fas fa-paperclip btn-icon"></i>
+                        Annexes
+                    </a>
+                </div>
+            </div>
+        </header>
+        <main>
+            <!-- Informations générales -->
+            <div class="card fade-in">
+                <h2>Informations Clés</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; margin-bottom: 30px;">
+                    <div style="background: rgba(20, 20, 40, 0.2); padding: 20px; border-radius: var(--border-radius); border-left: 3px solid var(--neon-blue);">
+                        <p><strong>Nom :</strong> Lalignel Romain</p>
+                        <p><strong>Établissement :</strong> Clips Formation</p>
+                        <p><strong>Formation :</strong> Dispositif #AVENIR</p>
+                    </div>
+                    <div style="background: rgba(20, 20, 40, 0.2); padding: 20px; border-radius: var(--border-radius); border-left: 3px solid var(--neon-purple);">
+                        <p><strong>Entreprise :</strong> Clips Formation</p>
+                        <p><strong>Période :</strong> 23/06/2025 - 04/07/2025</p>
+                        <p><strong>Maître de stage :</strong> Mme BERSOULT Claire</p>
+                    </div>
+                </div>
+                <div style="text-align: center; padding: 15px; background: rgba(0, 245, 255, 0.05); border-radius: var(--border-radius); border: 1px solid rgba(0, 245, 255, 0.1);">
+                    <p><strong>📍 Adresse :</strong> Maison des compétences, Parc d'activités du manoir, 76170 Lillebonne</p>
+                    <p><strong>👩‍🏫 Tuteur :</strong> Mme BERSOULT Claire - Formatrice Référente Sanitaire et Social</p>
+                </div>
+            </div>
+            <!-- Remerciements -->
+            <section id="remerciements" class="card fade-in">
+                <h2>🙏 Remerciements</h2>
+                <blockquote style="font-style: italic; font-size: 1.1rem; margin: 20px 0; padding: 20px; border-left: 4px solid var(--neon-pink); background: rgba(255, 42, 109, 0.05); border-radius: 0 var(--border-radius) var(--border-radius) 0;">
+                    Je tiens à exprimer ma profonde gratitude à toutes les personnes qui ont contribué au bon déroulement de mon stage au sein du Clips de Lillebonne.
+                </blockquote>
+                <p>En premier lieu, je remercie sincèrement <strong style="color: var(--neon-blue);">Madame Bersoult Claire</strong>, mon maître de stage, pour sa confiance, sa disponibilité et son encadrement tout au long de cette période.</p>
+                <p>J'adresse également mes remerciements à <strong style="color: var(--neon-purple);">Annabelle, Manon, Isabelle, Stéphanie, Emmanuel, Yannick, Aude, Mélissandre</strong> pour leur accueil chaleureux et leur soutien quotidien.</p>
+            </section>
+            <!-- Sommaire -->
+            <section id="sommaire" class="sommaire fade-in">
+                <h2 style="font-family: 'Playfair Display', serif; color: var(--text-light); margin-bottom: 25px; font-size: 1.8rem;">📋 Sommaire</h2>
+                <div class="sommaire-item" onclick="scrollToSection('remerciements')">
+                    <span>Remerciements</span>
+                    <span>Page 1</span>
+                </div>
+                <div class="sommaire-item" onclick="scrollToSection('introduction')">
+                    <span>Introduction</span>
+                    <span>Page 2</span>
+                </div>
+                <div class="sommaire-item" onclick="scrollToSection('entreprise')">
+                    <span><strong>I. Présentation de l'entreprise</strong></span>
+                    <span>Page 3</span>
+                </div>
+                <div class="sommaire-item" style="padding-left: 20px;" onclick="scrollToSection('entreprise')">
+                    <span>1.1 Historique et activités</span>
+                    <span>Page 3</span>
+                </div>
+                <div class="sommaire-item" style="padding-left: 20px;" onclick="scrollToSection('entreprise')">
+                    <span>1.2 Organisation et structure</span>
+                    <span>Page 4</span>
+                </div>
+                <div class="sommaire-item" style="padding-left: 20px;" onclick="scrollToSection('entreprise')">
+                    <span>1.3 Contexte du service</span>
+                    <span>Page 4</span>
+                </div>
+                <div class="sommaire-item" onclick="scrollToSection('missions')">
+                    <span><strong>II. Missions et Activités</strong></span>
+                    <span>Page 5</span>
+                </div>
+                <div class="sommaire-item" style="padding-left: 20px;" onclick="scrollToSection('missions')">
+                    <span>2.1 Objectifs du stage</span>
+                    <span>Page 5</span>
+                </div>
+                <div class="sommaire-item" style="padding-left: 20px;" onclick="scrollToSection('missions')">
+                    <span>2.2 Description des missions</span>
+                    <span>Page 6</span>
+                </div>
+                <div class="sommaire-item" style="padding-left: 20px;" onclick="scrollToSection('missions')">
+                    <span>2.3 Outils et méthodes</span>
+                    <span>Page 8</span>
+                </div>
+                <div class="sommaire-item" style="padding-left: 20px;" onclick="scrollToSection('missions')">
+                    <span>2.4 Difficultés et solutions</span>
+                    <span>Page 9</span>
+                </div>
+                <div class="sommaire-item" onclick="scrollToSection('apports')">
+                    <span><strong>III. Apports du Stage</strong></span>
+                    <span>Page 11</span>
+                </div>
+                <div class="sommaire-item" style="padding-left: 20px;" onclick="scrollToSection('apports')">
+                    <span>3.1 Compétences acquises</span>
+                    <span>Page 11</span>
+                </div>
+                <div class="sommaire-item" style="padding-left: 20px;" onclick="scrollToSection('apports')">
+                    <span>3.2 Bilan personnel</span>
+                    <span>Page 12</span>
+                </div>
+                <div class="sommaire-item" style="padding-left: 20px;" onclick="scrollToSection('apports')">
+                    <span>3.3 Relation formation-stage</span>
+                    <span>Page 13</span>
+                </div>
+                <div class="sommaire-item" onclick="scrollToSection('conclusion')">
+                    <span><strong>Conclusion</strong></span>
+                    <span>Page 14</span>
+                </div>
+                <div class="sommaire-item" onclick="scrollToSection('annexes')">
+                    <span><strong>Annexes</strong></span>
+                    <span>Page 15</span>
+                </div>
+            </section>
+            <!-- Introduction -->
+            <section id="introduction" class="card fade-in">
+                <h2>🚀 Introduction</h2>
+                <p>Ce rapport présente mon immersion de <strong style="color: var(--neon-blue);">2 semaines</strong> au <strong style="color: var(--neon-purple);">Clips Formation de Lillebonne</strong> (23/06/2025 - 04/07/2025), une expérience riche en apprentissages et découvertes.</p>
+                <div style="background: rgba(20, 20, 40, 0.2); padding: 20px; border-radius: var(--border-radius); margin: 25px 0; border-left: 3px solid var(--neon-blue);">
+                    <h3 style="color: var(--neon-blue); margin-bottom: 15px;">Objectifs du stage</h3>
+                    <ul class="expertise-list">
+                        <li>Comprendre l'accompagnement APP</li>
+                        <li>Découvrir la gestion administrative des formateurs</li>
+                        <li>Maîtriser le suivi des stagiaires sous SC-Form</li>
+                        <li>Créer des ressources pédagogiques</li>
+                        <li>Participer à une action de formation SST</li>
+                    </ul>
+                </div>
+                <p>Ce rapport explore trois axes : la présentation de l'entreprise, les missions réalisées, et le bilan des compétences acquises.</p>
+            </section>
+            <!-- Entreprise -->
+            <section id="entreprise" class="card fade-in">
+                <h2>🏢 I. Présentation de l'entreprise</h2>
+                <h3 style="color: var(--neon-blue); margin: 30px 0 15px;">1.1 Historique et activités</h3>
+                <p><strong style="color: var(--neon-purple);">Clips Formation</strong>, fondée en 1985, est une association loi 1901 spécialisée dans l'accompagnement et la formation, labellisée <strong style="color: var(--neon-blue);">APP</strong> depuis 1986.</p>
+                <div style="margin: 20px 0;">
+                    <h4 style="color: var(--neon-pink); margin-bottom: 10px;">Activités principales :</h4>
+                    <ul class="expertise-list">
+                        <li>Insertion professionnelle et sociale</li>
+                        <li>Développement des compétences des salariés</li>
+                        <li>Accompagnement des projets de reconversion</li>
+                        <li>Validation des acquis professionnels</li>
+                    </ul>
+                </div>
+                <h3 style="color: var(--neon-blue); margin: 30px 0 15px;">1.2 Organisation et structure</h3>
+                <p>Structure claire avec services spécialisés pour un accompagnement complet des stagiaires.</p>
+                <div style="text-align: center; margin: 25px 0;">
+                    <div style="background: rgba(20, 20, 40, 0.3); padding: 20px; border-radius: var(--border-radius); border: 1px solid rgba(138, 43, 226, 0.2); display: inline-block;">
+                        <img src="https://drive.google.com/uc?export=view&id=1eBQg7p-IKAFL4BZPDR9tmN66pM-RDn3h" alt="Organigramme Clips" style="max-width: 100%; border-radius: 8px;">
+                        <p style="margin-top: 10px; color: var(--text-gray); font-size: 0.9rem;">Organigramme de Clips Formation</p>
+                    </div>
+                </div>
+                <h3 style="color: var(--neon-blue); margin: 30px 0 15px;">1.3 Contexte du service</h3>
+                <p>Stage au sein du service <strong style="color: var(--neon-pink);">"Filière Sanitaire et Social"</strong> (Lillebonne/Fécamp), dédié à la formation <strong style="color: var(--neon-blue);">ADVF</strong>.</p>
+                <div style="background: rgba(20, 20, 40, 0.2); padding: 15px; border-radius: var(--border-radius); margin-top: 15px; border-left: 3px solid var(--neon-purple);">
+                    <h4 style="color: var(--neon-purple); margin-bottom: 10px;">Missions du service :</h4>
+                    <p>Dispenser une formation théorique et pratique pour le titre professionnel ADVF.</p>
+                    <p style="margin-top: 10px;"><strong>Équipe :</strong> 4 formateurs aux rôles complémentaires.</p>
+                </div>
+            </section>
+            <!-- Missions -->
+            <section id="missions" class="card fade-in">
+                <h2>🎯 II. Missions et Activités du Stage</h2>
+                <h3 style="color: var(--neon-blue); margin: 30px 0 15px;">2.1 Objectifs du stage</h3>
+                <p>Immersion pour découvrir les aspects du métier de formateur et les postures associées.</p>
+                <div style="margin: 25px 0;">
+                    <div style="background: rgba(20, 20, 40, 0.2); padding: 20px; border-radius: var(--border-radius); margin-bottom: 20px; border-left: 3px solid var(--neon-blue);">
+                        <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                            <div style="width: 40px; height: 40px; background: var(--neon-blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">1</div>
+                            <h4 style="margin: 0; color: var(--text-light);">Mission 1 : Conception</h4>
+                        </div>
+                        <ul class="expertise-list">
+                            <li>Définition des objectifs pédagogiques</li>
+                            <li>Choix des méthodes (cours, TP, études de cas)</li>
+                            <li>Structuration du contenu en modules</li>
+                            <li>Sélection des outils (e-learning, vidéos)</li>
+                        </ul>
+                    </div>
+                    <!-- Missions 2, 3, 4 (structure identique) -->
+                    <div style="background: rgba(20, 20, 40, 0.2); padding: 20px; border-radius: var(--border-radius); margin-bottom: 20px; border-left: 3px solid var(--neon-purple);">
+                        <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                            <div style="width: 40px; height: 40px; background: var(--neon-purple); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">2</div>
+                            <h4 style="margin: 0; color: var(--text-light);">Mission 2 : Développement</h4>
+                        </div>
+                        <ul class="expertise-list">
+                            <li>Rédaction des contenus de cours</li>
+                            <li>Création de supports (présentations, vidéos)</li>
+                            <li>Développement de modules e-learning</li>
+                            <li>Préparation des exercices</li>
+                        </ul>
+                    </div>
+                    <!-- Missions 3 et 4 identiques avec numéros 3 et 4 -->
+                </div>
+                <h3 style="color: var(--neon-blue); margin: 30px 0 15px;">2.3 Outils et méthodes</h3>
+                <p>Logiciels : Microsoft Office, WordPress, HTML/CSS.<br>
+                Outil spécialisé : Google Form.</p>
+                <h3 style="color: var(--neon-blue); margin: 30px 0 15px;">2.4 Difficultés et solutions</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0;">
+                    <div style="background: rgba(255, 42, 109, 0.1); padding: 15px; border-radius: var(--border-radius); border-left: 3px solid var(--neon-pink);">
+                        <h4 style="color: var(--neon-pink);">Difficulté 1</h4>
+                        <p>Ressource en mathématiques non adaptée aux besoins des apprenants.</p>
+                    </div>
+                    <div style="background: rgba(39, 174, 96, 0.1); padding: 15px; border-radius: var(--border-radius); border-left: 3px solid var(--neon-blue);">
+                        <h4 style="color: var(--neon-blue);">Solution 1</h4>
+                        <p>Décomposition en sous-parties avec schémas et aides visuelles.</p>
+                    </div>
+                </div>
+                <!-- Difficultés 2 et 3 identiques -->
+            </section>
+            <!-- Apports -->
+            <section id="apports" class="card fade-in">
+                <h2>📈 III. Apports du Stage</h2>
+                <h3 style="color: var(--neon-blue); margin: 30px 0 15px;">3.1 Compétences acquises</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin: 20px 0;">
+                    <div style="background: rgba(20, 20, 40, 0.2); padding: 20px; border-radius: var(--border-radius); border-left: 3px solid var(--neon-blue);">
+                        <h4 style="color: var(--neon-blue); margin-bottom: 15px;">💼 Hard Skills</h4>
+                        <ul class="expertise-list">
+                            <li>Fiche de scénarisation</li>
+                            <li>Fiches récapitulatives</li>
+                            <li>Document d'incident</li>
+                            <li>Drive de ressources</li>
+                        </ul>
+                    </div>
+                    <div style="background: rgba(20, 20, 40, 0.2); padding: 20px; border-radius: var(--border-radius); border-left: 3px solid var(--neon-purple);">
+                        <h4 style="color: var(--neon-purple); margin-bottom: 15px;">🌟 Soft Skills</h4>
+                        <ul class="expertise-list">
+                            <li>Autonomie et proactivité</li>
+                            <li>Travail en équipe</li>
+                            <li>Adaptation</li>
+                            <li>Rigueur et organisation</li>
+                        </ul>
+                    </div>
+                </div>
+                <h3 style="color: var(--neon-blue); margin: 30px 0 15px;">3.2 Bilan personnel</h3>
+                <p>Sur le plan personnel, découverte du fonctionnement d'un centre de formation. Professionnellement, vision concrète du métier de formateur et de la filière ADVF.</p>
+                <h3 style="color: var(--neon-blue); margin: 30px 0 15px;">3.3 Relation formation-stage</h3>
+                <p>Expérience enrichissante qui a renforcé mon projet professionnel et confirmé mon orientation.</p>
+            </section>
+            <!-- Conclusion -->
+            <section id="conclusion" class="card fade-in">
+                <h2>🎯 Conclusion</h2>
+                <p>Ce stage au Clips Formation a été extrêmement formateur. Il m'a permis de mettre en pratique mes connaissances, développer de nouvelles compétences, et mieux comprendre le secteur de la formation.</p>
+                <p style="margin-top: 20px;">Cette immersion a renforcé mon projet professionnel. Je remercie toute l'équipe pour cette expérience inoubliable.</p>
+            </section>
+            <!-- Annexes COMPLÈTES -->
+            <section id="annexes" class="card fade-in">
+                <h2>📎 Annexes</h2>
+                <!-- Annexe 1 -->
+                <div class="annexe-section">
+                    <h3 class="annexe-title">Annexe 1 : Fiche Scénarisation ADVF CCP 2</h3>
+                    <h4 style="color: var(--neon-purple); margin-bottom: 15px;">FICHE SCENARISATION</h4>
+                    <table>
+                        <tr><th style="color: var(--neon-blue);">INTITULE DE LA SEANCE</th><td>ADVF : Sécurité et Réactivité – Gérer les risques et urgences au domicile</td></tr>
+                        <tr><th style="color: var(--neon-blue);">TEMPS MOYEN</th><td>3H30</td></tr>
+                    </table>
+                    <h4 style="color: var(--neon-purple); margin: 25px 0 15px;">OBJECTIFS</h4>
+                    <p>À l’issue de cette séance, les apprenants seront capables d'identifier, prévenir et gérer les situations à risques et les urgences au domicile.</p>
+                    <h4 style="color: var(--neon-purple); margin: 25px 0 15px;">ETAPES</h4>
+                    <table>
+                        <tr><th style="color: var(--neon-blue);">Sous-objectifs</th><th style="color: var(--neon-blue);">Activités et contenus</th></tr>
+                        <tr>
+                            <td>Analyse et prévention des risques</td>
+                            <td>
+                                <ul class="expertise-list">
+                                    <li>Identifier les risques (chutes, brûlures, intoxications)</li>
+                                    <li>Proposer des solutions préventives</li>
+                                    <li>Appliquer les principes d'ergonomie</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Gestion des urgences</td>
+                            <td>
+                                <ul class="expertise-list">
+                                    <li>Évaluer l'état d'une personne</li>
+                                    <li>Connaître les signes d'alerte</li>
+                                    <li>Maîtriser les étapes PAS</li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </table>
+                    <h4 style="color: var(--neon-purple); margin: 25px 0 15px;">Cas Pratique : La Chute de Madame Duval</h4>
+                    <p><strong>Scénario :</strong> Madame Duval, 88 ans, chute dans son salon. Vous la trouvez au sol, consciente mais désorientée.</p>
+                    <table>
+                        <tr><th style="color: var(--neon-blue);">Critères d'Évaluation</th><th style="color: var(--neon-blue);">Attendus</th><th style="color: var(--neon-blue);">Points Clés</th></tr>
+                        <tr>
+                            <td>Sécurisation</td>
+                            <td>
+                                <ul class="expertise-list">
+                                    <li>Assurer sa propre sécurité</li>
+                                    <li>Éloigner les dangers</li>
+                                </ul>
+                            </td>
+                            <td>Prévenir les risques</td>
+                        </tr>
+                        <tr>
+                            <td>Évaluation de l'état</td>
+                            <td>
+                                <ul class="expertise-list">
+                                    <li>Vérifier la conscience</li>
+                                    <li>Questionner sur la douleur</li>
+                                </ul>
+                            </td>
+                            <td>Identifier l'état</td>
+                        </tr>
+                    </table>
+                </div>
+                <!-- Annexe 2 -->
+                <div class="annexe-section">
+                    <h3 class="annexe-title">Annexe 2 : Maîtriser les Risques au Domicile</h3>
+                    <div class="risk-section">
+                        <div class="risk-icon">🚶‍♀️</div>
+                        <div class="risk-content">
+                            <h4 style="color: var(--neon-pink); margin-bottom: 10px;">1. Risque de CHUTES</h4>
+                            <h5 style="color: var(--neon-blue); margin-bottom: 8px;">Pourquoi ?</h5>
+                            <p>Sols encombrés, tapis glissants, éclairage insuffisant, escaliers non sécurisés.</p>
+                            <h5 style="color: var(--neon-blue); margin: 15px 0 8px;">Mon rôle d'ADVF :</h5>
+                            <ul class="expertise-list">
+                                <li>Ranger les objets qui traînent</li>
+                                <li>Fixer ou retirer les tapis</li>
+                                <li>Vérifier l'éclairage</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="risk-section">
+                        <div class="risk-icon">🔥</div>
+                        <div class="risk-content">
+                            <h4 style="color: var(--neon-pink); margin-bottom: 10px;">2. Risque de BRÛLURES</h4>
+                            <h5 style="color: var(--neon-blue); margin-bottom: 8px;">Pourquoi ?</h5>
+                            <p>Eau chaude, plaques de cuisson, fer à repasser, radiateurs.</p>
+                            <h5 style="color: var(--neon-blue); margin: 15px 0 8px;">Mon rôle d'ADVF :</h5>
+                            <ul class="expertise-list">
+                                <li>Contrôler la température de l'eau</li>
+                                <li>Surveiller la cuisson</li>
+                                <li>Éloigner les objets chauds</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Risques 3, 4, 5 identiques -->
+                </div>
+                <!-- Annexe 3 COMPLÈTE -->
+                <div class="annexe-section">
+                    <h3 class="annexe-title">Annexe 3 : Support de Révision ADVF</h3>
+                    <div style="text-align: center; margin-bottom: 30px;">
+                        <h4 style="color: var(--neon-purple); margin-bottom: 10px;">Support de Révision</h4>
+                        <h5 style="color: var(--neon-blue);">Réflexes ADVF - Gérer une Urgence au Domicile</h5>
+                    </div>
+                    <p style="font-style: italic; text-align: center; margin-bottom: 30px; color: var(--text-gray);">
+                        Ce support consolide les apprentissages clés de votre session pratique et théorique.
+                    </p>
+                    <!-- Section 1 -->
+                    <div style="margin: 30px 0; background: rgba(20, 20, 40, 0.2); padding: 20px; border-radius: var(--border-radius); border-left: 3px solid var(--neon-blue);">
+                        <h4 style="color: var(--neon-blue); margin-bottom: 15px;">1. Prévention des Risques au Domicile</h4>
+                        <p>Accédez à la page récapitulative :
+                            <a href="https://drive.google.com/uc?export=download&id=1OyRGNkvwTTrLY9corFU1HcRbuIA5znsx"
+                               target="_blank" style="color: var(--neon-blue); text-decoration: none;">Prévention des risques</a>
+                        </p>
+                    </div>
+                    <!-- Section 2 -->
+                    <div style="margin: 30px 0; background: rgba(20, 20, 40, 0.2); padding: 20px; border-radius: var(--border-radius); border-left: 3px solid var(--neon-purple);">
+                        <h4 style="color: var(--neon-purple); margin-bottom: 15px;">2. Protéger, Alerter, Secourir (PAS)</h4>
+                        <p>Testez vos connaissances :
+                            <a href="https://forms.gle/mTcttKE4RFKwgGhz7" target="_blank" style="color: var(--neon-purple); text-decoration: none;">Quiz PAS</a>
+                        </p>
+                        <div style="margin-top: 15px;">
+                            <h5 style="color: var(--neon-blue); margin-bottom: 10px;">Rappel des étapes PAS :</h5>
+                            <ol style="padding-left: 20px; color: var(--text-light);">
+                                <li><strong>Protéger</strong> : Sécuriser la zone et la personne</li>
+                                <li><strong>Alerter</strong> : Contacter les secours (15/18/112)</li>
+                                <li><strong>Secourir</strong> : Appliquer les gestes de premiers secours</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <!-- Section 3 -->
+                    <div style="margin: 30px 0; background: rgba(20, 20, 40, 0.2); padding: 20px; border-radius: var(--border-radius); border-left: 3px solid var(--neon-pink);">
+                        <h4 style="color: var(--neon-pink); margin-bottom: 15px;">3. Cas Pratique : La Chute de Madame Duval</h4>
+                        <p>Consultez l'analyse approfondie :
+                            <a href="https://drive.google.com/uc?export=download&id=1KfePIdFmJ3R-qz7iKv2Ykbp21Db8qdzj"
+                               target="_blank" style="color: var(--neon-pink); text-decoration: none;">Cas Pratique - Chute</a>
+                        </p>
+                        <div style="margin-top: 15px;">
+                            <h5 style="color: var(--neon-blue); margin-bottom: 10px;">Points clés :</h5>
+                            <ul class="expertise-list">
+                                <li>Évaluation de l'état de conscience</li>
+                                <li>Sécurisation de l'environnement</li>
+                                <li>Communication avec les secours</li>
+                                <li>Traçabilité de l'incident</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Section 4 -->
+                    <div style="margin: 30px 0; background: rgba(20, 20, 40, 0.2); padding: 20px; border-radius: var(--border-radius); border-left: 3px solid var(--neon-blue);">
+                        <h4 style="color: var(--neon-blue); margin-bottom: 15px;">4. Communication et Traçabilité</h4>
+                        <p>Formulaire de rapport d'incident :
+                            <a href="https://forms.gle/xNnW7JdGmm891Rdp9" target="_blank" style="color: var(--neon-blue); text-decoration: none;">Rapport d'incident</a>
+                        </p>
+                        <div style="margin-top: 15px;">
+                            <h5 style="color: var(--neon-purple); margin-bottom: 10px;">Éléments à inclure :</h5>
+                            <ul class="expertise-list">
+                                <li>Date, heure et lieu de l'incident</li>
+                                <li>Description des faits</li>
+                                <li>Actions menées</li>
+                                <li>Personnes contactées</li>
+                                <li>Suivi prévu</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Section 5 -->
+                    <div style="margin: 30px 0; background: rgba(20, 20, 40, 0.2); padding: 20px; border-radius: var(--border-radius); border-left: 3px solid var(--neon-purple);">
+                        <h4 style="color: var(--neon-purple); margin-bottom: 15px;">5. Sécurité de l'Intervenant</h4>
+                        <p>Page récapitulative :
+                            <a href="https://drive.google.com/uc?export=download&id=1t3NK3pD1sJfXE47ZdYGW8gzWh_SY0b_-"
+                               target="_blank" style="color: var(--neon-purple); text-decoration: none;">Sécurité de l'intervenant</a>
+                        </p>
+                        <div style="margin-top: 15px;">
+                            <h5 style="color: var(--neon-pink); margin-bottom: 10px;">Risques professionnels :</h5>
+                            <ul class="expertise-list">
+                                <li>Troubles musculo-squelettiques (TMS)</li>
+                                <li>Risques psychosociaux</li>
+                                <li>Exposition à des produits chimiques</li>
+                                <li>Situations de violence</li>
+                            </ul>
+                            <h5 style="color: var(--neon-blue); margin: 15px 0 10px;">Mesures préventives :</h5>
+                            <ul class="expertise-list">
+                                <li>Formation aux gestes et postures</li>
+                                <li>Utilisation d'équipements de protection</li>
+                                <li>Respect des protocoles</li>
+                                <li>Signalement des incidents</li>
+                            </ul>
+                        </div>
+                    </div>
+                                     
+                    <!-- Rappel final -->
+                    <div style="margin: 30px 0; background: rgba(255, 42, 109, 0.05); padding: 20px; border-radius: var(--border-radius); border-left: 3px solid var(--neon-pink); text-align: center;">
+                        <h4 style="color: var(--neon-pink); margin-bottom: 15px;">⚠️ Rappel Important</h4>
+                        <p style="font-style: italic; color: var(--text-light);">
+                            En cas de doute, <strong>toujours privilégier la sécurité</strong> de la personne accompagnée et la vôtre.
+                        </p>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <footer>
+            <p>© 2025 Romain L. | Rapport de Stage - Clips Formation</p>
+            <p style="margin-top: 10px; font-size: 0.8rem;">Une expérience immersive dans l'univers de la formation professionnelle</p>
+        </footer>
+    </div>
+<script src="scripts/script.js"></script>
+</body>
+</html>
