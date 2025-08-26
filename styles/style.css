@@ -1,0 +1,49 @@
+:root {
+    --neon-blue: #00f5ff;
+    --neon-purple: #8a2be2;
+    --neon-pink: #ff2a6d;
+    --dark-bg: #0a0a1a;
+    --glass-bg: rgba(15, 15, 30, 0.6);
+    --shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    --transition: all 0.4s cubic-bezier(0.2, 0.8, 0.4, 1);
+    --border-radius: 12px;
+    --text-light: #f0f0f0;
+    --text-gray: #a0a0b0;
+}
+*
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body
+{
+    font-family: 'Montserrat', sans-serif;
+    background: var(--dark-bg);
+    color: var(--text-light);
+    line-height: 1.7;
+    overflow-x: hidden;
+    position: relative;
+}
+/* Effet de grille cyberpunk en arrière-plan */
+body::before
+{
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+        linear-gradient(90deg, transparent 98%, rgba(0, 245, 255, 0.05) 100%),
+        linear-gradient(0deg, transparent 98%, rgba(138, 43, 226, 0.05) 100%);
+    background-size: 50px 50px;
+    z-index: -1;
+    animation: grid-move 15s linear infinite;
+}
+@keyframes grid-move
+{
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(100px, 100px); }
+}
+/* ... (tout le reste du CSS est inclus dans le code complet ci-dessus) */
