@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intelligence Artificielle - Ressources Pédagogiques</title>
+
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/icon-ia/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/icon-ia/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/icon-ia/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <!-- Polices -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --neon-blue: #00f5ff;
+            --neon-purple: #8a2be2;
+            --neon-pink: #ff2a6d;
+            --dark-bg: #0a0a1a;
+            --text-light: #f0f0f0;
+            --text-gray: #a0a0b0;
+            --border-radius: 12px;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            line-height: 1.7;
+            margin: 0;
+            padding: 30px;
+        }
+
+        .ressources-ia-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+
+        /* Version 5 : En-tête avec ligne dégradée */
+        .introduction {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 0 20px;
+        }
+
+        .introduction h2 {
+            color: var(--neon-blue);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+        }
+
+        .degraded-line {
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--neon-blue), transparent);
+            margin: 10px auto 20px;
+        }
+
+        .introduction p {
+            max-width: 80%;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        /* Sections principales */
+        .section {
+            margin-bottom: 40px;
+            padding: 0 20px;
+        }
+
+        .section h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--neon-purple);
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(0, 245, 255, 0.2);
+            padding-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section h3 i {
+            color: var(--neon-blue);
+        }
+
+        /* Liste des ressources */
+        .resource-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .resource-list li {
+            margin-bottom: 15px;
+            padding: 15px;
+            background: rgba(20, 20, 40, 0.2);
+            border-radius: var(--border-radius);
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .resource-list li:hover {
+            background: rgba(20, 20, 40, 0.4);
+            transform: translateX(5px);
+        }
+
+        .resource-link {
+            color: var(--text-light);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 500;
+            flex: 1;
+        }
+
+        .resource-link i {
+            color: var(--neon-blue);
+            width: 20px;
+            text-align: center;
+        }
+
+        .resource-link:hover {
+            color: var(--neon-pink);
+        }
+
+        .resource-link:hover i {
+            color: var(--neon-pink);
+        }
+
+        .resource-type {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+            background: rgba(0, 245, 255, 0.1);
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+
+        /* Section de contact */
+        .contact-section {
+            text-align: center;
+            padding: 25px;
+            margin-top: 40px;
+            background: rgba(20, 20, 40, 0.3);
+            border-radius: var(--border-radius);
+            border-left: 3px solid var(--neon-purple);
+            margin-left: 20px;
+            margin-right: 20px;
+        }
+
+        .contact-section h3 {
+            color: var(--neon-blue);
+            margin-bottom: 15px;
+        }
+
+        .contact-button {
+            display: inline-block;
+            background: rgba(15, 15, 30, 0.6);
+            color: var(--text-light) !important;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: var(--border-radius);
+            margin-top: 10px;
+            font-weight: 500;
+            border: 1px solid rgba(0, 245, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .contact-button:hover {
+            background: rgba(0, 245, 255, 0.1);
+            color: var(--neon-pink) !important;
+            border-color: rgba(0, 245, 255, 0.4);
+        }
+
+        .contact-button i {
+            margin-right: 8px;
+        }
+
+        /* Animation fade-in */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .ressources-ia-container {
+                padding: 10px 0;
+            }
+
+            .introduction, .section, .contact-section {
+                padding-left: 10px;
+                padding-right: 10px;
+            }
+
+            .resource-list li {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 10px;
+            }
+
+            .resource-type {
+                margin-top: 8px;
+                align-self: flex-end;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="ressources-ia-container">
+        <!-- En-tête version 5 -->
+        <div class="introduction fade-in">
+            <h2>Ressources IA</h2>
+            <div class="degraded-line"></div>
+            <p>
+                Documents, exercices et liens pour <strong>explorer l'IA</strong> en profondeur.
+            </p>
+        </div>
+
+        <!-- Section Supports de cours -->
+        <div class="section fade-in">
+            <h3>
+                <i class="fas fa-file-alt"></i> Supports de cours
+            </h3>
+            <ul class="resource-list">
+                <li>
+    <a href="fiches/intro-ia.html" class="resource-link" target="_blank">
+        <i class="fas fa-file-alt"></i>
+        <span>Introduction à l'Intelligence Artificielle</span>
+    </a>
+    <span class="resource-type">Page</span>
+</li>
+
+                <li>
+    <a href="fiches/base-ia.html" class="resource-link" target="_blank">
+        <i class="fas fa-file-alt"></i>
+        <span>Principes de base de l'IA</span>
+    </a>
+    <span class="resource-type">Page</span>
+</li>
+
+                <li>
+    <a href="fiches/reseaux-neurones.html" class="resource-link" target="_blank">
+        <i class="fas fa-project-diagram"></i>
+        <span>Comprendre les réseaux de neurones</span>
+    </a>
+    <span class="resource-type">Page</span>
+</li>
+
+                <li>
+    <a href="fiches/chatbots-ia.html" class="resource-link" target="_blank">
+        <i class="fas fa-comments"></i> Applications Pratiques : Les Chatbots IA
+    </a>
+    <span class="resource-type">Page</span>
+</li>
+
+            </ul>
+        </div>
+
+        <!-- Section Exercices pratiques -->
+        <div class="section fade-in">
+            <h3>
+                <i class="fas fa-laptop-code"></i> Exercices pratiques
+            </h3>
+            <ul class="resource-list">
+                <li>
+                    <a href="assets/pdf/ia-ressources/exercice1.pdf" class="resource-link" target="_blank">
+                        <i class="fas fa-file-pdf"></i>
+                        <span>Exploration des modèles d'IA</span>
+                    </a>
+                    <span class="resource-type">Exercice</span>
+                </li>
+                <li>
+                    <a href="assets/pdf/ia-ressources/exercice2.pdf" class="resource-link" target="_blank">
+                        <i class="fas fa-file-pdf"></i>
+                        <span>Test de prompts</span>
+                    </a>
+                    <span class="resource-type">Exercice</span>
+                </li>
+                <li>
+                    <a href="assets/pdf/ia-ressources/exercice3.pdf" class="resource-link" target="_blank">
+                        <i class="fas fa-file-pdf"></i>
+                        <span>Analyse de cas d'usage</span>
+                    </a>
+                    <span class="resource-type">Exercice</span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Section Ressources complémentaires -->
+        <div class="section fade-in">
+            <h3>
+                <i class="fas fa-globe"></i> Ressources complémentaires
+            </h3>
+            <ul class="resource-list">
+                <li>
+                    <a href="https://exemple.com/site-ia" class="resource-link" target="_blank">
+                        <i class="fas fa-globe"></i>
+                        <span>Site web de référence sur l'IA</span>
+                    </a>
+                    <span class="resource-type">Lien externe</span>
+                </li>
+                <li>
+                    <a href="https://exemple.com/video-ia" class="resource-link" target="_blank">
+                        <i class="fas fa-video"></i>
+                        <span>Vidéo explicative sur l'IA générative</span>
+                    </a>
+                    <span class="resource-type">Vidéo</span>
+                </li>
+                <li>
+                    <a href="https://exemple.com/article-ia" class="resource-link" target="_blank">
+                        <i class="fas fa-newspaper"></i>
+                        <span>Article sur les dernières avancées en IA</span>
+                    </a>
+                    <span class="resource-type">Article</span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Section Contact -->
+        <div class="contact-section fade-in">
+            <h3>Des questions ?</h3>
+            <p>N'hésitez pas à me contacter pour toute question supplémentaire concernant ces ressources.</p>
+            <a href="mailto:romainlalignel@outlook.fr" class="contact-button">
+                <i class="fas fa-envelope"></i> Me contacter
+            </a>
+        </div>
+    </div>
+
+    <!-- Script pour les animations -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            fadeElements.forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+</html>

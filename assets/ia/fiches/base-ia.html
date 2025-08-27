@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Principes de base de l'IA | Romain L.</title>
+
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../favicon/icon-ia/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon/icon-ia/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon/icon-ia/favicon-16x16.png">
+
+    <!-- Polices -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --neon-blue: #00f5ff;
+            --neon-purple: #8a2be2;
+            --neon-pink: #ff2a6d;
+            --dark-bg: #0a0a1a;
+            --text-light: #f0f0f0;
+            --text-gray: #a0a0b0;
+            --border-radius: 12px;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            line-height: 1.7;
+            margin: 0;
+            padding: 30px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+
+        /* En-tête */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            padding: 0 20px;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            color: var(--neon-blue);
+        }
+
+        .back-button i {
+            margin-right: 8px;
+            color: var(--neon-purple);
+        }
+
+        .title {
+            text-align: center;
+            flex: 1;
+        }
+
+        .title h1 {
+            font-family: 'Playfair Display', serif;
+            color: var(--neon-blue);
+            font-size: 2.2rem;
+            margin: 0;
+        }
+
+        /* Style pour les sections de contenu */
+        .content-section {
+            background: rgba(20, 20, 40, 0.3);
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: var(--border-radius);
+            border-left: 3px solid var(--neon-blue);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .content-section h2 {
+            font-family: 'Playfair Display', serif;
+            color: var(--neon-purple);
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(0, 245, 255, 0.2);
+            padding-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .content-section h2 i {
+            color: var(--neon-blue);
+        }
+
+        .content-section h3 {
+            color: var(--neon-blue);
+            font-size: 1.4rem;
+            margin: 25px 0 15px 0;
+            font-weight: 600;
+        }
+
+        .content-section p {
+            margin-bottom: 1.2rem;
+            line-height: 1.8;
+        }
+
+        .content-section ul {
+            padding-left: 20px;
+            margin-bottom: 1.5rem;
+        }
+
+        .content-section li {
+            margin-bottom: 0.8rem;
+        }
+
+        .content-section strong {
+            color: var(--neon-pink);
+            font-weight: 600;
+        }
+
+        .content-section em {
+            color: var(--text-gray);
+            font-style: italic;
+        }
+
+        /* Définition en encadré */
+        .definition-box {
+            background: rgba(20, 20, 40, 0.4);
+            padding: 20px;
+            border-radius: var(--border-radius);
+            border-left: 3px solid var(--neon-pink);
+            margin: 20px 0;
+            font-style: italic;
+        }
+
+        /* Exemples en surbrillance */
+        .example {
+            background: rgba(0, 245, 255, 0.05);
+            padding: 15px;
+            border-radius: var(--border-radius);
+            border-left: 2px solid var(--neon-blue);
+            margin: 20px 0;
+        }
+
+        /* Section de conclusion */
+        .conclusion {
+            background: rgba(30, 20, 40, 0.3);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            border-left: 3px solid var(--neon-purple);
+            text-align: center;
+        }
+
+        .conclusion h2 {
+            color: var(--neon-blue);
+            margin-bottom: 20px;
+        }
+
+        .conclusion p {
+            font-size: 1.1rem;
+            max-width: 80%;
+            margin: 0 auto 20px;
+        }
+
+        /* Navigation interne */
+        .toc {
+            position: sticky;
+            top: 20px;
+            align-self: flex-start;
+            background: rgba(20, 20, 40, 0.4);
+            padding: 15px;
+            border-radius: var(--border-radius);
+            width: 250px;
+            margin-right: 20px;
+        }
+
+        .toc ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .toc li {
+            margin-bottom: 10px;
+        }
+
+        .toc a {
+            color: var(--text-gray);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: block;
+            padding: 5px 0;
+        }
+
+        .toc a:hover, .toc a.active {
+            color: var(--neon-blue);
+            border-left: 2px solid var(--neon-blue);
+            padding-left: 10px;
+        }
+
+        /* Layout principal */
+        .main-layout {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .main-content {
+            flex: 1;
+        }
+
+        /* Animation fade-in */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .main-layout {
+                flex-direction: column;
+            }
+
+            .toc {
+                position: static;
+                width: 100%;
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            .content-section {
+                padding: 20px;
+            }
+
+            .conclusion p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- En-tête avec retour vers la page mère -->
+        <div class="header fade-in">
+            <a href="#" class="back-button" onclick="window.close(); return false;">
+                <i class="fas fa-arrow-left"></i> Retour aux ressources
+            </a>
+            <div class="title">
+                <h1>Principes de base de l'IA</h1>
+            </div>
+        </div>
+
+        <!-- Layout principal avec table des matières et contenu -->
+        <div class="main-layout">
+            <!-- Table des matières -->
+            <nav class="toc fade-in">
+                <ul>
+                    <li><a href="#introduction" class="active">Introduction</a></li>
+                    <li><a href="#machine-learning">Apprentissage automatique</a></li>
+                    <li><a href="#reseaux-neurones">Réseaux de neurones</a></li>
+                    <li><a href="#algorithmes">Algorithmique avancée</a></li>
+                    <li><a href="#interaction">Interaction homme-machine</a></li>
+                    <li><a href="#conclusion">Conclusion</a></li>
+                </ul>
+            </nav>
+
+            <!-- Contenu principal -->
+            <main class="main-content">
+                <!-- Section Introduction -->
+                <div id="introduction" class="content-section fade-in">
+                    <h2><i class="fas fa-brain"></i> Les fondements de l'IA</h2>
+
+                    <div class="definition-box">
+                        <p>Les principes de base de l'intelligence artificielle (IA) constituent le socle sur lequel reposent les technologies modernes capables de simuler des aspects de l'intelligence humaine.</p>
+                        <p>Ces principes incluent des concepts tels que l'apprentissage automatique, les réseaux de neurones, l'algorithmique avancée, et l'interaction homme-machine.</p>
+                    </div>
+
+                    <p>Comprendre ces principes permet de mieux appréhender comment l'IA est intégrée dans notre quotidien et comment elle influence divers secteurs d'activité.</p>
+                </div>
+
+                <!-- Section Machine Learning -->
+                <div id="machine-learning" class="content-section fade-in">
+                    <h2><i class="fas fa-chart-line"></i> L'apprentissage automatique</h2>
+
+                    <p>L'<strong>apprentissage automatique</strong> (ou "machine learning") est un pilier central de l'IA. Il permet aux systèmes informatiques d'apprendre et de s'améliorer à partir de l'expérience, sans être explicitement programmés pour chaque tâche.</p>
+
+                    <div class="example">
+                        <p><strong>Exemple concret :</strong> Imaginez un système capable de recommander des films. Au lieu de programmer manuellement les préférences de chaque utilisateur, un algorithme d'apprentissage automatique analyse les habitudes de visionnage de milliers d'utilisateurs. Il identifie des motifs comme les genres de films les plus regardés ou les réalisateurs préférés, puis utilise ces informations pour suggérer de nouveaux films.</p>
+                        <p><em>Plus le système est utilisé, plus ses recommandations deviennent précises et personnalisées.</em></p>
+                    </div>
+
+                    <div class="example">
+                        <p><strong>Cas d'usage :</strong> Netflix utilise l'apprentissage automatique pour recommander des films et séries en fonction de ce que vous avez déjà regardé et apprécié.</p>
+                    </div>
+                </div>
+
+                <!-- Section Réseaux de neurones -->
+                <div id="reseaux-neurones" class="content-section fade-in">
+                    <h2><i class="fas fa-project-diagram"></i> Les réseaux de neurones</h2>
+
+                    <p>Les <strong>réseaux de neurones</strong> sont inspirés par le fonctionnement du cerveau humain. Ils sont composés de couches de "neurones" artificiels qui traitent les informations et apprennent à reconnaître des motifs complexes.</p>
+
+                    <div class="example">
+                        <p><strong>Application pratique :</strong> Dans la reconnaissance vocale, les réseaux de neurones convertissent la parole en texte. Quand vous parlez à un assistant vocal comme Siri ou Google Assistant, le système utilise des réseaux de neurones pour :</p>
+                        <ul>
+                            <li>Analyser les sons de votre voix</li>
+                            <li>Les convertir en mots</li>
+                            <li>Comprendre la signification de vos requêtes</li>
+                        </ul>
+                        <p>Cela permet à l'assistant de répondre de manière appropriée.</p>
+                    </div>
+
+                    <div class="example">
+                        <p><strong>Exemple :</strong> Si vous demandez "Quel est le temps aujourd'hui ?", l'assistant utilise des réseaux de neurones pour comprendre votre question et vous fournir une réponse précise.</p>
+                    </div>
+                </div>
+
+                <!-- Section Algorithmes -->
+                <div id="algorithmes" class="content-section fade-in">
+                    <h2><i class="fas fa-cogs"></i> L'algorithmique avancée</h2>
+
+                    <p>L'<strong>algorithmique avancée</strong> est un principe clé de l'IA. Les algorithmes sont des ensembles d'instructions qui permettent aux machines d'accomplir des tâches spécifiques.</p>
+
+                    <p>Dans le contexte de l'IA, les algorithmes sont souvent utilisés pour :</p>
+                    <ul>
+                        <li>Optimiser les processus</li>
+                        <li>Prendre des décisions complexes</li>
+                        <li>Traiter de grandes quantités de données</li>
+                    </ul>
+
+                    <div class="example">
+                        <p><strong>Cas concret :</strong> Dans la logistique, les algorithmes d'IA optimisent les itinéraires de livraison en analysant :</p>
+                        <ul>
+                            <li>La distance</li>
+                            <li>Le trafic</li>
+                            <li>Les contraintes de temps</li>
+                        </ul>
+                        <p>Cela permet de déterminer les itinéraires les plus efficaces pour livrer des colis.</p>
+                    </div>
+
+                    <div class="example">
+                        <p><strong>Exemple d'entreprise :</strong> Amazon utilise des algorithmes d'IA pour optimiser les itinéraires de livraison et garantir que les colis arrivent à temps.</p>
+                    </div>
+                </div>
+
+                <!-- Section Interaction -->
+                <div id="interaction" class="content-section fade-in">
+                    <h2><i class="fas fa-handshake"></i> L'interaction homme-machine</h2>
+
+                    <p>L'<strong>interaction homme-machine</strong> est un principe important de l'IA qui se concentre sur la manière dont les humains et les machines communiquent et collaborent.</p>
+
+                    <p>Les interfaces utilisateur sont conçues pour rendre les interactions plus intuitives et naturelles :</p>
+                    <ul>
+                        <li>Écrans tactiles</li>
+                        <li>Assistants vocaux</li>
+                        <li>Chatbots</li>
+                    </ul>
+
+                    <div class="example">
+                        <p><strong>Application en santé :</strong> Les chatbots sont utilisés pour fournir des informations médicales de base et répondre aux questions des patients.</p>
+                        <p>Les patients peuvent interagir avec le chatbot en utilisant un langage naturel, comme s'ils parlaient à un professionnel de la santé. Le chatbot utilise des algorithmes d'IA pour :</p>
+                        <ul>
+                            <li>Comprendre les questions</li>
+                            <li>Fournir des réponses précises</li>
+                            <li>Orienter les patients vers les ressources appropriées</li>
+                        </ul>
+                    </div>
+
+                    <div class="example">
+                        <p><strong>Exemple :</strong> Un chatbot peut poser des questions sur les symptômes d'un patient et fournir des conseils sur les prochaines étapes à suivre, comme consulter un médecin ou prendre un médicament en vente libre.</p>
+                    </div>
+                </div>
+
+                <!-- Section Conclusion -->
+                <div id="conclusion" class="conclusion fade-in">
+                    <h2>Conclusion</h2>
+                    <p>Les principes de base de l'IA, tels que l'apprentissage automatique, les réseaux de neurones, l'algorithmique avancée, et l'interaction homme-machine, sont essentiels pour comprendre comment cette technologie transforme notre monde.</p>
+
+                    <p>Ces principes permettent aux machines de :</p>
+                    <ul style="text-align: left; max-width: 80%; margin: 0 auto;">
+                        <li>Simuler l'intelligence humaine</li>
+                        <li>Apprendre à partir de données</li>
+                        <li>Reconnaître des motifs complexes</li>
+                        <li>Optimiser les processus</li>
+                        <li>Interagir de manière intuitive avec les humains</li>
+                    </ul>
+
+                    <p>À mesure que l'IA continue d'évoluer, ces principes deviendront de plus en plus sophistiqués, ouvrant la voie à de nouvelles applications et innovations qui amélioreront notre qualité de vie.</p>
+
+                    <p>L'IA est déjà utilisée dans des domaines tels que :</p>
+                    <ul style="text-align: left; max-width: 80%; margin: 0 auto;">
+                        <li>La médecine</li>
+                        <li>La finance</li>
+                        <li>Les transports</li>
+                        <li>L'éducation</li>
+                    </ul>
+
+                    <p>En comprenant ces principes, nous pouvons mieux appréhender les opportunités et les défis que l'IA présente, et travailler à créer un avenir où la technologie sert au mieux les besoins de l'humanité.</p>
+
+                    <div style="margin-top: 30px; text-align: center;">
+                        <a href="#" class="contact-button" onclick="window.close(); return false;">
+                            <i class="fas fa-arrow-left" style="margin-right: 8px;"></i> Retour aux ressources IA
+                        </a>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Script pour les animations et la navigation -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Animations au scroll
+            const fadeElements = document.querySelectorAll('.fade-in');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            fadeElements.forEach(el => observer.observe(el));
+
+            // Navigation interne
+            document.querySelectorAll('.toc a').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    document.querySelectorAll('.toc a').forEach(l => l.classList.remove('active'));
+                    link.classList.add('active');
+                    const targetId = link.getAttribute('href');
+                    document.querySelector(targetId).scrollIntoView({ behavior: 'smooth' });
+                });
+            });
+
+            // Mise à jour de la table des matières au scroll
+            window.addEventListener('scroll', () => {
+                const sections = document.querySelectorAll('.content-section');
+                let currentSection = '';
+
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (window.scrollY >= sectionTop - 100) {
+                        currentSection = section.getAttribute('id');
+                    }
+                });
+
+                document.querySelectorAll('.toc a').forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${currentSection}`) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
