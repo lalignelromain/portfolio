@@ -143,14 +143,14 @@
             left: 100%;
         }
         .btn-primary {
-            background: rgba(138, 43, 226, 0.1);
-            border-color: rgba(138, 43, 226, 0.3);
-            color: var(--neon-purple);
+            background: transparent;
+            border: 1px solid rgba(0, 245, 255, 0.3);
+            color: var(--neon-blue);
         }
         .btn-primary:hover {
-            box-shadow: 0 0 15px rgba(138, 43, 226, 0.4);
-            border-color: rgba(138, 43, 226, 0.6);
-            background: rgba(138, 43, 226, 0.2);
+            box-shadow: 0 0 15px rgba(0, 245, 255, 0.3);
+            border-color: rgba(0, 245, 255, 0.6);
+            background: rgba(0, 245, 255, 0.1);
         }
         .btn-icon {
             margin-right: 10px;
