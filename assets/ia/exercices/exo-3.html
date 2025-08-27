@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercice : Analyse de cas d'usage</title>
+    <!-- Polices et icônes -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --neon-blue: #00f5ff;
+            --neon-purple: #8a2be2;
+            --neon-pink: #ff2a6d;
+            --dark-bg: #0a0a1a;
+            --text-light: #f0f0f0;
+            --text-gray: #a0a0b0;
+            --border-radius: 12px;
+        }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            line-height: 1.7;
+            margin: 0;
+            padding: 30px;
+        }
+        .ressources-ia-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: rgba(20, 20, 40, 0.3);
+            border-radius: var(--border-radius);
+            border-left: 3px solid var(--neon-purple);
+        }
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+        }
+        h1 {
+            color: var(--neon-blue);
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+        h2 {
+            color: var(--neon-purple);
+            margin: 25px 0 15px;
+            font-size: 1.6rem;
+            border-bottom: 1px solid rgba(0, 245, 255, 0.2);
+            padding-bottom: 10px;
+        }
+        .case-box {
+            background: rgba(20, 20, 40, 0.4);
+            padding: 15px;
+            border-radius: var(--border-radius);
+            margin: 15px 0;
+            transition: all 0.3s ease;
+        }
+        .case-box:hover {
+            background: rgba(20, 20, 40, 0.6);
+        }
+        .case-title {
+            color: var(--neon-pink);
+            margin-top: 0;
+        }
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: var(--border-radius);
+            border: 1px solid var(--neon-blue);
+            background: rgba(0, 0, 0, 0.3);
+            color: var(--text-light);
+            min-height: 80px;
+            resize: vertical;
+            margin-top: 10px;
+        }
+        button {
+            background: var(--neon-purple);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            margin: 10px 5px 0 0;
+            transition: background 0.3s ease;
+        }
+        button:hover {
+            background: var(--neon-blue);
+        }
+        .button-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .feedback {
+            margin-top: 10px;
+            font-style: italic;
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+        .saved {
+            color: var(--neon-blue);
+        }
+        .synthese-box {
+            background: rgba(0, 245, 255, 0.1);
+            padding: 15px;
+            border-radius: var(--border-radius);
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="ressources-ia-container">
+        <div class="container">
+            <h1><i class="fas fa-search"></i> Exercice 3 : Analyse de cas d'usage</h1>
+
+            <div class="case-box">
+                <h2 class="case-title"><i class="fas fa-heartbeat"></i> Cas 1 : Santé</h2>
+                <p><strong>Description :</strong> Utilisation de l'IA pour le diagnostic médical (ex : détection de tumeurs).</p>
+                <p><strong>Questions :</strong></p>
+                <ul>
+                    <li>Quels sont les avantages de cette application ?</li>
+                    <li>Quels risques éthiques ou techniques peut-elle poser ?</li>
+                </ul>
+                <textarea id="reponse-sante" placeholder="Vos réponses..."></textarea>
+                <div class="button-group">
+                    <button onclick="saveResponse('reponse-sante')">Sauvegarder</button>
+                    <button onclick="clearResponse('reponse-sante')">Effacer</button>
+                </div>
+                <p id="feedback-sante" class="feedback"></p>
+            </div>
+
+            <div class="case-box">
+                <h2 class="case-title"><i class="fas fa-graduation-cap"></i> Cas 2 : Éducation</h2>
+                <p><strong>Description :</strong> Chatbots tuteurs ou correction automatique de copies.</p>
+                <p><strong>Questions :</strong></p>
+                <ul>
+                    <li>Comment l'IA peut-elle personnaliser l'apprentissage ?</li>
+                    <li>Quelles sont les limites de cette approche ?</li>
+                </ul>
+                <textarea id="reponse-education" placeholder="Vos réponses..."></textarea>
+                <div class="button-group">
+                    <button onclick="saveResponse('reponse-education')">Sauvegarder</button>
+                    <button onclick="clearResponse('reponse-education')">Effacer</button>
+                </div>
+                <p id="feedback-education" class="feedback"></p>
+            </div>
+
+            <div class="case-box">
+                <h2 class="case-title"><i class="fas fa-leaf"></i> Cas 3 : Environnement</h2>
+                <p><strong>Description :</strong> Optimisation énergétique via l'IA (ex : smart grids).</p>
+                <p><strong>Questions :</strong></p>
+                <ul>
+                    <li>Quel impact sur la réduction des émissions de CO₂ ?</li>
+                    <li>Quels défis techniques doivent être relevés ?</li>
+                </ul>
+                <textarea id="reponse-environnement" placeholder="Vos réponses..."></textarea>
+                <div class="button-group">
+                    <button onclick="saveResponse('reponse-environnement')">Sauvegarder</button>
+                    <button onclick="clearResponse('reponse-environnement')">Effacer</button>
+                </div>
+                <p id="feedback-environnement" class="feedback"></p>
+            </div>
+
+            <div class="synthese-box">
+                <h2 class="case-title"><i class="fas fa-lightbulb"></i> Synthèse</h2>
+                <p>Rédigez un paragraphe sur le cas qui vous semble le plus prometteur, en justifiant votre choix :</p>
+                <textarea id="synthese" placeholder="Votre synthèse..."></textarea>
+                <div class="button-group">
+                    <button onclick="saveResponse('synthese')">Sauvegarder</button>
+                    <button onclick="clearResponse('synthese')">Effacer</button>
+                    <button onclick="generateSummary()">Générer un résumé</button>
+                </div>
+                <p id="feedback-synthese" class="feedback"></p>
+                <div id="resume-generated" style="margin-top: 15px; display: none;">
+                    <h3>Résumé généré :</h3>
+                    <p id="resume-text"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sauvegarder les réponses dans localStorage
+        function saveResponse(id) {
+            const response = document.getElementById(id).value;
+            localStorage.setItem(id, response);
+            document.getElementById(`feedback-${id}`).textContent = "Réponse sauvegardée !";
+            document.getElementById(`feedback-${id}`).classList.add('saved');
+            setTimeout(() => {
+                document.getElementById(`feedback-${id}`).textContent = "";
+                document.getElementById(`feedback-${id}`).classList.remove('saved');
+            }, 2000);
+        }
+
+        // Effacer les réponses
+        function clearResponse(id) {
+            document.getElementById(id).value = "";
+            localStorage.removeItem(id);
+        }
+
+        // Charger les réponses sauvegardées
+        window.onload = function() {
+            const textareas = ['reponse-sante', 'reponse-education', 'reponse-environnement', 'synthese'];
+            textareas.forEach(id => {
+                const saved = localStorage.getItem(id);
+                if (saved) {
+                    document.getElementById(id).value = saved;
+                }
+            });
+        };
+
+        // Générer un résumé automatique
+        function generateSummary() {
+            const sante = document.getElementById('reponse-sante').value;
+            const education = document.getElementById('reponse-education').value;
+            const environnement = document.getElementById('reponse-environnement').value;
+            const synthese = document.getElementById('synthese').value;
+
+            if (sante.trim() === "" && education.trim() === "" && environnement.trim() === "") {
+                alert("Veuillez répondre aux questions avant de générer un résumé.");
+                return;
+            }
+
+            let resume = "Résumé de votre analyse :\n\n";
+            if (sante.trim() !== "") resume += "- **Santé** : " + sante + "\n\n";
+            if (education.trim() !== "") resume += "- **Éducation** : " + education + "\n\n";
+            if (environnement.trim() !== "") resume += "- **Environnement** : " + environnement + "\n\n";
+            if (synthese.trim() !== "") resume += "- **Synthèse** : " + synthese;
+
+            document.getElementById('resume-text').textContent = resume;
+            document.getElementById('resume-generated').style.display = "block";
+        }
+    </script>
+</body>
+</html>

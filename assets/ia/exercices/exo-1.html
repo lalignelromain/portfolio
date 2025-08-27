@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercice : Exploration des modèles d'IA</title>
+    <!-- Polices et icônes -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --neon-blue: #00f5ff;
+            --neon-purple: #8a2be2;
+            --neon-pink: #ff2a6d;
+            --dark-bg: #0a0a1a;
+            --text-light: #f0f0f0;
+            --text-gray: #a0a0b0;
+            --border-radius: 12px;
+        }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            line-height: 1.7;
+            margin: 0;
+            padding: 30px;
+        }
+        .ressources-ia-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: rgba(20, 20, 40, 0.3);
+            border-radius: var(--border-radius);
+            border-left: 3px solid var(--neon-purple);
+        }
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+        }
+        h1 {
+            color: var(--neon-blue);
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+        h2 {
+            color: var(--neon-purple);
+            margin: 25px 0 15px;
+            font-size: 1.6rem;
+            border-bottom: 1px solid rgba(0, 245, 255, 0.2);
+            padding-bottom: 10px;
+        }
+        .exercise-section {
+            margin-bottom: 25px;
+            padding: 0 10px;
+        }
+        .example-box {
+            background: rgba(20, 20, 40, 0.4);
+            padding: 15px;
+            border-radius: var(--border-radius);
+            margin: 15px 0;
+            transition: all 0.3s ease;
+        }
+        .example-box:hover {
+            background: rgba(20, 20, 40, 0.6);
+        }
+        .toggle-answer {
+            color: var(--neon-blue);
+            cursor: pointer;
+            font-style: italic;
+            margin-top: 10px;
+        }
+        .answer-box {
+            background: rgba(0, 245, 255, 0.1);
+            padding: 15px;
+            border-radius: var(--border-radius);
+            margin-top: 10px;
+            display: none;
+        }
+        .answer-box.visible {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .question-list {
+            margin-left: 20px;
+        }
+        .question-list li {
+            margin-bottom: 10px;
+        }
+        .resource-link {
+            color: var(--neon-pink);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .resource-link:hover {
+            color: var(--neon-blue);
+            text-decoration: underline;
+        }
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: var(--border-radius);
+            border: 1px solid var(--neon-blue);
+            background: rgba(0, 0, 0, 0.3);
+            color: var(--text-light);
+            min-height: 100px;
+            resize: vertical;
+            margin-top: 10px;
+        }
+        button {
+            background: var(--neon-purple);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            margin: 10px 5px 0 0;
+            transition: background 0.3s ease;
+        }
+        button:hover {
+            background: var(--neon-blue);
+        }
+        .button-group {
+            display: flex;
+            gap: 10px;
+        }
+        .feedback {
+            margin-top: 10px;
+            font-style: italic;
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+        .saved {
+            color: var(--neon-blue);
+        }
+    </style>
+</head>
+<body>
+    <div class="ressources-ia-container">
+        <div class="container">
+            <h1><i class="fas fa-robot"></i> Exercice 1 : Exploration des modèles d'IA</h1>
+
+            <div class="exercise-section">
+                <h2>Introduction</h2>
+                <p>
+                    Les modèles d'IA se divisent en plusieurs catégories : supervisés, non supervisés, par renforcement, et génératifs.
+                    Chaque type a ses propres applications et principes de fonctionnement.
+                </p>
+            </div>
+
+            <div class="exercise-section">
+                <h2>Consignes</h2>
+                <ol class="question-list">
+                    <li>Pour chaque type de modèle, donnez un exemple d'application concrète.</li>
+                    <li>Expliquez en 2-3 phrases le principe de fonctionnement.</li>
+                    <li>Citez un outil ou une technologie qui utilise ce type de modèle.</li>
+                </ol>
+            </div>
+
+            <div class="exercise-section">
+                <h2>Exemples à compléter</h2>
+                <div class="example-box">
+                    <h3><i class="fas fa-project-diagram"></i> Modèle supervisé</h3>
+                    <p><strong>Exemple :</strong> Classification d'images avec des réseaux de neurones convolutifs (CNN).</p>
+                    <p class="toggle-answer" onclick="toggleAnswer('supervise')">Voir une explication détaillée...</p>
+                    <div id="supervise" class="answer-box">
+                        <p>Les modèles supervisés apprennent à partir de données étiquetées. Par exemple, pour reconnaître des chats et des chiens, on fournit au modèle des images déjà classées.</p>
+                    </div>
+                    <textarea id="reponse-supervise" placeholder="Votre réponse..."></textarea>
+                    <div class="button-group">
+                        <button onclick="saveResponse('reponse-supervise')">Sauvegarder</button>
+                        <button onclick="clearResponse('reponse-supervise')">Effacer</button>
+                    </div>
+                    <p id="feedback-supervise" class="feedback"></p>
+                </div>
+
+                <div class="example-box">
+                    <h3><i class="fas fa-cluster"></i> Modèle non supervisé</h3>
+                    <p><strong>Exemple :</strong> Segmentation de clients avec K-means.</p>
+                    <p class="toggle-answer" onclick="toggleAnswer('nonsupervise')">Voir une explication détaillée...</p>
+                    <div id="nonsupervise" class="answer-box">
+                        <p>Les modèles non supervisés identifient des motifs ou des groupes dans des données non étiquetées, comme regrouper des clients selon leur comportement d'achat.</p>
+                    </div>
+                    <textarea id="reponse-nonsupervise" placeholder="Votre réponse..."></textarea>
+                    <div class="button-group">
+                        <button onclick="saveResponse('reponse-nonsupervise')">Sauvegarder</button>
+                        <button onclick="clearResponse('reponse-nonsupervise')">Effacer</button>
+                    </div>
+                    <p id="feedback-nonsupervise" class="feedback"></p>
+                </div>
+
+                <div class="example-box">
+                    <h3><i class="fas fa-gamepad"></i> Modèle par renforcement</h3>
+                    <p><strong>Exemple :</strong> AlphaGo pour le jeu de Go.</p>
+                    <p class="toggle-answer" onclick="toggleAnswer('renforcement')">Voir une explication détaillée...</p>
+                    <div id="renforcement" class="answer-box">
+                        <p>Ces modèles apprennent par essai-erreur en recevant des récompenses pour des actions réussies, comme gagner une partie de Go.</p>
+                    </div>
+                    <textarea id="reponse-renforcement" placeholder="Votre réponse..."></textarea>
+                    <div class="button-group">
+                        <button onclick="saveResponse('reponse-renforcement')">Sauvegarder</button>
+                        <button onclick="clearResponse('reponse-renforcement')">Effacer</button>
+                    </div>
+                    <p id="feedback-renforcement" class="feedback"></p>
+                </div>
+
+                <div class="example-box">
+                    <h3><i class="fas fa-magic"></i> Modèle génératif</h3>
+                    <p><strong>Exemple :</strong> GPT-4 pour la génération de texte.</p>
+                    <p class="toggle-answer" onclick="toggleAnswer('generatif')">Voir une explication détaillée...</p>
+                    <div id="generatif" class="answer-box">
+                        <p>Les modèles génératifs créent de nouvelles données similaires à celles sur lesquelles ils ont été entraînés, comme du texte, des images ou de la musique.</p>
+                    </div>
+                    <textarea id="reponse-generatif" placeholder="Votre réponse..."></textarea>
+                    <div class="button-group">
+                        <button onclick="saveResponse('reponse-generatif')">Sauvegarder</button>
+                        <button onclick="clearResponse('reponse-generatif')">Effacer</button>
+                    </div>
+                    <p id="feedback-generatif" class="feedback"></p>
+                </div>
+            </div>
+
+            <div class="exercise-section">
+                <h2>Questions</h2>
+                <ol class="question-list">
+                    <li>Quel type de modèle utiliseriez-vous pour prédire le prix d'une maison ?</li>
+                    <li>Pourquoi les modèles génératifs sont-ils particulièrement populaires en 2025 ?</li>
+                    <li>Quels sont les limites des modèles non supervisés ?</li>
+                </ol>
+                <textarea id="reponse-questions" placeholder="Vos réponses..."></textarea>
+                <div class="button-group">
+                    <button onclick="saveResponse('reponse-questions')">Sauvegarder</button>
+                    <button onclick="clearResponse('reponse-questions')">Effacer</button>
+                </div>
+                <p id="feedback-questions" class="feedback"></p>
+            </div>
+
+            <div class="exercise-section">
+                <h2>Ressources</h2>
+                <p>Pour approfondir :</p>
+                <ul>
+                    <li><a href="https://towardsdatascience.com/" class="resource-link" target="_blank"><i class="fas fa-external-link-alt"></i> Towards Data Science</a></li>
+                    <li><a href="https://ai.googleblog.com/" class="resource-link" target="_blank"><i class="fas fa-external-link-alt"></i> Google AI Blog</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Afficher/masquer les réponses
+        function toggleAnswer(id) {
+            const box = document.getElementById(id);
+            box.classList.toggle('visible');
+        }
+
+        // Sauvegarder les réponses dans localStorage
+        function saveResponse(id) {
+            const response = document.getElementById(id).value;
+            localStorage.setItem(id, response);
+            document.getElementById(`feedback-${id}`).textContent = "Réponse sauvegardée !";
+            document.getElementById(`feedback-${id}`).classList.add('saved');
+            setTimeout(() => {
+                document.getElementById(`feedback-${id}`).textContent = "";
+                document.getElementById(`feedback-${id}`).classList.remove('saved');
+            }, 2000);
+        }
+
+        // Effacer les réponses
+        function clearResponse(id) {
+            document.getElementById(id).value = "";
+            localStorage.removeItem(id);
+        }
+
+        // Charger les réponses sauvegardées
+        window.onload = function() {
+            const textareas = ['reponse-supervise', 'reponse-nonsupervise', 'reponse-renforcement', 'reponse-generatif', 'reponse-questions'];
+            textareas.forEach(id => {
+                const saved = localStorage.getItem(id);
+                if (saved) {
+                    document.getElementById(id).value = saved;
+                }
+            });
+        };
+    </script>
+</body>
+</html>

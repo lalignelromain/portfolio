@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Risques et Sécurité de l'IA | Romain L.</title>
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../favicon/icon-ia/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon/icon-ia/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon/icon-ia/favicon-16x16.png">
+    <!-- Polices -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --neon-blue: #00f5ff;
+            --neon-purple: #8a2be2;
+            --neon-pink: #ff2a6d;
+            --dark-bg: #0a0a1a;
+            --text-light: #f0f0f0;
+            --text-gray: #a0a0b0;
+            --border-radius: 12px;
+        }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            line-height: 1.7;
+            margin: 0;
+            padding: 30px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            padding: 0 20px;
+        }
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        .back-button:hover {
+            color: var(--neon-blue);
+        }
+        .back-button i {
+            margin-right: 8px;
+            color: var(--neon-purple);
+        }
+        .title {
+            text-align: center;
+            flex: 1;
+        }
+        .title h1 {
+            font-family: 'Playfair Display', serif;
+            color: var(--neon-blue);
+            font-size: 2.2rem;
+            margin: 0;
+        }
+        .content-section {
+            background: rgba(20, 20, 40, 0.3);
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: var(--border-radius);
+            border-left: 3px solid var(--neon-blue);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .content-section h2 {
+            font-family: 'Playfair Display', serif;
+            color: var(--neon-purple);
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(0, 245, 255, 0.2);
+            padding-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .content-section h2 i {
+            color: var(--neon-blue);
+        }
+        .content-section p {
+            margin-bottom: 1.2rem;
+            line-height: 1.8;
+        }
+        .content-section ul {
+            padding-left: 20px;
+            margin-bottom: 1.5rem;
+        }
+        .content-section li {
+            margin-bottom: 0.8rem;
+        }
+        .content-section strong {
+            color: var(--neon-pink);
+            font-weight: 600;
+        }
+        .example {
+            background: rgba(0, 245, 255, 0.05);
+            padding: 15px;
+            border-radius: var(--border-radius);
+            border-left: 2px solid var(--neon-blue);
+            margin: 20px 0;
+        }
+        .case-study {
+            background: rgba(20, 20, 40, 0.4);
+            padding: 15px;
+            border-radius: var(--border-radius);
+            border-left: 3px solid var(--neon-pink);
+            margin: 20px 0;
+            font-style: italic;
+        }
+        .risk-card {
+            background: rgba(20, 20, 40, 0.4);
+            padding: 20px;
+            border-radius: var(--border-radius);
+            border-left: 3px solid var(--neon-pink);
+            margin: 20px 0;
+        }
+        .risk-card h3 {
+            color: var(--neon-blue);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .risk-card h3 i {
+            color: var(--neon-purple);
+        }
+        .technical-note {
+            background: rgba(40, 20, 60, 0.3);
+            padding: 15px;
+            border-radius: var(--border-radius);
+            border-left: 2px solid var(--neon-blue);
+            margin: 15px 0;
+            font-size: 0.95rem;
+        }
+        .regulations, .glossary, .best-practices {
+            background: rgba(20, 20, 40, 0.4);
+            padding: 20px;
+            border-radius: var(--border-radius);
+            border-left: 3px solid var(--neon-purple);
+            margin: 20px 0;
+        }
+        .glossary-term {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+        .glossary-term:before {
+            content: "•";
+            color: var(--neon-blue);
+            position: absolute;
+            left: 0;
+        }
+        .conclusion {
+            background: rgba(30, 20, 40, 0.3);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            border-left: 3px solid var(--neon-purple);
+            text-align: center;
+        }
+        .conclusion h2 {
+            color: var(--neon-blue);
+            margin-bottom: 20px;
+        }
+        .conclusion p {
+            font-size: 1.1rem;
+            max-width: 80%;
+            margin: 0 auto 20px;
+        }
+        .toc {
+            position: sticky;
+            top: 20px;
+            align-self: flex-start;
+            background: rgba(20, 20, 40, 0.4);
+            padding: 15px;
+            border-radius: var(--border-radius);
+            width: 250px;
+            margin-right: 20px;
+        }
+        .toc ul {
+            list-style: none;
+            padding: 0;
+        }
+        .toc li {
+            margin-bottom: 10px;
+        }
+        .toc a {
+            color: var(--text-gray);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: block;
+            padding: 5px 0;
+        }
+        .toc a:hover, .toc a.active {
+            color: var(--neon-blue);
+            border-left: 2px solid var(--neon-blue);
+            padding-left: 10px;
+        }
+        .main-layout {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        .main-content {
+            flex: 1;
+        }
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        @media (max-width: 992px) {
+            .main-layout {
+                flex-direction: column;
+            }
+            .toc {
+                position: static;
+                width: 100%;
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            .content-section {
+                padding: 20px;
+            }
+            .conclusion p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header fade-in">
+            <a href="#" class="back-button" onclick="window.close(); return false;">
+                <i class="fas fa-arrow-left"></i> Retour aux ressources
+            </a>
+            <div class="title">
+                <h1>Risques et Sécurité de l'IA</h1>
+            </div>
+        </div>
+        <div class="main-layout">
+            <nav class="toc fade-in">
+                <ul>
+                    <li><a href="#introduction" class="active">Introduction</a></li>
+                    <li><a href="#protection-donnees">Protection des données</a></li>
+                    <li><a href="#securite-systemes">Sécurité des systèmes</a></li>
+                    <li><a href="#biais-discrimination">Biais et discrimination</a></li>
+                    <li><a href="#transparence">Transparence</a></li>
+                    <li><a href="#impact-emploi">Impact sur l'emploi</a></li>
+                    <li><a href="#utilisation-malveillante">Utilisation malveillante</a></li>
+                    <li><a href="#responsabilite-ethique">Responsabilité et éthique</a></li>
+                    <li><a href="#reglementations">Réglementations</a></li>
+                    <li><a href="#bonnes-pratiques">Bonnes pratiques</a></li>
+                    <li><a href="#glossaire">Glossaire</a></li>
+                    <li><a href="#conclusion">Conclusion</a></li>
+                </ul>
+            </nav>
+            <main class="main-content">
+                <!-- Section Introduction -->
+                <div id="introduction" class="content-section fade-in">
+                    <h2><i class="fas fa-shield-alt"></i> Introduction</h2>
+                    <p>L'<strong>intelligence artificielle (IA)</strong> offre de nombreuses opportunités, mais elle présente aussi des <strong>risques majeurs</strong> en matière de sécurité, d'éthique et de société.</p>
+                    <p>Cette page explore ces défis et propose des solutions concrètes pour une utilisation responsable de l'IA.</p>
+                </div>
+                <!-- Section Protection des données -->
+                <div id="protection-donnees" class="content-section fade-in">
+                    <h2><i class="fas fa-lock"></i> Protection des données et vie privée</h2>
+                    <div class="risk-card">
+                        <h3><i class="fas fa-exclamation-triangle"></i> Risque</h3>
+                        <p>Les systèmes d'IA collectent et traitent des <strong>données personnelles sensibles</strong>, exposant les utilisateurs à des risques de fuites ou de mauvais usage.</p>
+                    </div>
+                    <div class="example">
+                        <p><strong>Exemple :</strong> Les assistants vocaux (Alexa, Google Home) enregistrent des conversations privées. En 2023, une fuite chez un fabricant a exposé les enregistrements de millions d'utilisateurs (source : Rapport sur la cybersécurité 2023).</p>
+                    </div>
+                    <div class="case-study">
+                        <p><strong>Étude de cas :</strong> Une application de santé a été condamnée pour avoir vendu des données médicales à des assureurs sans consentement explicite, violant le RGPD.</p>
+                    </div>
+                    <div class="risk-card">
+                        <h3><i class="fas fa-shield-alt"></i> Mesures de sécurité</h3>
+                        <ul>
+                            <li>Chiffrement <strong>de bout en bout</strong> pour les données sensibles.</li>
+                            <li>Respect strict du <strong>RGPD</strong> et des lois locales sur la vie privée.</li>
+                            <li>Transparence totale sur les <strong>données collectées</strong> et leur usage.</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Section Sécurité des systèmes -->
+                <div id="securite-systemes" class="content-section fade-in">
+                    <h2><i class="fas fa-server"></i> Sécurité des systèmes</h2>
+                    <div class="risk-card">
+                        <h3><i class="fas fa-exclamation-triangle"></i> Risque</h3>
+                        <p>Les IA sont vulnérables aux <strong>cyberattaques</strong> (injection de données, attaques adversariales) pouvant fausser leurs décisions.</p>
+                    </div>
+                    <div class="example">
+                        <p><strong>Exemple :</strong> Des chercheurs ont trompé un système de reconnaissance faciale avec une paire de lunettes spéciales, obtenant un accès non autorisé à un bâtiment sécurisé.</p>
+                    </div>
+                    <div class="technical-note">
+                        <p><strong>Contre-mesures techniques :</strong></p>
+                        <ul>
+                            <li><strong>Fuzzing</strong> : Tests automatisés pour détecter les vulnérabilités.</li>
+                            <li><strong>Adversarial Training</strong> : Entraînement avec des données perturbées pour renforcer la robustesse.</li>
+                            <li><strong>Sandboxing</strong> : Isolation des modules IA pour limiter les dommages en cas de compromission.</li>
+                        </ul>
+                    </div>
+                    <div class="risk-card">
+                        <h3><i class="fas fa-shield-alt"></i> Mesures de sécurité</h3>
+                        <ul>
+                            <li>Audit régulier des systèmes par des experts indépendants.</li>
+                            <li>Mises à jour <strong>automatiques</strong> des correctifs de sécurité.</li>
+                            <li>Surveillance en temps réel des <strong>comportements anormaux</strong>.</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Section Biais et discrimination -->
+                <div id="biais-discrimination" class="content-section fade-in">
+                    <h2><i class="fas fa-balance-scale"></i> Biais et discrimination</h2>
+                    <div class="risk-card">
+                        <h3><i class="fas fa-exclamation-triangle"></i> Risque</h3>
+                        <p>Les algorithmes reproduisent souvent les <strong>biais présents dans leurs données d'entraînement</strong>, discriminant certains groupes.</p>
+                    </div>
+                    <div class="example">
+                        <p><strong>Exemple :</strong> Une étude du MIT (2022) a montré que les algorithmes de reconnaissance faciale avaient un taux d'erreur 100 fois plus élevé pour les femmes noires que pour les hommes blancs.</p>
+                    </div>
+                    <div class="risk-card">
+                        <h3><i class="fas fa-shield-alt"></i> Mesures de sécurité</h3>
+                        <ul>
+                            <li>Diversification des <strong>jeux de données</strong> (genre, ethnie, âge).</li>
+                            <li>Tests systématiques avec des outils comme <strong>AI Fairness 360</strong> (IBM).</li>
+                            <li>Équipes de développement <strong>diversifiées</strong> et formées à l'éthique.</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Section Transparence -->
+                <div id="transparence" class="content-section fade-in">
+                    <h2><i class="fas fa-eye"></i> Transparence et explicabilité</h2>
+                    <div class="risk-card">
+                        <h3><i class="fas fa-exclamation-triangle"></i> Risque</h3>
+                        <p>Les modèles d'IA complexes (comme les réseaux de neurones) fonctionnent comme des <strong>"boîtes noires"</strong>, rendant leurs décisions incompréhensibles.</p>
+                    </div>
+                    <div class="example">
+                        <p><strong>Exemple :</strong> Un algorithme de prêt immobilier a refusé des dossiers sans justification claire, jusqu'à ce qu'une analyse révèle un biais contre certains quartiers.</p>
+                    </div>
+                    <div class="technical-note">
+                        <p><strong>Outils d'explicabilité :</strong></p>
+                        <ul>
+                            <li><strong>LIME</strong> : Explications locales pour les prédictions individuelles.</li>
+                            <li><strong>SHAP</strong> : Analyse de l'impact de chaque variable sur la décision.</li>
+                            <li><strong>Modèles hybrides</strong> : Combinaison de modèles interprétables et performants.</li>
+                        </ul>
+                    </div>
+                    <div class="risk-card">
+                        <h3><i class="fas fa-shield-alt"></i> Mesures de sécurité</h3>
+                        <ul>
+                            <li>Documentation détaillée des <strong>processus décisionnels</strong>.</li>
+                            <li>Fournir aux utilisateurs des <strong>explications claires</strong> (ex. : "Votre prêt a été refusé à cause de X et Y").</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Section Impact sur l'emploi -->
+                <div id="impact-emploi" class="content-section fade-in">
+                    <h2><i class="fas fa-briefcase"></i> Impact sur l'emploi</h2>
+                    <div class="risk-card">
+                        <h3><i class="fas fa-exclamation-triangle"></i> Risque</h3>
+                        <p>L'automatisation par l'IA menace des <strong>millions d'emplois</strong>, surtout dans les secteurs répétitifs (manufacture, service client).</p>
+                    </div>
+                    <div class="example">
+                        <p><strong>Exemple :</strong> Une usine automobile a réduit sa main-d'œuvre de 40 % après l'introduction de robots IA, sans plan de reconversion pour les employés.</p>
+                    </div>
+                    <div class="risk-card">
+                        <h3><i class="fas fa-shield-alt"></i> Mesures de sécurité</h3>
+                        <ul>
+                            <li>Programmes de <strong>formation continue</strong> aux nouvelles compétences.</li>
+                            <li>Partenariats entre entreprises et <strong>écoles/universités</strong>.</li>
+                            <li>Aides financières pour la <strong>reconversion professionnelle</strong>.</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Section Utilisation malveillante -->
+                <div id="utilisation-malveillante" class="content-section fade-in">
+                    <h2><i class="fas fa-skull-crossbones"></i> Utilisation malveillante</h2>
+                    <div class="risk-card">
+                        <h3><i class="fas fa-exclamation-triangle"></i> Risque</h3>
+                        <p>L'IA peut être détournée pour créer des <strong>deepfakes</strong>, automatiser des cyberattaques ou manipuler l'opinion publique.</p>
+                    </div>
+                    <div class="example">
+                        <p><strong>Exemple :</strong> Des deepfakes de personnalités politiques ont été utilisés pour influencer des élections en 2022, diffusés massivement sur les réseaux sociaux.</p>
+                    </div>
+                    <div class="risk-card">
+                        <h3><i class="fas fa-shield-alt"></i> Mesures de sécurité</h3>
+                        <ul>
+                            <li>Détection automatique des <strong>contenus manipulés</strong> (ex. : outils comme Deepware Scanner).</li>
+                            <li>Collaboration entre plateformes et gouvernements pour <strong>supprimer les contenus malveillants</strong>.</li>
+                            <li>Éducation du public à l'<strong>esprit critique</strong> face aux médias synthétiques.</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Section Responsabilité et éthique -->
+                <div id="responsabilite-ethique" class="content-section fade-in">
+                    <h2><i class="fas fa-gavel"></i> Responsabilité et éthique</h2>
+                    <div class="risk-card">
+                        <h3><i class="fas fa-exclamation-triangle"></i> Risque</h3>
+                        <p>En cas d'erreur (ex. : accident de voiture autonome), la <strong>responsabilité juridique</strong> est souvent floue : fabricant, développeur ou utilisateur ?</p>
+                    </div>
+                    <div class="example">
+                        <p><strong>Exemple :</strong> En 2021, un accident mortel impliquant une voiture autonome a déclenché un débat sur la responsabilité : le constructeur a finalement été condamné à une amende record.</p>
+                    </div>
+                    <div class="risk-card">
+                        <h3><i class="fas fa-shield-alt"></i> Mesures de sécurité</h3>
+                        <ul>
+                            <li>Cadre légal clair définissant les <strong>responsabilités</strong> de chaque acteur.</li>
+                            <li>Assurances spécifiques pour les <strong>systèmes autonomes</strong>.</li>
+                            <li>Comités d'éthique internes dans les entreprises développant de l'IA.</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Section Réglementations -->
+                <div id="reglementations" class="content-section fade-in">
+                    <h2><i class="fas fa-scale-balanced"></i> Réglementations et cadres légaux</h2>
+                    <div class="regulations">
+                        <p>Plusieurs pays ont adopté des lois pour encadrer l'IA :</p>
+                        <ul>
+                            <li><strong>Union européenne</strong> :
+                                <ul>
+                                    <li><strong>RGPD</strong> : Protection des données personnelles.</li>
+                                    <li><strong>Proposition de loi sur l'IA (2021)</strong> : Classification des systèmes par niveau de risque (interdit, haut risque, limité, minimal).</li>
+                                </ul>
+                            </li>
+                            <li><strong>États-Unis</strong> :
+                                <ul>
+                                    <li><strong>NIST AI Framework</strong> : Lignes directrices pour une IA "digne de confiance".</li>
+                                    <li><strong>Algorithmic Accountability Act</strong> (projet) : Audit des systèmes IA pour les biais et la sécurité.</li>
+                                </ul>
+                            </li>
+                            <li><strong>Canada</strong> :
+                                <ul>
+                                    <li><strong>Loi sur la protection des données (LPRPDE)</strong> : Obligations strictes pour les entreprises.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <p>Ces réglementations visent à concilier <strong>innovation</strong> et <strong>protection des droits fondamentaux</strong>.</p>
+                    </div>
+                </div>
+                <!-- Section Bonnes pratiques -->
+                <div id="bonnes-pratiques" class="content-section fade-in">
+                    <h2><i class="fas fa-lightbulb"></i> Bonnes pratiques pour les utilisateurs</h2>
+                    <div class="best-practices">
+                        <p>En tant qu'utilisateur, vous pouvez :</p>
+                        <ul>
+                            <li>Vérifier les <strong>paramètres de confidentialité</strong> des applications IA (ex. : désactiver l'enregistrement vocal).</li>
+                            <li>Privilégier les <strong>outils open-source</strong> ou audités par des tiers (ex. : Signal pour les messageries).</li>
+                            <li>Signaler les <strong>comportements discriminatoires</strong> ou suspects (ex. : biais dans un chatbot).</li>
+                            <li>Utiliser des <strong>extensions de navigateur</strong> pour bloquer les trackers (ex. : uBlock Origin).</li>
+                            <li>Vous informer sur les <strong>risques liés à l'IA</strong> via des sources fiables (ex. : rapports de l'UNESCO sur l'éthique de l'IA).</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Section Glossaire -->
+                <div id="glossaire" class="content-section fade-in">
+                    <h2><i class="fas fa-book"></i> Glossaire</h2>
+                    <div class="glossary">
+                        <div class="glossary-term">
+            <strong>Attaque adversariale</strong> : Technique visant à tromper un modèle d'IA en ajoutant des perturbations imperceptibles aux données d'entrée (ex. : modifier légèrement une image pour qu'elle soit mal classée).
+        </div>
+        <div class="glossary-term">
+            <strong>Deepfake</strong> : Vidéo ou audio truqué utilisant l'IA pour imiter une personne réelle, souvent utilisé pour la désinformation.
+        </div>
+        <div class="glossary-term">
+            <strong>Biais algorithmiques</strong> : Erreurs systématiques dans les décisions d'un algorithme, souvent dues à des données d'entraînement non représentatives.
+        </div>
+        <div class="glossary-term">
+            <strong>RGPD</strong> : Règlement Général sur la Protection des Données, loi européenne encadrant la collecte et le traitement des données personnelles.
+        </div>
+        <div class="glossary-term">
+            <strong>Adversarial Training</strong> : Méthode d'entraînement où un modèle est exposé à des exemples perturbés pour améliorer sa robustesse.
+        </div>
+        <div class="glossary-term">
+            <strong>Explicabilité (XAI)</strong> : Capacité à comprendre et expliquer les décisions d'un modèle d'IA, essentielle pour la transparence.
+        </div>
+                    </div>
+                </div>
+                <!-- Section Initiatives positives -->
+                <div class="content-section fade-in">
+                    <h2><i class="fas fa-hands-helping"></i> Initiatives pour une IA responsable</h2>
+                    <div class="regulations">
+                        <p>Des organisations travaillent à établir des standards éthiques pour l'IA :</p>
+                        <ul>
+                            <li><strong>Partnership on AI</strong> : Coalition d'entreprises (Google, Microsoft, etc.) et d'ONG pour promouvoir les bonnes pratiques.</li>
+                            <li><strong>AI Ethics Lab</strong> : Think tank indépendant analysant l'impact sociétal de l'IA.</li>
+                            <li><strong>UNESCO</strong> : Recommandation sur l'éthique de l'IA (2021), adoptée par 193 pays.</li>
+                            <li><strong>Comités d'éthique internes</strong> : Créés par des entreprises comme Microsoft et IBM pour évaluer leurs projets d'IA.</li>
+                        </ul>
+                        <p>Ces initiatives montrent que l'industrie et les gouvernements prennent au sérieux les enjeux éthiques de l'IA.</p>
+                    </div>
+                </div>
+                <!-- Section Conclusion -->
+                <div id="conclusion" class="conclusion fade-in">
+                    <h2>Conclusion</h2>
+                    <p>L'IA représente une <strong>révolution technologique</strong>, mais son développement doit être encadré pour éviter les dérives.</p>
+                    <p>En combinant <strong>réglementations strictes</strong>, <strong>transparence</strong>, et <strong>collaboration internationale</strong>, nous pouvons maximiser ses bénéfices tout en minimisant ses risques.</p>
+                    <p>Chacun a un rôle à jouer : les gouvernements doivent légiférer, les entreprises doivent innover de manière responsable, et les utilisateurs doivent rester informés et vigilants.</p>
+                    <div style="margin-top: 30px; text-align: center;">
+                        <a href="#" class="back-button" onclick="window.close(); return false;">
+                            <i class="fas fa-arrow-left" style="margin-right: 8px;"></i> Retour aux ressources IA
+                        </a>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            fadeElements.forEach(el => observer.observe(el));
+            document.querySelectorAll('.toc a').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    document.querySelectorAll('.toc a').forEach(l => l.classList.remove('active'));
+                    link.classList.add('active');
+                    const targetId = link.getAttribute('href');
+                    document.querySelector(targetId).scrollIntoView({ behavior: 'smooth' });
+                });
+            });
+            window.addEventListener('scroll', () => {
+                const sections = document.querySelectorAll('.content-section, .conclusion');
+                let currentSection = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (window.scrollY >= sectionTop - 100) {
+                        currentSection = section.getAttribute('id');
+                    }
+                });
+                document.querySelectorAll('.toc a').forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${currentSection}`) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

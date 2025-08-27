@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercice : Test de prompts</title>
+    <!-- Polices et icônes -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --neon-blue: #00f5ff;
+            --neon-purple: #8a2be2;
+            --neon-pink: #ff2a6d;
+            --dark-bg: #0a0a1a;
+            --text-light: #f0f0f0;
+            --text-gray: #a0a0b0;
+            --border-radius: 12px;
+        }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            line-height: 1.7;
+            margin: 0;
+            padding: 30px;
+        }
+        .ressources-ia-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: rgba(20, 20, 40, 0.3);
+            border-radius: var(--border-radius);
+            border-left: 3px solid var(--neon-purple);
+        }
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+        }
+        h1 {
+            color: var(--neon-blue);
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+        h2 {
+            color: var(--neon-purple);
+            margin: 25px 0 15px;
+            font-size: 1.6rem;
+            border-bottom: 1px solid rgba(0, 245, 255, 0.2);
+            padding-bottom: 10px;
+        }
+        .exercise-section {
+            margin-bottom: 25px;
+            padding: 0 10px;
+        }
+        .prompt-box {
+            background: rgba(20, 20, 40, 0.4);
+            padding: 15px;
+            border-radius: var(--border-radius);
+            margin: 15px 0;
+            transition: all 0.3s ease;
+        }
+        .prompt-box:hover {
+            background: rgba(20, 20, 40, 0.6);
+        }
+        .prompt-example {
+            font-style: italic;
+            color: var(--text-gray);
+            margin: 10px 0;
+            font-size: 1.1rem;
+        }
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: var(--border-radius);
+            border: 1px solid var(--neon-blue);
+            background: rgba(0, 0, 0, 0.3);
+            color: var(--text-light);
+            min-height: 100px;
+            resize: vertical;
+            margin-top: 10px;
+        }
+        button {
+            background: var(--neon-purple);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            margin: 10px 5px 0 0;
+            transition: background 0.3s ease;
+        }
+        button:hover {
+            background: var(--neon-blue);
+        }
+        .button-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .feedback {
+            margin-top: 10px;
+            font-style: italic;
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+        .rating {
+            display: flex;
+            gap: 5px;
+            margin-top: 10px;
+        }
+        .rating i {
+            color: var(--text-gray);
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        .rating i:hover {
+            color: var(--neon-pink);
+        }
+        .rating i.active {
+            color: var(--neon-blue);
+        }
+        .saved {
+            color: var(--neon-blue);
+        }
+    </style>
+</head>
+<body>
+    <div class="ressources-ia-container">
+        <div class="container">
+            <h1><i class="fas fa-comment-dots"></i> Exercice 2 : Test de prompts</h1>
+
+            <div class="exercise-section">
+                <h2>Introduction</h2>
+                <p>
+                    Un prompt bien formulé permet d'obtenir des réponses plus pertinentes et précises de la part d'une IA générative.
+                    Testez les exemples ci-dessous et analysez les résultats.
+                </p>
+            </div>
+
+            <div class="exercise-section">
+                <h2>Consignes</h2>
+                <p>Testez les prompts suivants avec un chatbot (ex : Le Chat) :</p>
+
+                <div class="prompt-box">
+                    <p class="prompt-example">"Explique-moi l'IA comme à un enfant de 10 ans."</p>
+                    <textarea id="reponse-prompt1" placeholder="Coller ici la réponse de l'IA..."></textarea>
+                    <div class="button-group">
+                        <button onclick="saveResponse('reponse-prompt1')">Sauvegarder</button>
+                        <button onclick="clearResponse('reponse-prompt1')">Effacer</button>
+                    </div>
+                    <p class="feedback">Notez la qualité de la réponse :</p>
+                    <div class="rating" id="rating-prompt1">
+                        <i class="fas fa-star" onclick="rateResponse('rating-prompt1', 1)"></i>
+                        <i class="fas fa-star" onclick="rateResponse('rating-prompt1', 2)"></i>
+                        <i class="fas fa-star" onclick="rateResponse('rating-prompt1', 3)"></i>
+                        <i class="fas fa-star" onclick="rateResponse('rating-prompt1', 4)"></i>
+                        <i class="fas fa-star" onclick="rateResponse('rating-prompt1', 5)"></i>
+                    </div>
+                    <p id="feedback-prompt1" class="feedback"></p>
+                </div>
+
+                <div class="prompt-box">
+                    <p class="prompt-example">"Quels sont les 3 enjeux éthiques majeurs de l'IA en 2025 ? Justifie chaque point."</p>
+                    <textarea id="reponse-prompt2" placeholder="Coller ici la réponse de l'IA..."></textarea>
+                    <div class="button-group">
+                        <button onclick="saveResponse('reponse-prompt2')">Sauvegarder</button>
+                        <button onclick="clearResponse('reponse-prompt2')">Effacer</button>
+                    </div>
+                    <p class="feedback">Notez la qualité de la réponse :</p>
+                    <div class="rating" id="rating-prompt2">
+                        <i class="fas fa-star" onclick="rateResponse('rating-prompt2', 1)"></i>
+                        <i class="fas fa-star" onclick="rateResponse('rating-prompt2', 2)"></i>
+                        <i class="fas fa-star" onclick="rateResponse('rating-prompt2', 3)"></i>
+                        <i class="fas fa-star" onclick="rateResponse('rating-prompt2', 4)"></i>
+                        <i class="fas fa-star" onclick="rateResponse('rating-prompt2', 5)"></i>
+                    </div>
+                    <p id="feedback-prompt2" class="feedback"></p>
+                </div>
+
+                <div class="prompt-box">
+                    <p class="prompt-example">"Génère un poème sur l'IA en alexandrins."</p>
+                    <textarea id="reponse-prompt3" placeholder="Coller ici la réponse de l'IA..."></textarea>
+                    <div class="button-group">
+                        <button onclick="saveResponse('reponse-prompt3')">Sauvegarder</button>
+                        <button onclick="clearResponse('reponse-prompt3')">Effacer</button>
+                    </div>
+                    <p class="feedback">Notez la qualité de la réponse :</p>
+                    <div class="rating" id="rating-prompt3">
+                        <i class="fas fa-star" onclick="rateResponse('rating-prompt3', 1)"></i>
+                        <i class="fas fa-star" onclick="rateResponse('rating-prompt3', 2)"></i>
+                        <i class="fas fa-star" onclick="rateResponse('rating-prompt3', 3)"></i>
+                        <i class="fas fa-star" onclick="rateResponse('rating-prompt3', 4)"></i>
+                        <i class="fas fa-star" onclick="rateResponse('rating-prompt3', 5)"></i>
+                    </div>
+                    <p id="feedback-prompt3" class="feedback"></p>
+                </div>
+            </div>
+
+            <div class="exercise-section">
+                <h2>Analyse</h2>
+                <p>Comparez les réponses obtenues :</p>
+                <ul>
+                    <li>Clarté et pertinence</li>
+                    <li>Créativité et originalité</li>
+                    <li>Précision et profondeur</li>
+                </ul>
+                <p>Identifiez les éléments du prompt qui influencent la qualité de la réponse.</p>
+                <textarea id="analyse" placeholder="Votre analyse..."></textarea>
+                <div class="button-group">
+                    <button onclick="saveResponse('analyse')">Sauvegarder</button>
+                    <button onclick="clearResponse('analyse')">Effacer</button>
+                </div>
+                <p id="feedback-analyse" class="feedback"></p>
+            </div>
+
+            <div class="exercise-section">
+                <h2>Bonus</h2>
+                <p>Proposez un prompt original pour obtenir une réponse sur un sujet technique :</p>
+                <textarea id="bonus-prompt" placeholder="Exemple : 'Explique le fonctionnement d'un transformeur en IA, avec des métaphores culinaires.'"></textarea>
+                <div class="button-group">
+                    <button onclick="testPrompt()">Tester ce prompt</button>
+                    <button onclick="saveResponse('bonus-prompt')">Sauvegarder</button>
+                    <button onclick="clearResponse('bonus-prompt')">Effacer</button>
+                </div>
+                <p id="feedback-bonus" class="feedback"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sauvegarder les réponses dans localStorage
+        function saveResponse(id) {
+            const response = document.getElementById(id).value;
+            localStorage.setItem(id, response);
+            document.getElementById(`feedback-${id}`).textContent = "Réponse sauvegardée !";
+            document.getElementById(`feedback-${id}`).classList.add('saved');
+            setTimeout(() => {
+                document.getElementById(`feedback-${id}`).textContent = "";
+                document.getElementById(`feedback-${id}`).classList.remove('saved');
+            }, 2000);
+        }
+
+        // Effacer les réponses
+        function clearResponse(id) {
+            document.getElementById(id).value = "";
+            localStorage.removeItem(id);
+        }
+
+        // Noter une réponse
+        function rateResponse(ratingId, score) {
+            const stars = document.getElementById(ratingId).querySelectorAll('i');
+            stars.forEach((star, index) => {
+                star.classList.toggle('active', index < score);
+            });
+            localStorage.setItem(`${ratingId}-score`, score);
+        }
+
+        // Charger les réponses et notes sauvegardées
+        window.onload = function() {
+            const textareas = ['reponse-prompt1', 'reponse-prompt2', 'reponse-prompt3', 'analyse', 'bonus-prompt'];
+            textareas.forEach(id => {
+                const saved = localStorage.getItem(id);
+                if (saved) {
+                    document.getElementById(id).value = saved;
+                }
+            });
+
+            const ratings = ['rating-prompt1', 'rating-prompt2', 'rating-prompt3'];
+            ratings.forEach(id => {
+                const score = localStorage.getItem(`${id}-score`);
+                if (score) {
+                    rateResponse(id, parseInt(score));
+                }
+            });
+        };
+
+        // Simuler le test d'un prompt
+        function testPrompt() {
+            const prompt = document.getElementById('bonus-prompt').value;
+            if (prompt.trim() === "") {
+                alert("Veuillez entrer un prompt avant de le tester.");
+                return;
+            }
+            alert(`Prompt à tester : "${prompt}"\n\nCopiez ce prompt dans un chatbot pour voir le résultat !`);
+        }
+    </script>
+</body>
+</html>

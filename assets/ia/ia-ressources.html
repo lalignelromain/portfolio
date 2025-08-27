@@ -4,17 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Intelligence Artificielle - Ressources Pédagogiques</title>
-
     <!-- Favicons -->
     <link rel="apple-touch-icon" sizes="180x180" href="favicon/icon-ia/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon/icon-ia/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon/icon-ia/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
-
     <!-- Polices -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
     <style>
         :root {
             --neon-blue: #00f5ff;
@@ -25,7 +22,6 @@
             --text-gray: #a0a0b0;
             --border-radius: 12px;
         }
-
         body {
             font-family: 'Montserrat', sans-serif;
             background-color: var(--dark-bg);
@@ -34,20 +30,17 @@
             margin: 0;
             padding: 30px;
         }
-
         .ressources-ia-container {
             max-width: 900px;
             margin: 0 auto;
             padding: 20px 0;
         }
-
         /* Version 5 : En-tête avec ligne dégradée */
         .introduction {
             text-align: center;
             margin-bottom: 40px;
             padding: 0 20px;
         }
-
         .introduction h2 {
             color: var(--neon-blue);
             margin-bottom: 15px;
@@ -56,27 +49,23 @@
             font-family: 'Playfair Display', serif;
             font-size: 2.2rem;
         }
-
         .degraded-line {
             width: 100%;
             height: 2px;
             background: linear-gradient(90deg, transparent, var(--neon-blue), transparent);
             margin: 10px auto 20px;
         }
-
         .introduction p {
             max-width: 80%;
             margin: 0 auto;
             font-size: 1.1rem;
             line-height: 1.8;
         }
-
         /* Sections principales */
         .section {
             margin-bottom: 40px;
             padding: 0 20px;
         }
-
         .section h3 {
             font-family: 'Playfair Display', serif;
             color: var(--neon-purple);
@@ -88,17 +77,14 @@
             align-items: center;
             gap: 10px;
         }
-
         .section h3 i {
             color: var(--neon-blue);
         }
-
         /* Liste des ressources */
         .resource-list {
             list-style-type: none;
             padding-left: 0;
         }
-
         .resource-list li {
             margin-bottom: 15px;
             padding: 15px;
@@ -109,12 +95,10 @@
             justify-content: space-between;
             align-items: center;
         }
-
         .resource-list li:hover {
             background: rgba(20, 20, 40, 0.4);
             transform: translateX(5px);
         }
-
         .resource-link {
             color: var(--text-light);
             text-decoration: none;
@@ -124,21 +108,17 @@
             font-weight: 500;
             flex: 1;
         }
-
         .resource-link i {
             color: var(--neon-blue);
             width: 20px;
             text-align: center;
         }
-
         .resource-link:hover {
             color: var(--neon-pink);
         }
-
         .resource-link:hover i {
             color: var(--neon-pink);
         }
-
         .resource-type {
             font-size: 0.9rem;
             color: var(--text-gray);
@@ -146,7 +126,6 @@
             padding: 4px 8px;
             border-radius: 4px;
         }
-
         /* Section de contact */
         .contact-section {
             text-align: center;
@@ -158,12 +137,10 @@
             margin-left: 20px;
             margin-right: 20px;
         }
-
         .contact-section h3 {
             color: var(--neon-blue);
             margin-bottom: 15px;
         }
-
         .contact-button {
             display: inline-block;
             background: rgba(15, 15, 30, 0.6);
@@ -176,46 +153,38 @@
             border: 1px solid rgba(0, 245, 255, 0.2);
             transition: all 0.3s ease;
         }
-
         .contact-button:hover {
             background: rgba(0, 245, 255, 0.1);
             color: var(--neon-pink) !important;
             border-color: rgba(0, 245, 255, 0.4);
         }
-
         .contact-button i {
             margin-right: 8px;
         }
-
         /* Animation fade-in */
         .fade-in {
             opacity: 0;
             transform: translateY(20px);
             transition: opacity 0.6s ease, transform 0.6s ease;
         }
-
         .fade-in.visible {
             opacity: 1;
             transform: translateY(0);
         }
-
         /* Responsive */
         @media (max-width: 768px) {
             .ressources-ia-container {
                 padding: 10px 0;
             }
-
             .introduction, .section, .contact-section {
                 padding-left: 10px;
                 padding-right: 10px;
             }
-
             .resource-list li {
                 flex-direction: column;
                 align-items: flex-start;
                 padding: 10px;
             }
-
             .resource-type {
                 margin-top: 8px;
                 align-self: flex-end;
@@ -233,7 +202,6 @@
                 Documents, exercices et liens pour <strong>explorer l'IA</strong> en profondeur.
             </p>
         </div>
-
         <!-- Section Supports de cours -->
         <div class="section fade-in">
             <h3>
@@ -241,39 +209,50 @@
             </h3>
             <ul class="resource-list">
                 <li>
-    <a href="fiches/intro-ia.html" class="resource-link" target="_blank">
-        <i class="fas fa-file-alt"></i>
-        <span>Introduction à l'Intelligence Artificielle</span>
-    </a>
-    <span class="resource-type">Page</span>
-</li>
-
+                    <a href="fiches/intro-ia.html" class="resource-link" target="_blank">
+                        <i class="fas fa-file-alt"></i>
+                        <span>Introduction à l'Intelligence Artificielle</span>
+                    </a>
+                    <span class="resource-type">Page</span>
+                </li>
                 <li>
-    <a href="fiches/base-ia.html" class="resource-link" target="_blank">
-        <i class="fas fa-file-alt"></i>
-        <span>Principes de base de l'IA</span>
-    </a>
-    <span class="resource-type">Page</span>
-</li>
-
+                    <a href="fiches/base-ia.html" class="resource-link" target="_blank">
+                        <i class="fas fa-file-alt"></i>
+                        <span>Principes de base de l'IA</span>
+                    </a>
+                    <span class="resource-type">Page</span>
+                </li>
                 <li>
-    <a href="fiches/reseaux-neurones.html" class="resource-link" target="_blank">
-        <i class="fas fa-project-diagram"></i>
-        <span>Comprendre les réseaux de neurones</span>
-    </a>
-    <span class="resource-type">Page</span>
-</li>
-
+                    <a href="fiches/reseaux-neurones.html" class="resource-link" target="_blank">
+                        <i class="fas fa-project-diagram"></i>
+                        <span>Comprendre les réseaux de neurones</span>
+                    </a>
+                    <span class="resource-type">Page</span>
+                </li>
                 <li>
-    <a href="fiches/chatbots-ia.html" class="resource-link" target="_blank">
-        <i class="fas fa-comments"></i> Applications Pratiques : Les Chatbots IA
-    </a>
-    <span class="resource-type">Page</span>
-</li>
-
+                    <a href="fiches/chatbots-ia.html" class="resource-link" target="_blank">
+                        <i class="fas fa-comments"></i>
+                        <span>Applications Pratiques : Les Chatbots IA</span>
+                    </a>
+                    <span class="resource-type">Page</span>
+                </li>
+                <!-- NOUVELLES PAGES AJOUTÉES -->
+                <li>
+                    <a href="fiches/impact-eco.html" class="resource-link" target="_blank">
+                        <i class="fas fa-leaf"></i>
+                        <span>Impact écologique de l'IA</span>
+                    </a>
+                    <span class="resource-type">Page</span>
+                </li>
+                <li>
+                    <a href="fiches/secu-ia.html" class="resource-link" target="_blank">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Risques et Sécurité de l'IA</span>
+                    </a>
+                    <span class="resource-type">Page</span>
+                </li>
             </ul>
         </div>
-
         <!-- Section Exercices pratiques -->
         <div class="section fade-in">
             <h3>
@@ -281,21 +260,21 @@
             </h3>
             <ul class="resource-list">
                 <li>
-                    <a href="assets/pdf/ia-ressources/exercice1.pdf" class="resource-link" target="_blank">
+                    <a href="exercices/exo-1.html" class="resource-link" target="_blank">
                         <i class="fas fa-file-pdf"></i>
                         <span>Exploration des modèles d'IA</span>
                     </a>
                     <span class="resource-type">Exercice</span>
                 </li>
                 <li>
-                    <a href="assets/pdf/ia-ressources/exercice2.pdf" class="resource-link" target="_blank">
+                    <a href="exercices/exo-2.html" class="resource-link" target="_blank">
                         <i class="fas fa-file-pdf"></i>
                         <span>Test de prompts</span>
                     </a>
                     <span class="resource-type">Exercice</span>
                 </li>
                 <li>
-                    <a href="assets/pdf/ia-ressources/exercice3.pdf" class="resource-link" target="_blank">
+                    <a href="exercices/exo-3.html" class="resource-link" target="_blank">
                         <i class="fas fa-file-pdf"></i>
                         <span>Analyse de cas d'usage</span>
                     </a>
@@ -303,7 +282,6 @@
                 </li>
             </ul>
         </div>
-
         <!-- Section Ressources complémentaires -->
         <div class="section fade-in">
             <h3>
@@ -333,7 +311,6 @@
                 </li>
             </ul>
         </div>
-
         <!-- Section Contact -->
         <div class="contact-section fade-in">
             <h3>Des questions ?</h3>
@@ -343,7 +320,6 @@
             </a>
         </div>
     </div>
-
     <!-- Script pour les animations -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
