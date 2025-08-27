@@ -162,11 +162,12 @@
                     </div>
                 </div>
                 <div style="text-align: center; margin-top: 30px;">
-                    <button class="btn btn-primary" onclick="openCV()">
-                        <i class="fas fa-file-pdf btn-icon"></i>
-                        Télécharger mon CV
-                    </button>
-                </div>
+    <button class="btn btn-primary" onclick="openCV()">
+        <i class="fas fa-file-pdf btn-icon"></i>
+        Consulter mon CV
+    </button>
+</div>
+
             </div>
         </main>
         <footer>
@@ -174,12 +175,18 @@
         </footer>
     </div>
     <!-- Modale CV -->
-    <div id="cvModal" class="modal">
-        <div class="modal-content">
-            <span class="modal-close" onclick="closeCV()">&times;</span>
-            <iframe src="https://drive.google.com/file/d/1poHKKUCaD3dgQNyiRSLtwM7Wuor4CwNd/preview" style="width: 100%; height: 600px; border: none; border-radius: var(--border-radius);"></iframe>
+<div id="cvModal" class="modal">
+    <div class="modal-content">
+        <span class="modal-close" onclick="closeCV()">&times;</span>
+        <iframe id="cvFrame" src="assets/pdf/cv.pdf" style="width: 100%; height: 80vh; border: none;"></iframe>
+        <div style="text-align: center; margin-top: 10px;">
+            <a id="openInAcrobat" href="assets/pdf/cv/mon-cv.pdf" target="_blank" style="padding: 8px 15px; background: #dc3545; color: white; text-decoration: none; border-radius: 5px;">
+                Ouvrir avec Acrobat
+            </a>
         </div>
     </div>
+</div>
+
     <!-- Modale Mind-Set (contenu complet) -->
     <div id="mindsetModal" class="modal">
         <div class="modal-content">
