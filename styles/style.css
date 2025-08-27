@@ -9,8 +9,6 @@
     --border-radius: 12px;
     --text-light: #f0f0f0;
     --text-gray: #a0a0b0;
-
-    /* Variables contrôlées par JavaScript pour les performances */
     --animation-play-state: running;
     --animation-duration: 30s;
     --background-opacity: 0.03;
@@ -51,17 +49,11 @@ body::before {
     transform: translate3d(0, 0, 0);
 }
 
-/* Animation optimisée avec transform3d pour l'accélération GPU */
 @keyframes grid-move {
-    0% {
-        transform: translate3d(0, 0, 0);
-    }
-    100% {
-        transform: translate3d(50px, 50px, 0);
-    }
+    0% { transform: translate3d(0, 0, 0); }
+    100% { transform: translate3d(50px, 50px, 0); }
 }
 
-/* Particules lumineuses optimisées (sans blur coûteux) */
 body::after {
     content: '';
     position: fixed;
@@ -77,13 +69,14 @@ body::after {
     will-change: opacity;
 }
 
-/* Classes d'état contrôlées par JavaScript */
+/* Modes de performance */
 .performance-mode body::before {
     animation-duration: 60s !important;
     opacity: 0.5;
 }
 
-.low-performance body::before {
+.low-performance body::before,
+.no-animations body::before {
     animation: none !important;
 }
 
@@ -151,7 +144,7 @@ header {
     font-weight: 300;
 }
 
-/* Boutons holographiques (corrigé) */
+/* Boutons holographiques (corrigés pour le responsive) */
 .btn {
     position: relative;
     overflow: hidden;
@@ -159,9 +152,9 @@ header {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-width: 180px;
+    min-width: 150px; /* Réduite pour mieux s'adapter */
     height: 56px;
-    padding: 14px 28px;
+    padding: 14px 20px; /* Padding latéral réduit */
     background: transparent;
     color: var(--neon-blue);
     text-decoration: none;
@@ -174,7 +167,7 @@ header {
     box-sizing: border-box;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     white-space: nowrap;
-    margin: 0 7.5px;
+    text-align: center; /* Centre le texte */
 }
 
 .btn::before {
@@ -222,23 +215,25 @@ header {
     font-size: 1rem;
 }
 
-/* Conteneur des boutons */
+/* Conteneur des boutons (optimisé pour le responsive) */
 .btn-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 0;
     justify-content: center;
-    align-items: center;
+    gap: 15px; /* Espace uniforme entre les boutons */
     margin: 50px auto;
     max-width: 100%;
     z-index: 2;
 }
 
+/* Boutons flexibles et centrés */
 .btn-item {
-    margin: 0 7.5px;
+    flex: 1 1 150px; /* S'adapte mais garde une base de 150px */
+    max-width: 200px; /* Largeur maximale pour éviter l'étirement */
+    margin: 0 5px; /* Marge réduite */
 }
 
-/* Force les animations sur les boutons même en mode performance réduite */
+/* Force les animations sur les boutons */
 .low-performance .btn::before,
 .no-animations .btn::before {
     display: block !important;
@@ -540,7 +535,13 @@ footer {
     margin-top: 80px;
 }
 
-/* Responsive et optimisations */
+/* Responsive optimisé */
+@media (max-width: 1024px) {
+    .btn-item {
+        flex: 1 1 180px; /* Base légèrement plus large pour les écrans moyens */
+    }
+}
+
 @media (max-width: 768px) {
     :root {
         --animation-duration: 45s;
@@ -555,11 +556,13 @@ footer {
     .btn-container {
         flex-direction: column;
         align-items: center;
+        gap: 10px; /* Espace réduit sur mobile */
     }
 
     .btn-item {
         width: 100%;
-        margin-bottom: 10px;
+        max-width: 300px;
+        margin: 0 auto 10px; /* Centre et espace en bas */
     }
 
     .btn {
