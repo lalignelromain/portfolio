@@ -28,6 +28,8 @@
             line-height: 1.7;
             margin: 0;
             padding: 30px;
+            position: relative;
+            overflow-x: hidden;
         }
         .container {
             max-width: 900px;
@@ -48,6 +50,7 @@
             text-decoration: none;
             font-weight: 500;
             transition: all 0.3s ease;
+            cursor: pointer;
         }
         .back-button:hover {
             color: var(--neon-blue);
@@ -66,6 +69,69 @@
             font-size: 2.2rem;
             margin: 0;
         }
+        /* Bouton flottant horizontal */
+        .floating-button {
+            position: fixed;
+            right: -200px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+            background: rgba(15, 15, 30, 0.8);
+            color: var(--text-light);
+            padding: 12px 15px;
+            border-radius: var(--border-radius) 0 0 var(--border-radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: 1px solid rgba(0, 245, 255, 0.2);
+            border-right: none;
+            transition: all 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+            box-shadow: -2px 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        .floating-button.show {
+            right: 0;
+            opacity: 1;
+            visibility: visible;
+        }
+        .floating-button.hide {
+            right: -200px;
+            opacity: 0;
+            visibility: hidden;
+        }
+        .floating-button:hover {
+            background: rgba(0, 245, 255, 0.1);
+            color: var(--neon-pink);
+            border-color: rgba(0, 245, 255, 0.4);
+        }
+        .floating-button i {
+            margin-right: 8px;
+        }
+        /* Bouton de contact (style uniformisé) */
+        .contact-button {
+            display: inline-block;
+            background: rgba(15, 15, 30, 0.6);
+            color: var(--text-light) !important;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: var(--border-radius);
+            margin-top: 10px;
+            font-weight: 500;
+            border: 1px solid rgba(0, 245, 255, 0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .contact-button:hover {
+            background: rgba(0, 245, 255, 0.1);
+            color: var(--neon-pink) !important;
+            border-color: rgba(0, 245, 255, 0.4);
+        }
+        .contact-button i {
+            margin-right: 8px;
+        }
+        /* Sections de contenu */
         .content-section {
             background: rgba(20, 20, 40, 0.3);
             padding: 30px;
@@ -478,23 +544,23 @@
                     <h2><i class="fas fa-book"></i> Glossaire</h2>
                     <div class="glossary">
                         <div class="glossary-term">
-            <strong>Attaque adversariale</strong> : Technique visant à tromper un modèle d'IA en ajoutant des perturbations imperceptibles aux données d'entrée (ex. : modifier légèrement une image pour qu'elle soit mal classée).
-        </div>
-        <div class="glossary-term">
-            <strong>Deepfake</strong> : Vidéo ou audio truqué utilisant l'IA pour imiter une personne réelle, souvent utilisé pour la désinformation.
-        </div>
-        <div class="glossary-term">
-            <strong>Biais algorithmiques</strong> : Erreurs systématiques dans les décisions d'un algorithme, souvent dues à des données d'entraînement non représentatives.
-        </div>
-        <div class="glossary-term">
-            <strong>RGPD</strong> : Règlement Général sur la Protection des Données, loi européenne encadrant la collecte et le traitement des données personnelles.
-        </div>
-        <div class="glossary-term">
-            <strong>Adversarial Training</strong> : Méthode d'entraînement où un modèle est exposé à des exemples perturbés pour améliorer sa robustesse.
-        </div>
-        <div class="glossary-term">
-            <strong>Explicabilité (XAI)</strong> : Capacité à comprendre et expliquer les décisions d'un modèle d'IA, essentielle pour la transparence.
-        </div>
+                            <strong>Attaque adversariale</strong> : Technique visant à tromper un modèle d'IA en ajoutant des perturbations imperceptibles aux données d'entrée (ex. : modifier légèrement une image pour qu'elle soit mal classée).
+                        </div>
+                        <div class="glossary-term">
+                            <strong>Deepfake</strong> : Vidéo ou audio truqué utilisant l'IA pour imiter une personne réelle, souvent utilisé pour la désinformation.
+                        </div>
+                        <div class="glossary-term">
+                            <strong>Biais algorithmiques</strong> : Erreurs systématiques dans les décisions d'un algorithme, souvent dues à des données d'entraînement non représentatives.
+                        </div>
+                        <div class="glossary-term">
+                            <strong>RGPD</strong> : Règlement Général sur la Protection des Données, loi européenne encadrant la collecte et le traitement des données personnelles.
+                        </div>
+                        <div class="glossary-term">
+                            <strong>Adversarial Training</strong> : Méthode d'entraînement où un modèle est exposé à des exemples perturbés pour améliorer sa robustesse.
+                        </div>
+                        <div class="glossary-term">
+                            <strong>Explicabilité (XAI)</strong> : Capacité à comprendre et expliquer les décisions d'un modèle d'IA, essentielle pour la transparence.
+                        </div>
                     </div>
                 </div>
                 <!-- Section Initiatives positives -->
@@ -518,7 +584,8 @@
                     <p>En combinant <strong>réglementations strictes</strong>, <strong>transparence</strong>, et <strong>collaboration internationale</strong>, nous pouvons maximiser ses bénéfices tout en minimisant ses risques.</p>
                     <p>Chacun a un rôle à jouer : les gouvernements doivent légiférer, les entreprises doivent innover de manière responsable, et les utilisateurs doivent rester informés et vigilants.</p>
                     <div style="margin-top: 30px; text-align: center;">
-                        <a href="#" class="back-button" onclick="window.close(); return false;">
+                        <!-- Bouton de fin de page uniformisé -->
+                        <a href="#" class="contact-button" onclick="window.close(); return false;">
                             <i class="fas fa-arrow-left" style="margin-right: 8px;"></i> Retour aux ressources IA
                         </a>
                     </div>
@@ -526,8 +593,14 @@
             </main>
         </div>
     </div>
+    <!-- Bouton flottant -->
+    <div class="floating-button" onclick="window.close(); return false;" title="Retour aux ressources">
+        <i class="fas fa-arrow-left"></i> Retour aux ressources
+    </div>
+    <!-- Script pour les animations et la navigation -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // Animations au scroll
             const fadeElements = document.querySelectorAll('.fade-in');
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -537,6 +610,8 @@
                 });
             }, { threshold: 0.1 });
             fadeElements.forEach(el => observer.observe(el));
+
+            // Navigation interne
             document.querySelectorAll('.toc a').forEach(link => {
                 link.addEventListener('click', (e) => {
                     e.preventDefault();
@@ -546,6 +621,11 @@
                     document.querySelector(targetId).scrollIntoView({ behavior: 'smooth' });
                 });
             });
+
+            // Gestion du bouton flottant
+            const floatingButton = document.querySelector('.floating-button');
+            const conclusion = document.querySelector('#conclusion');
+
             window.addEventListener('scroll', () => {
                 const sections = document.querySelectorAll('.content-section, .conclusion');
                 let currentSection = '';
@@ -561,6 +641,21 @@
                         link.classList.add('active');
                     }
                 });
+
+                // Calcul de la position de la conclusion
+                const conclusionTop = conclusion.offsetTop;
+                const conclusionHeight = conclusion.offsetHeight;
+                const windowHeight = window.innerHeight;
+                const scrollPosition = window.scrollY + windowHeight;
+
+                // Afficher/masquer le bouton flottant
+                if (window.scrollY > 300 && scrollPosition < conclusionTop + conclusionHeight - 200) {
+                    floatingButton.classList.add('show');
+                    floatingButton.classList.remove('hide');
+                } else {
+                    floatingButton.classList.remove('show');
+                    floatingButton.classList.add('hide');
+                }
             });
         });
     </script>
