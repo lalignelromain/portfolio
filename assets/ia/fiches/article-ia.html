@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avancées récentes en IA (2024-2025)</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/icon-ia/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/icon-ia/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/icon-ia/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --neon-blue: #00f5ff;
+            --neon-purple: #8a2be2;
+            --neon-pink: #ff2a6d;
+            --dark-bg: #0a0a1a;
+            --text-light: #f0f0f0;
+            --text-gray: #a0a0b0;
+            --border-radius: 12px;
+            --card-bg: rgba(20, 20, 40, 0.3);
+            --highlight-bg: rgba(20, 20, 40, 0.4);
+        }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            line-height: 1.7;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            color: var(--neon-blue);
+            font-size: 2.4rem;
+            margin: 0;
+            border-bottom: 1px solid rgba(0, 245, 255, 0.2);
+            padding-bottom: 15px;
+        }
+        .introduction {
+            text-align: center;
+            max-width: 90%;
+            margin: 0 auto 40px;
+            padding: 20px;
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            border-left: 3px solid var(--neon-blue);
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        .floating-button {
+            position: fixed;
+            right: -200px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+            background: rgba(15, 15, 30, 0.8);
+            color: var(--text-light);
+            padding: 12px 15px;
+            border-radius: var(--border-radius) 0 0 var(--border-radius);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: 1px solid rgba(0, 245, 255, 0.2);
+            border-right: none;
+            transition: all 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+            box-shadow: -2px 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        .floating-button.show {
+            right: 0;
+            opacity: 1;
+            visibility: visible;
+            display: flex;
+        }
+        .floating-button:hover {
+            background: rgba(0, 245, 255, 0.1);
+            color: var(--neon-pink);
+            border-color: rgba(0, 245, 255, 0.4);
+        }
+        .floating-button i {
+            margin-right: 8px;
+        }
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(15, 15, 30, 0.8);
+            color: var(--text-light);
+            padding: 12px 20px;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: 500;
+            border: 1px solid rgba(0, 245, 255, 0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            margin: 40px auto;
+            width: fit-content;
+        }
+        .back-button:hover {
+            background: rgba(0, 245, 255, 0.1);
+            color: var(--neon-pink);
+            border-color: rgba(0, 245, 255, 0.4);
+        }
+        .back-button i {
+            margin-right: 8px;
+        }
+        .tab-nav {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            border-bottom: 1px solid rgba(0, 245, 255, 0.2);
+        }
+        .tab-nav button {
+            background: transparent;
+            border: none;
+            color: var(--text-gray);
+            padding: 10px 20px;
+            margin: 0 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        .tab-nav button.active {
+            color: var(--neon-blue);
+            border-bottom: 2px solid var(--neon-blue);
+        }
+        .tab-nav button:hover {
+            color: var(--neon-purple);
+        }
+        .tab-content {
+            display: none;
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            border-left: 3px solid var(--neon-blue);
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .resource-card {
+            background: var(--highlight-bg);
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: var(--border-radius);
+            border-left: 3px solid var(--neon-pink);
+        }
+        .resource-card h3 {
+            color: var(--neon-purple);
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .resource-card h3 i {
+            color: var(--neon-blue);
+        }
+        .resource-link {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            display: block;
+        }
+        .resource-link:hover {
+            color: var(--neon-pink);
+        }
+        .source {
+            font-style: italic;
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            margin-top: 8px;
+        }
+        .highlight {
+            background: rgba(0, 245, 255, 0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+            color: var(--neon-blue);
+        }
+        .toc {
+            position: sticky;
+            top: 20px;
+            align-self: flex-start;
+            background: var(--card-bg);
+            padding: 15px;
+            border-radius: var(--border-radius);
+            width: 250px;
+            margin-right: 20px;
+        }
+        .toc ul {
+            list-style: none;
+            padding: 0;
+        }
+        .toc li {
+            margin-bottom: 10px;
+        }
+        .toc a {
+            color: var(--text-gray);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: block;
+            padding: 5px 0;
+        }
+        .toc a:hover, .toc a.active {
+            color: var(--neon-blue);
+            border-left: 2px solid var(--neon-blue);
+            padding-left: 10px;
+        }
+        .main-layout {
+            display: flex;
+            gap: 30px;
+        }
+        .main-content {
+            flex: 1;
+        }
+        @media (max-width: 992px) {
+            .main-layout {
+                flex-direction: column;
+            }
+            .toc {
+                position: static;
+                width: 100%;
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+        }
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .degraded-line {
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--neon-blue), transparent);
+            margin: 10px auto 20px;
+        }
+        .section h2 {
+            font-family: 'Playfair Display', serif;
+            color: var(--neon-purple);
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(0, 245, 255, 0.2);
+            padding-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .section h2 i {
+            color: var(--neon-blue);
+        }
+        .section h3 {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--neon-blue);
+            font-size: 1.4rem;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Avancées récentes en IA (2024-2025)</h1>
+        </div>
+        <!-- Introduction (hors onglet) -->
+        <div class="introduction fade-in">
+            
+            
+            <p>
+                L'Intelligence Artificielle évolue à un rythme effréné. Cette fiche fait le point sur les innovations majeures, les applications concrètes et les enjeux éthiques de l'IA en 2024-2025, avec des sources fiables et des exemples concrets.
+            </p>
+        </div>
+        <div class="main-layout">
+            <nav class="toc">
+                <ul>
+                    <li><a href="#" class="active" data-tab="modeles">Modèles de langage</a></li>
+                    <li><a href="#" data-tab="sante">Applications en santé</a></li>
+                    <li><a href="#" data-tab="ethique">Éthique et régulation</a></li>
+                    <li><a href="#" data-tab="environnement">Impact environnemental</a></li>
+                    <li><a href="#" data-tab="perspectives">Perspectives futures</a></li>
+                    <li><a href="#" data-tab="ressources">Pour approfondir</a></li>
+                </ul>
+            </nav>
+            <main class="main-content">
+                <div class="tab-nav">
+                    <button class="active" data-tab="modeles">Modèles de langage</button>
+                    <button data-tab="sante">Applications en santé</button>
+                    <button data-tab="ethique">Éthique et régulation</button>
+                    <button data-tab="environnement">Impact environnemental</button>
+                    <button data-tab="perspectives">Perspectives futures</button>
+                    <button data-tab="ressources">Pour approfondir</button>
+                </div>
+                <!-- Onglet Modèles de langage -->
+                <div id="modeles" class="tab-content fade-in active">
+                    <div class="section">
+                        <h2><i class="fas fa-brain"></i> Modèles de langage et génération de texte</h2>
+                        <p>
+                            Les modèles de langage comme GPT-5, PaLM 2.5 et Mistral 8x22B repoussent les limites de la compréhension et de la génération de texte, avec des applications en traduction, résumé, création de contenu et assistance conversationnelle.
+                        </p>
+                        <div class="resource-item">
+                            <h3>GPT-5 et ses capacités étendues</h3>
+                            <p>
+                                GPT-5, sorti en 2024, offre une meilleure compréhension du contexte, une réduction des biais et une capacité à gérer des tâches complexes comme la génération de code ou l'analyse de données structurées.
+                            </p>
+                            <p class="source">
+                                Source : <a href="https://openai.com/research" class="resource-link" target="_blank">OpenAI Research</a>
+                            </p>
+                        </div>
+                        <div class="resource-item">
+                            <h3>Mistral AI et l'IA française</h3>
+                            <p>
+                                Mistral AI, startup française, a lancé en 2024 des modèles multilingues performants, avec une attention particulière à l'efficacité énergétique et à la transparence.
+                            </p>
+                            <p class="source">
+                                Source : <a href="https://mistral.ai/" class="resource-link" target="_blank">Mistral AI</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Onglet Applications en santé -->
+                <div id="sante" class="tab-content fade-in">
+                    <div class="section">
+                        <h2><i class="fas fa-heartbeat"></i> Applications en santé</h2>
+                        <p>
+                            L'IA transforme la médecine, du diagnostic précoce à la découverte de médicaments, en passant par la personnalisation des traitements.
+                        </p>
+                        <div class="resource-item">
+                            <h3>Diagnostic assisté par IA</h3>
+                            <p>
+                                Des algorithmes comme <span class="highlight">DeepMind AlphaFold 3</span> permettent de prédire la structure des protéines avec une précision inégalée, accélérant la recherche sur les maladies rares et les cancers.
+                            </p>
+                            <p class="source">
+                                Source : <a href="https://deepmind.com/" class="resource-link" target="_blank">DeepMind - AlphaFold</a>
+                            </p>
+                        </div>
+                        <div class="resource-item">
+                            <h3>Imagerie médicale et détection précoce</h3>
+                            <p>
+                                Les outils d'IA analysent désormais les scanners et IRM avec une précision supérieure à celle des radiologues pour certaines pathologies (ex. : cancer du poumon, Alzheimer).
+                            </p>
+                            <p class="source">
+                                Source : <a href="https://www.thelancet.com/" class="resource-link" target="_blank">The Lancet Digital Health</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Onglet Éthique et régulation -->
+                <div id="ethique" class="tab-content fade-in">
+                    <div class="section">
+                        <h2><i class="fas fa-balance-scale"></i> Enjeux éthiques et régulation</h2>
+                        <p>
+                            L'adoption massive de l'IA soulève des questions sur la vie privée, la transparence et l'équité. Les gouvernements et organisations internationales travaillent à encadrer ces technologies.
+                        </p>
+                        <div class="resource-item">
+                            <h3>Règlement IA de l'Union Européenne</h3>
+                            <p>
+                                Entré en vigueur en 2024, ce règlement classe les systèmes d'IA par niveau de risque et impose des obligations strictes pour les applications à haut risque (ex. : recrutement, surveillance biométrique).
+                            </p>
+                            <p class="source">
+                                Source : <a href="https://digital-strategy.ec.europa.eu/fr/policies/reglem-ia" class="resource-link" target="_blank">Commission Européenne</a>
+                            </p>
+                        </div>
+                        <div class="resource-item">
+                            <h3>Biais et équité des algorithmes</h3>
+                            <p>
+                                Des outils comme <span class="highlight">IBM AI Fairness 360</span> aident à détecter et corriger les biais dans les modèles d'IA, notamment dans les domaines de l'emploi et du crédit.
+                            </p>
+                            <p class="source">
+                                Source : <a href="https://www.ibm.com/watson/ai-fairness-360" class="resource-link" target="_blank">IBM AI Fairness 360</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Onglet Impact environnemental -->
+                <div id="environnement" class="tab-content fade-in">
+                    <div class="section">
+                        <h2><i class="fas fa-leaf"></i> Impact environnemental</h2>
+                        <p>
+                            L'entraînement des modèles d'IA consomme énormément d'énergie. Des initiatives visent à réduire cet impact, comme l'utilisation de data centers alimentés par des énergies renouvelables.
+                        </p>
+                        <div class="resource-item">
+                            <h3>Optimisation énergétique</h3>
+                            <p>
+                                Google et Microsoft ont réduit de 30% l'empreinte carbone de leurs modèles grâce à des techniques d'entraînement optimisées et des puces spécialisées (ex. : TPU v5).
+                            </p>
+                            <p class="source">
+                                Source : <a href="https://ai.google/research/" class="resource-link" target="_blank">Google AI - Sustainability</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Onglet Perspectives futures -->
+                <div id="perspectives" class="tab-content fade-in">
+                    <div class="section">
+                        <h2><i class="fas fa-rocket"></i> Perspectives pour 2025-2030</h2>
+                        <p>
+                            Les prochaines années verront l'émergence d'AGIs (Intelligences Générales Artificielles) plus autonomes, ainsi que des applications dans l'éducation, les smart cities et l'exploration spatiale.
+                        </p>
+                        <div class="resource-item">
+                            <h3>Éducation et formation</h3>
+                            <p>
+                                Des plateformes comme <span class="highlight">Khan Academy + Khanmigo</span> utilisent l'IA pour personnaliser l'apprentissage et assister les enseignants.
+                            </p>
+                            <p class="source">
+                                Source : <a href="https://www.khanacademy.org/" class="resource-link" target="_blank">Khan Academy</a>
+                            </p>
+                        </div>
+                        <div class="resource-item">
+                            <h3>IA et exploration spatiale</h3>
+                            <p>
+                                La NASA et l'ESA utilisent l'IA pour analyser les données des télescopes (James Webb) et préparer les missions vers Mars.
+                            </p>
+                            <p class="source">
+                                Source : <a href="https://www.nasa.gov/" class="resource-link" target="_blank">NASA - AI for Space Exploration</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Onglet Pour approfondir -->
+                <div id="ressources" class="tab-content fade-in">
+                    <div class="section">
+                        <h2><i class="fas fa-book"></i> Pour approfondir</h2>
+                        <ul class="resource-list">
+                            <li class="resource-item">
+                                <a href="https://www.inria.fr/fr/intelligence-artificielle" class="resource-link" target="_blank">
+                                    <i class="fas fa-external-link-alt"></i> INRIA - Intelligence Artificielle
+                                </a>
+                                <p class="source">Institut national de recherche en sciences et technologies du numérique.</p>
+                            </li>
+                            <li class="resource-item">
+                                <a href="https://www.cnil.fr/" class="resource-link" target="_blank">
+                                    <i class="fas fa-external-link-alt"></i> CNIL - IA et protection des données
+                                </a>
+                                <p class="source">Commission Nationale de l'Informatique et des Libertés.</p>
+                            </li>
+                            <li class="resource-item">
+                                <a href="https://www.fun-mooc.fr/" class="resource-link" target="_blank">
+                                    <i class="fas fa-external-link-alt"></i> MOOC "Elements of AI" (Université d'Helsinki)
+                                </a>
+                                <p class="source">Cours gratuit en ligne pour comprendre les bases de l'IA.</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Bouton de retour en bas de page -->
+                <div id="backButtonContainer" style="text-align: center; display: none;">
+                    <a href="javascript:void(0);" class="back-button" id="backButton">
+                        <i class="fas fa-arrow-left"></i> Retour à l'accueil
+                    </a>
+                </div>
+            </main>
+        </div>
+    </div>
+    <!-- Bouton flottant -->
+    <div class="floating-button" id="floatingButton" title="Retour à l'accueil">
+        <i class="fas fa-arrow-left"></i> Retour
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabButtons = document.querySelectorAll('.tab-nav button');
+            const tabContents = document.querySelectorAll('.tab-content');
+            const tocLinks = document.querySelectorAll('.toc a');
+            const floatingButton = document.getElementById('floatingButton');
+            const backButtonContainer = document.getElementById('backButtonContainer');
+            const backButton = document.getElementById('backButton');
+            const introduction = document.querySelector('.introduction');
+
+            // Fonction pour basculer d'onglet
+            function switchTab(tabId) {
+                tabContents.forEach(content => content.classList.remove('active'));
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                tocLinks.forEach(link => link.classList.remove('active'));
+
+                document.getElementById(tabId).classList.add('active');
+                document.querySelector(`.tab-nav button[data-tab="${tabId}"]`).classList.add('active');
+                document.querySelector(`.toc a[data-tab="${tabId}"]`).classList.add('active');
+                updateButtons();
+            }
+
+            // Mise à jour des boutons "Retour"
+            function updateButtons() {
+                const introductionBottom = introduction.getBoundingClientRect().bottom;
+                const isInIntroduction = window.scrollY < introductionBottom;
+
+                if (isInIntroduction) {
+                    floatingButton.classList.remove('show');
+                    backButtonContainer.style.display = 'none';
+                } else {
+                    floatingButton.classList.add('show');
+                    backButtonContainer.style.display = 'block';
+                }
+            }
+
+            // Clic sur les boutons → scroll vers l'introduction
+            floatingButton.onclick = () => introduction.scrollIntoView({ behavior: 'smooth' });
+            backButton.onclick = () => introduction.scrollIntoView({ behavior: 'smooth' });
+
+            // Activation des onglets
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => switchTab(button.getAttribute('data-tab')));
+            });
+
+            tocLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    switchTab(link.getAttribute('data-tab'));
+                });
+            });
+
+            // Gestion du scroll pour afficher/masquer les boutons
+            window.addEventListener('scroll', updateButtons);
+            updateButtons(); // Initialisation
+
+            // Animation fade-in
+            const fadeElements = document.querySelectorAll('.fade-in');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) entry.target.classList.add('visible');
+                });
+            }, { threshold: 0.1 });
+            fadeElements.forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+</html>

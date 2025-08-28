@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site de référence sur l'Intelligence Artificielle</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/icon-ia/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/icon-ia/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/icon-ia/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --neon-blue: #00f5ff;
+            --neon-purple: #8a2be2;
+            --neon-pink: #ff2a6d;
+            --dark-bg: #0a0a1a;
+            --text-light: #f0f0f0;
+            --text-gray: #a0a0b0;
+            --border-radius: 12px;
+            --card-bg: rgba(20, 20, 40, 0.3);
+            --highlight-bg: rgba(20, 20, 40, 0.4);
+        }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            line-height: 1.7;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            color: var(--neon-blue);
+            font-size: 2.4rem;
+            margin: 0;
+            border-bottom: 1px solid rgba(0, 245, 255, 0.2);
+            padding-bottom: 15px;
+        }
+        .introduction {
+            text-align: center;
+            max-width: 90%;
+            margin: 0 auto 40px;
+            padding: 20px;
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            border-left: 3px solid var(--neon-blue);
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        .floating-button {
+            position: fixed;
+            right: -200px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+            background: rgba(15, 15, 30, 0.8);
+            color: var(--text-light);
+            padding: 12px 15px;
+            border-radius: var(--border-radius) 0 0 var(--border-radius);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: 1px solid rgba(0, 245, 255, 0.2);
+            border-right: none;
+            transition: all 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+            box-shadow: -2px 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        .floating-button.show {
+            right: 0;
+            opacity: 1;
+            visibility: visible;
+            display: flex;
+        }
+        .floating-button:hover {
+            background: rgba(0, 245, 255, 0.1);
+            color: var(--neon-pink);
+            border-color: rgba(0, 245, 255, 0.4);
+        }
+        .floating-button i {
+            margin-right: 8px;
+        }
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(15, 15, 30, 0.8);
+            color: var(--text-light);
+            padding: 12px 20px;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: 500;
+            border: 1px solid rgba(0, 245, 255, 0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            margin: 40px auto;
+            width: fit-content;
+        }
+        .back-button:hover {
+            background: rgba(0, 245, 255, 0.1);
+            color: var(--neon-pink);
+            border-color: rgba(0, 245, 255, 0.4);
+        }
+        .back-button i {
+            margin-right: 8px;
+        }
+        .tab-nav {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            border-bottom: 1px solid rgba(0, 245, 255, 0.2);
+        }
+        .tab-nav button {
+            background: transparent;
+            border: none;
+            color: var(--text-gray);
+            padding: 10px 20px;
+            margin: 0 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        .tab-nav button.active {
+            color: var(--neon-blue);
+            border-bottom: 2px solid var(--neon-blue);
+        }
+        .tab-nav button:hover {
+            color: var(--neon-purple);
+        }
+        .tab-content {
+            display: none;
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            border-left: 3px solid var(--neon-blue);
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .resource-card {
+            background: var(--highlight-bg);
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: var(--border-radius);
+            border-left: 3px solid var(--neon-pink);
+        }
+        .resource-card h3 {
+            color: var(--neon-purple);
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .resource-card h3 i {
+            color: var(--neon-blue);
+        }
+        .resource-link {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            display: block;
+        }
+        .resource-link:hover {
+            color: var(--neon-pink);
+        }
+        .source {
+            font-style: italic;
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            margin-top: 8px;
+        }
+        .highlight {
+            background: rgba(0, 245, 255, 0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+            color: var(--neon-blue);
+        }
+        .toc {
+            position: sticky;
+            top: 20px;
+            align-self: flex-start;
+            background: var(--card-bg);
+            padding: 15px;
+            border-radius: var(--border-radius);
+            width: 250px;
+            margin-right: 20px;
+        }
+        .toc ul {
+            list-style: none;
+            padding: 0;
+        }
+        .toc li {
+            margin-bottom: 10px;
+        }
+        .toc a {
+            color: var(--text-gray);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: block;
+            padding: 5px 0;
+        }
+        .toc a:hover, .toc a.active {
+            color: var(--neon-blue);
+            border-left: 2px solid var(--neon-blue);
+            padding-left: 10px;
+        }
+        .main-layout {
+            display: flex;
+            gap: 30px;
+        }
+        .main-content {
+            flex: 1;
+        }
+        @media (max-width: 992px) {
+            .main-layout {
+                flex-direction: column;
+            }
+            .toc {
+                position: static;
+                width: 100%;
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+        }
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .tool-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .tool-item {
+            padding: 12px;
+            background: var(--highlight-bg);
+            border-radius: var(--border-radius);
+            transition: all 0.3s ease;
+        }
+        .tool-item:hover {
+            background: rgba(20, 20, 40, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Site de référence sur l'Intelligence Artificielle</h1>
+        </div>
+        <!-- Introduction (hors onglet) -->
+        <div class="introduction fade-in">
+            <p>
+                Cette page regroupe des ressources fiables et complètes pour comprendre les fondements de l'IA, ses applications, ses outils, ses enjeux éthiques et les formations disponibles. Toutes les sources sont vérifiées et mises à jour régulièrement.
+            </p>
+        </div>
+        <div class="main-layout">
+            <nav class="toc">
+                <ul>
+                    <li><a href="#" class="active" data-tab="definition">Définition et concepts clés</a></li>
+                    <li><a href="#" data-tab="domaines">Domaines d'application</a></li>
+                    <li><a href="#" data-tab="outils">Outils et plateformes</a></li>
+                    <li><a href="#" data-tab="formations">Formations et MOOC</a></li>
+                    <li><a href="#" data-tab="actualites">Actualités et veille</a></li>
+                    <li><a href="#" data-tab="enjeux">Enjeux éthiques et régulation</a></li>
+                    <li><a href="#" data-tab="communautes">Communautés et événements</a></li>
+                </ul>
+            </nav>
+            <main class="main-content">
+                <div class="tab-nav">
+                    <button class="active" data-tab="definition">Définition et concepts clés</button>
+                    <button data-tab="domaines">Domaines d'application</button>
+                    <button data-tab="outils">Outils et plateformes</button>
+                    <button data-tab="formations">Formations et MOOC</button>
+                    <button data-tab="actualites">Actualités et veille</button>
+                    <button data-tab="enjeux">Enjeux éthiques et régulation</button>
+                    <button data-tab="communautes">Communautés et événements</button>
+                </div>
+                <!-- Onglet Définition et concepts clés -->
+                <div id="definition" class="tab-content fade-in active">
+                    <div class="resource-card">
+                        <h3><i class="fas fa-book"></i> Qu'est-ce que l'IA ?</h3>
+                        <p>
+                            L'IA englobe plusieurs sous-domaines : <span class="highlight">apprentissage automatique (Machine Learning)</span>, <span class="highlight">réseaux de neurones</span>, <span class="highlight">traitement du langage naturel (NLP)</span>, <span class="highlight">vision par ordinateur</span>, et <span class="highlight">robotique</span>.
+                        </p>
+                        <p class="source">
+                            Source : <a href="https://www.inria.fr/fr/intelligence-artificielle" class="resource-link" target="_blank">INRIA - Intelligence Artificielle</a>
+                        </p>
+                    </div>
+                    <div class="resource-card">
+                        <h3><i class="fas fa-book"></i> Différence entre IA faible et IA forte</h3>
+                        <p>
+                            L'<span class="highlight">IA faible</span> est spécialisée dans une tâche (ex. : reconnaissance d'image), tandis que l'<span class="highlight">IA forte</span> (ou AGI) vise une intelligence générale, capable de raisonner comme un humain.
+                        </p>
+                        <p class="source">
+                            Source : <a href="https://www.futura-sciences.com/tech/definitions/informatique-intelligence-artificielle-463/" class="resource-link" target="_blank">Futura Sciences</a>
+                        </p>
+                    </div>
+                </div>
+                <!-- Onglet Domaines d'application -->
+                <div id="domaines" class="tab-content fade-in">
+                    <div class="resource-card">
+                        <h3><i class="fas fa-robot"></i> Santé</h3>
+                        <p>
+                            Diagnostic assisté, découverte de médicaments, chirurgie robotisée, et suivi personnalisé des patients.
+                        </p>
+                        <p class="source">
+                            Source : <a href="https://www.inserm.fr/" class="resource-link" target="_blank">Inserm - IA et Santé</a>
+                        </p>
+                    </div>
+                    <div class="resource-card">
+                        <h3><i class="fas fa-robot"></i> Transport</h3>
+                        <p>
+                            Véhicules autonomes, optimisation des trajets, gestion du trafic, et maintenance prédictive.
+                        </p>
+                        <p class="source">
+                            Source : <a href="https://www.anfr.fr/" class="resource-link" target="_blank">ANFR - Mobilité intelligente</a>
+                        </p>
+                    </div>
+                    <div class="resource-card">
+                        <h3><i class="fas fa-robot"></i> Éducation</h3>
+                        <p>
+                            Plateformes d'apprentissage adaptatif (ex. : <span class="highlight">Khan Academy</span>, <span class="highlight">Duolingo</span>), tuteurs intelligents, et évaluation automatisée.
+                        </p>
+                        <p class="source">
+                            Source : <a href="https://eduscol.education.fr/" class="resource-link" target="_blank">Éduscol - Numérique éducatif</a>
+                        </p>
+                    </div>
+                    <div class="resource-card">
+                        <h3><i class="fas fa-robot"></i> Finance</h3>
+                        <p>
+                            Détection de fraudes, scoring crédit, trading algorithmique, et conseils financiers personnalisés.
+                        </p>
+                        <p class="source">
+                            Source : <a href="https://www.acpr.banque-france.fr/" class="resource-link" target="_blank">ACPR - IA en finance</a>
+                        </p>
+                    </div>
+                    <div class="resource-card">
+                        <h3><i class="fas fa-robot"></i> Industrie</h3>
+                        <p>
+                            Maintenance prédictive, contrôle qualité automatisé, et optimisation des chaînes de production.
+                        </p>
+                        <p class="source">
+                            Source : <a href="https://www.alliance-industrie.fr/" class="resource-link" target="_blank">Alliance Industrie du Futur</a>
+                        </p>
+                    </div>
+                </div>
+                <!-- Onglet Outils et plateformes -->
+                <div id="outils" class="tab-content fade-in">
+                    <div class="tool-list">
+                        <div class="tool-item">
+                            <h3><i class="fas fa-tools"></i> TensorFlow</h3>
+                            <p>Bibliothèque open source pour le Machine Learning, développée par Google.</p>
+                            <a href="https://www.tensorflow.org/" class="resource-link" target="_blank"><i class="fas fa-external-link-alt"></i> Site officiel</a>
+                        </div>
+                        <div class="tool-item">
+                            <h3><i class="fas fa-tools"></i> PyTorch</h3>
+                            <p>Framework populaire pour le deep learning, soutenu par Facebook.</p>
+                            <a href="https://pytorch.org/" class="resource-link" target="_blank"><i class="fas fa-external-link-alt"></i> Site officiel</a>
+                        </div>
+                        <div class="tool-item">
+                            <h3><i class="fas fa-tools"></i> Scikit-learn</h3>
+                            <p>Bibliothèque Python pour le Machine Learning classique.</p>
+                            <a href="https://scikit-learn.org/" class="resource-link" target="_blank"><i class="fas fa-external-link-alt"></i> Site officiel</a>
+                        </div>
+                        <div class="tool-item">
+                            <h3><i class="fas fa-tools"></i> Hugging Face</h3>
+                            <p>Plateforme pour les modèles de NLP et l'IA générative.</p>
+                            <a href="https://huggingface.co/" class="resource-link" target="_blank"><i class="fas fa-external-link-alt"></i> Site officiel</a>
+                        </div>
+                        <div class="tool-item">
+                            <h3><i class="fas fa-tools"></i> IBM Watson</h3>
+                            <p>Suite d'outils d'IA pour les entreprises, incluant NLP et analyse de données.</p>
+                            <a href="https://www.ibm.com/watson" class="resource-link" target="_blank"><i class="fas fa-external-link-alt"></i> Site officiel</a>
+                        </div>
+                        <div class="tool-item">
+                            <h3><i class="fas fa-tools"></i> Google Vertex AI</h3>
+                            <p>Plateforme unifiée pour l'entraînement et le déploiement de modèles d'IA.</p>
+                            <a href="https://cloud.google.com/vertex-ai" class="resource-link" target="_blank"><i class="fas fa-external-link-alt"></i> Site officiel</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Onglet Formations et MOOC -->
+                <div id="formations" class="tab-content fade-in">
+                    <div class="resource-card">
+                        <h3><i class="fas fa-graduation-cap"></i> MOOC "Elements of AI" (Université d'Helsinki)</h3>
+                        <p>
+                            Cours gratuit en ligne pour découvrir les bases de l'IA, accessible à tous.
+                        </p>
+                        <p class="source">
+                            Source : <a href="https://www.elementsofai.com/" class="resource-link" target="_blank">Elements of AI</a>
+                        </p>
+                    </div>
+                    <div class="resource-card">
+                        <h3><i class="fas fa-graduation-cap"></i> Cours "Deep Learning Specialization" (Andrew Ng - Coursera)</h3>
+                        <p>
+                            Formation approfondie sur le deep learning, avec des projets pratiques.
+                        </p>
+                        <p class="source">
+                            Source : <a href="https://www.coursera.org/specializations/deep-learning" class="resource-link" target="_blank">Coursera</a>
+                        </p>
+                    </div>
+                    <div class="resource-card">
+                        <h3><i class="fas fa-graduation-cap"></i> Class Central - Cours d'IA</h3>
+                        <p>
+                            Annuaire des meilleurs cours en ligne sur l'IA, classés par niveau et thème.
+                        </p>
+                        <p class="source">
+                            Source : <a href="https://www.classcentral.com/" class="resource-link" target="_blank">Class Central</a>
+                        </p>
+                    </div>
+                    <div class="resource-card">
+                        <h3><i class="fas fa-graduation-cap"></i> OpenClassrooms - Parcours IA</h3>
+                        <p>
+                            Formations certifiantes en IA, data science et Machine Learning, en français.
+                        </p>
+                        <p class="source">
+                            Source : <a href="https://openclassrooms.com/fr/" class="resource-link" target="_blank">OpenClassrooms</a>
+                        </p>
+                    </div>
+                </div>
+                <!-- Onglet Actualités et veille -->
+                <div id="actualites" class="tab-content fade-in">
+                    <div class="resource-card">
+                        <h3><i class="fas fa-newspaper"></i> MIT Technology Review (IA)</h3>
+                        <p>
+                            Articles et analyses sur les innovations en IA, par le Massachusetts Institute of Technology.
+                        </p>
+                        <p class="source">
+                            Source : <a href="https://www.technologyreview.com/topic/artificial-intelligence/" class="resource-link" target="_blank">MIT Technology Review</a>
+                        </p>
+                    </div>
+                    <div class="resource-card">
+                        <h3><i class="fas fa-newspaper"></i> The Batch (DeepLearning.AI)</h3>
+                        <p>
+                            Newsletter hebdomadaire sur l'IA, par Andrew Ng.
+                        </p>
+                        <p class="source">
+                            Source : <a href="https://www.deeplearning.ai/the-batch/" class="resource-link" target="_blank">The Batch</a>
+                        </p>
+                    </div>
+                    <div class="resource-card">
+                        <h3><i class="fas fa-newspaper"></i> IA sur Le Monde</h3>
+                        <p>
+                            Dossiers et articles sur l'IA, ses applications et ses enjeux sociétaux.
+                        </p>
+                        <p class="source">
+                            Source : <a href="https://www.lemonde.fr/ia/" class="resource-link" target="_blank">Le Monde - IA</a>
+                        </p>
+                    </div>
+                </div>
+                <!-- Onglet Enjeux éthiques et régulation -->
+                <div id="enjeux" class="tab-content fade-in">
+                    <div class="resource-card">
+                        <h3><i class="fas fa-balance-scale"></i> Règlement IA de l'Union Européenne</h3>
+                        <p>
+                            Cadre légal pour encadrer les systèmes d'IA, classé par niveau de risque.
+                        </p>
+                        <p class="source">
+                            Source : <a href="https://digital-strategy.ec.europa.eu/fr/policies/reglem-ia" class="resource-link" target="_blank">Commission Européenne</a>
+                        </p>
+                    </div>
+                    <div class="resource-card">
+                        <h3><i class="fas fa-balance-scale"></i> CNIL - IA et protection des données</h3>
+                        <p>
+                            Recommandations et bonnes pratiques pour concilier IA et RGPD.
+                        </p>
+                        <p class="source">
+                            Source : <a href="https://www.cnil.fr/fr/ia-et-protection-des-donnees" class="resource-link" target="_blank">CNIL</a>
+                        </p>
+                    </div>
+                    <div class="resource-card">
+                        <h3><i class="fas fa-balance-scale"></i> Partnership on AI</h3>
+                        <p>
+                            Organisation multi-acteurs pour promouvoir une IA bénéfique et responsable.
+                        </p>
+                        <p class="source">
+                            Source : <a href="https://partnershiponai.org/" class="resource-link" target="_blank">Partnership on AI</a>
+                        </p>
+                    </div>
+                </div>
+                <!-- Onglet Communautés et événements -->
+                <div id="communautes" class="tab-content fade-in">
+                    <div class="resource-card">
+                        <h3><i class="fas fa-users"></i> Meetup IA</h3>
+                        <p>
+                            Groupes locaux et événements autour de l'IA, dans le monde entier.
+                        </p>
+                        <p class="source">
+                            Source : <a href="https://www.meetup.com/topics/ai/" class="resource-link" target="_blank">Meetup - IA</a>
+                        </p>
+                    </div>
+                    <div class="resource-card">
+                        <h3><i class="fas fa-users"></i> NeurIPS (Conférence internationale)</h3>
+                        <p>
+                            La plus grande conférence annuelle sur le Machine Learning et l'IA.
+                        </p>
+                        <p class="source">
+                            Source : <a href="https://neurips.cc/" class="resource-link" target="_blank">NeurIPS</a>
+                        </p>
+                    </div>
+                    <div class="resource-card">
+                        <h3><i class="fas fa-users"></i> Data Science Meetups (France)</h3>
+                        <p>
+                            Rencontres et ateliers sur la data science et l'IA en France.
+                        </p>
+                        <p class="source">
+                            Source : <a href="https://www.meetup.com/fr-FR/find/?location=FR&source=EVENTS&keywords=data+science" class="resource-link" target="_blank">Meetup - Data Science France</a>
+                        </p>
+                    </div>
+                </div>
+                <!-- Bouton de retour en bas de page -->
+                <div id="backButtonContainer" style="text-align: center; display: none;">
+                    <a href="javascript:void(0);" class="back-button" id="backButton">
+                        <i class="fas fa-arrow-left"></i> Retour à l'accueil
+                    </a>
+                </div>
+            </main>
+        </div>
+    </div>
+    <!-- Bouton flottant -->
+    <div class="floating-button" id="floatingButton" title="Retour à l'accueil">
+        <i class="fas fa-arrow-left"></i> Retour
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabButtons = document.querySelectorAll('.tab-nav button');
+            const tabContents = document.querySelectorAll('.tab-content');
+            const tocLinks = document.querySelectorAll('.toc a');
+            const floatingButton = document.getElementById('floatingButton');
+            const backButtonContainer = document.getElementById('backButtonContainer');
+            const backButton = document.getElementById('backButton');
+            const introduction = document.querySelector('.introduction');
+
+            function switchTab(tabId) {
+                tabContents.forEach(content => content.classList.remove('active'));
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                tocLinks.forEach(link => link.classList.remove('active'));
+
+                document.getElementById(tabId).classList.add('active');
+                document.querySelector(`.tab-nav button[data-tab="${tabId}"]`).classList.add('active');
+                document.querySelector(`.toc a[data-tab="${tabId}"]`).classList.add('active');
+                updateButtons();
+            }
+
+            function updateButtons() {
+                const introductionBottom = introduction.getBoundingClientRect().bottom;
+                const isInIntroduction = window.scrollY < introductionBottom;
+
+                if (isInIntroduction) {
+                    floatingButton.classList.remove('show');
+                    backButtonContainer.style.display = 'none';
+                } else {
+                    floatingButton.classList.add('show');
+                    backButtonContainer.style.display = 'block';
+                }
+            }
+
+            floatingButton.onclick = () => introduction.scrollIntoView({ behavior: 'smooth' });
+            backButton.onclick = () => introduction.scrollIntoView({ behavior: 'smooth' });
+
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => switchTab(button.getAttribute('data-tab')));
+            });
+
+            tocLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    switchTab(link.getAttribute('data-tab'));
+                });
+            });
+
+            window.addEventListener('scroll', updateButtons);
+            updateButtons();
+
+            const fadeElements = document.querySelectorAll('.fade-in');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) entry.target.classList.add('visible');
+                });
+            }, { threshold: 0.1 });
+            fadeElements.forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+</html>
