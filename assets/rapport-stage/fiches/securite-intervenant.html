@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="apple-touch-icon" sizes="180x180" href="favicon/icon-securite/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="favicon/icon-securite/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="favicon/icon-securite/favicon-16x16.png">
-<link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/icon-securite/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/icon-securite/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/icon-securite/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
     <title>ADVF : Votre Sécurité en tant qu'Intervenant(e)</title>
-    <!-- Polices Google (identiques au portfolio) -->
+    <!-- Polices Google -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Font Awesome (optionnel, si tu veux ajouter des icônes plus tard) -->
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -21,97 +21,293 @@
             --text-light: #f0f0f0;
             --text-gray: #a0a0b0;
             --border-radius: 12px;
+            --card-bg: rgba(20, 20, 40, 0.3);
+            --highlight-bg: rgba(20, 20, 40, 0.4);
         }
+
         body {
             font-family: 'Montserrat', sans-serif;
             background-color: var(--dark-bg);
             color: var(--text-light);
             line-height: 1.7;
             margin: 0;
-            padding: 30px;
+            padding: 0;
+            overflow-x: hidden;
         }
+
         .container {
-            max-width: 900px;
+            max-width: 1000px;
             margin: 0 auto;
-            background-color: rgba(20, 20, 40, 0.3);
-            padding: 30px 40px;
-            border-radius: var(--border-radius);
-            border-left: 3px solid var(--neon-purple);
+            padding: 30px 20px;
         }
-        header {
+
+        /* En-tête */
+        .header {
             text-align: center;
             margin-bottom: 40px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid rgba(0, 245, 255, 0.2);
         }
-        header h1 {
+
+        .header h1 {
             font-family: 'Playfair Display', serif;
             color: var(--neon-blue);
-            font-size: 2.2rem;
-            margin-bottom: 10px;
+            font-size: 2.4rem;
+            margin: 0;
+            border-bottom: 1px solid rgba(0, 245, 255, 0.2);
+            padding-bottom: 15px;
         }
-        header h2 {
+
+        .header h2 {
             font-family: 'Montserrat', sans-serif;
             color: var(--text-gray);
             font-size: 1.2rem;
             font-weight: 400;
+            margin-top: 10px;
         }
-        h3 {
-            font-family: 'Playfair Display', serif;
-            color: var(--neon-purple);
-            font-size: 1.6rem;
-            margin: 30px 0 15px 0;
-            border-bottom: 1px solid rgba(0, 245, 255, 0.2);
-            padding-bottom: 10px;
-        }
-        h4 {
-            font-family: 'Montserrat', sans-serif;
-            color: var(--neon-blue);
-            font-size: 1.3rem;
-            margin: 25px 0 10px 0;
-        }
-        ul {
-            padding-left: 25px;
-            margin: 15px 0;
-        }
-        ul ul {
-            list-style-type: circle;
-            padding-left: 20px;
-        }
-        li {
-            margin-bottom: 8px;
+
+        /* Bouton flottant horizontal */
+        .floating-button {
+            position: fixed;
+            right: -200px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+            background: rgba(15, 15, 30, 0.8);
             color: var(--text-light);
+            padding: 12px 15px;
+            border-radius: var(--border-radius) 0 0 var(--border-radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: 1px solid rgba(0, 245, 255, 0.2);
+            border-right: none;
+            transition: all 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+            box-shadow: -2px 2px 10px rgba(0, 0, 0, 0.2);
         }
-        strong {
+
+        .floating-button.show {
+            right: 0;
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .floating-button.hide {
+            right: -200px;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .floating-button:hover {
+            background: rgba(0, 245, 255, 0.1);
             color: var(--neon-pink);
+            border-color: rgba(0, 245, 255, 0.4);
         }
+
+        .floating-button i {
+            margin-right: 8px;
+        }
+
+        /* Bouton de bas de page */
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(15, 15, 30, 0.8);
+            color: var(--text-light);
+            padding: 12px 20px;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: 500;
+            border: 1px solid rgba(0, 245, 255, 0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            margin: 40px auto;
+            width: fit-content;
+        }
+
+        .back-button:hover {
+            background: rgba(0, 245, 255, 0.1);
+            color: var(--neon-pink);
+            border-color: rgba(0, 245, 255, 0.4);
+        }
+
+        .back-button i {
+            margin-right: 8px;
+        }
+
+        /* Navigation par onglets */
+        .tab-nav {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            border-bottom: 1px solid rgba(0, 245, 255, 0.2);
+        }
+
+        .tab-nav button {
+            background: transparent;
+            border: none;
+            color: var(--text-gray);
+            padding: 10px 20px;
+            margin: 0 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .tab-nav button.active {
+            color: var(--neon-blue);
+            border-bottom: 2px solid var(--neon-blue);
+        }
+
+        .tab-nav button:hover {
+            color: var(--neon-purple);
+        }
+
+        /* Contenu des onglets */
+        .tab-content {
+            display: none;
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            border-left: 3px solid var(--neon-blue);
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Cartes pour les sections */
+        .section-card {
+            background: var(--highlight-bg);
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: var(--border-radius);
+            border-left: 3px solid var(--neon-purple);
+        }
+
+        .section-card h3, .section-card h4 {
+            color: var(--neon-purple);
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-card h3 i, .section-card h4 i {
+            color: var(--neon-blue);
+        }
+
         .section-intro {
             font-style: italic;
             margin-bottom: 20px;
             color: var(--text-gray);
         }
+
+        /* Listes à puces */
+        ul {
+            padding-left: 25px;
+            margin: 15px 0;
+        }
+
+        ul ul {
+            list-style-type: circle;
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 8px;
+            color: var(--text-light);
+        }
+
+        strong {
+            color: var(--neon-pink);
+        }
+
+        /* Menu flottant à gauche */
+        .toc {
+            position: sticky;
+            top: 20px;
+            align-self: flex-start;
+            background: var(--card-bg);
+            padding: 15px;
+            border-radius: var(--border-radius);
+            width: 250px;
+            margin-right: 20px;
+        }
+
+        .toc ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .toc li {
+            margin-bottom: 10px;
+        }
+
+        .toc a {
+            color: var(--text-gray);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: block;
+            padding: 5px 0;
+        }
+
+        .toc a:hover, .toc a.active {
+            color: var(--neon-blue);
+            border-left: 2px solid var(--neon-blue);
+            padding-left: 10px;
+        }
+
+        /* Layout principal */
+        .main-layout {
+            display: flex;
+            gap: 30px;
+        }
+
+        .main-content {
+            flex: 1;
+        }
+
+        /* Footer */
         footer {
             text-align: center;
-            margin-top: 50px;
+            margin-top: 30px;
             padding-top: 20px;
             border-top: 1px solid rgba(0, 245, 255, 0.2);
             color: var(--text-gray);
             font-size: 0.9em;
         }
-        /* Responsive adjustments */
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .main-layout {
+                flex-direction: column;
+            }
+
+            .toc {
+                position: static;
+                width: 100%;
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+        }
+
         @media (max-width: 768px) {
             .container {
                 padding: 15px;
             }
-            header h1 {
+
+            .header h1 {
                 font-size: 1.8rem;
             }
-            h3 {
-                font-size: 1.4rem;
+
+            .section-card h3, .section-card h4 {
+                font-size: 1.3rem;
             }
-            h4 {
-                font-size: 1.1rem;
-            }
+
             ul {
                 padding-left: 15px;
             }
@@ -120,80 +316,190 @@
 </head>
 <body>
     <div class="container">
-        <header>
+        <!-- En-tête -->
+        <div class="header">
             <h1>ADVF : Votre Sécurité en tant qu'Intervenant(e)</h1>
             <h2>Maîtriser le Stress et les Situations Difficiles</h2>
-        </header>
-        <p class="section-intro">
-            En tant qu'ADVF, vous êtes exposé(e) à diverses situations, parfois stressantes ou imprévues. Votre sécurité physique et émotionnelle est primordiale. Connaître les bons réflexes vous permet de prévenir les risques et d'agir sereinement.
-        </p>
-        <h3>1. Gérer le Stress au Quotidien</h3>
-        <p class="section-intro">
-            (Image suggérée : Personne prenant une grande inspiration, image apaisante comme la nature, ou pictogramme de zen/calme)
-        </p>
-        <ul>
-            <li><strong>Identifiez vos signes :</strong> Apprenez à reconnaître les signaux de stress chez vous (fatigue, irritabilité, maux de tête, tensions musculaires).</li>
-            <li><strong>Techniques de respiration :</strong> En cas de tension, prenez quelques grandes inspirations et expirations lentes. Cela aide à calmer le système nerveux.</li>
-            <li><strong>Petites pauses :</strong> Si possible, accordez-vous de courtes pauses entre deux interventions.</li>
-            <li><strong>Décompression :</strong> Après votre journée, pratiquez une activité qui vous détend (lecture, marche, musique, parler à un proche).</li>
-            <li><strong>Parlez-en :</strong> Ne restez pas seul(e) face au stress. Échangez avec des collègues, votre responsable ou des proches. Le soutien est crucial.</li>
-        </ul>
-        <h3>2. Comprendre et Anticiper les Comportements Agressifs</h3>
-        <p class="section-intro">
-            (Image suggérée : Deux silhouettes éloignées, une personne levant la main comme pour dire stop, ou pictogramme de signal d'alerte)
-        </p>
-        <h4>Les signaux d'alerte verbaux :</h4>
-        <ul>
-            <li>Voix forte, ton menaçant, hurlements.</li>
-            <li>Insultes, propos dénigrants.</li>
-            <li>Répétition insistante des mêmes phrases.</li>
-            <li>Menaces directes ou indirectes.</li>
-        </ul>
-        <h4>Les signaux d'alerte non verbaux :</h4>
-        <ul>
-            <li>Regard fixe, posture rigide, poings serrés.</li>
-            <li>Mouvements brusques, agitation, déambulation.</li>
-            <li>Proximité excessive, envahissement de l'espace personnel.</li>
-            <li>Refus de coopérer, opposition systématique.</li>
-            <li>Crispation des mâchoires, rougissement du visage.</li>
-        </ul>
-        <h3>3. Les Réflexes pour Vous Protéger (Face à l'Agressivité)</h3>
-        <p class="section-intro">
-            (Image suggérée : Main tendue en signe de stop, une porte ouverte, pictogramme de bouclier)
-        </p>
-        <h4>PRÉVENIR (Désescalade Verbale) :</h4>
-        <ul>
-            <li><strong>Gardez votre calme :</strong> Votre sérénité peut apaiser la situation.</li>
-            <li><strong>Parlez calmement :</strong> Utilisez un ton de voix bas et posé.</li>
-            <li><strong>Écoute active :</strong> Laissez la personne s'exprimer, même si ce qu'elle dit est irrationnel. Montrez que vous écoutez.</li>
-            <li><strong>Reformulez :</strong> "Si je comprends bien, vous êtes en colère parce que..."</li>
-            <li><strong>Proposez des alternatives :</strong> "Peut-être pourrions-nous faire ceci plutôt ?"</li>
-            <li><strong>Évitez les jugements, les défis, et la confrontation directe.</strong></li>
-            <li><strong>Respectez l'espace personnel :</strong> Ne vous approchez pas trop.</li>
-        </ul>
-        <h4>AGIR (Sécurité Physique) :</h4>
-        <ul>
-            <li><strong>Position de sécurité :</strong> Tenez-vous légèrement de côté par rapport à la personne, jamais face à elle de manière agressive.</li>
-            <li><strong>Distance de sécurité :</strong> Maintenez une distance d'au moins un bras tendu.</li>
-            <li><strong>Voie de sortie :</strong> Assurez-vous d'avoir toujours un chemin dégagé vers la sortie. Ne vous calez pas dans un coin.</li>
-            <li><strong>Ne pas isoler :</strong> Évitez de vous retrouver seul(e) avec la personne si la situation s'envenime.</li>
-            <li><strong>Protégez-vous :</strong> Utilisez vos bras pour parer les coups si nécessaire (protection du visage et de la tête).</li>
-        </ul>
-        <h4>ALERTER (Quand la situation l'exige) :</h4>
-        <ul>
-            <li><strong>Si la désescalade échoue :</strong> Si la personne reste agressive ou si la violence est physique.</li>
-            <li><strong>Quitter le lieu :</strong> Si vous vous sentez en danger, quittez la pièce ou le domicile. Votre sécurité est prioritaire.</li>
-            <li><strong>Contacter immédiatement :</strong>
+        </div>
+
+        <!-- Layout principal -->
+        <div class="main-layout">
+            <!-- Table des matières -->
+            <nav class="toc">
                 <ul>
-                    <li>Votre <strong>employeur/responsable</strong> (votre ligne hiérarchique).</li>
-                    <li>Les <strong>forces de l'ordre (17)</strong> en cas de menace ou d'agression physique avérée.</li>
+                    <li><a href="#" class="active" data-tab="stress">Gérer le Stress</a></li>
+                    <li><a href="#" data-tab="comportements">Comportements Agressifs</a></li>
+                    <li><a href="#" data-tab="reflexes">Réflexes de Protection</a></li>
+                    <li><a href="#" data-tab="conclusion">Conclusion</a></li>
                 </ul>
-            </li>
-            <li><strong>Signaler :</strong> Remplir un rapport d'incident détaillé après l'événement, même si cela ne semble pas grave sur le moment.</li>
-        </ul>
-        <footer>
-            <p>Être un(e) ADVF, c'est aussi savoir se préserver. En appliquant ces conseils, vous renforcez votre capacité à gérer les situations complexes et assurez la pérennité de votre engagement professionnel.</p>
-        </footer>
+            </nav>
+
+            <!-- Contenu principal -->
+            <main class="main-content">
+                <!-- Navigation par onglets -->
+                <div class="tab-nav">
+                    <button class="active" data-tab="stress">Gérer le Stress</button>
+                    <button data-tab="comportements">Comportements Agressifs</button>
+                    <button data-tab="reflexes">Réflexes de Protection</button>
+                    <button data-tab="conclusion">Conclusion</button>
+                </div>
+
+                <!-- Onglet Gérer le Stress -->
+                <div id="stress" class="tab-content active">
+                    <p class="section-intro">
+                        En tant qu'ADVF, vous êtes exposé(e) à diverses situations, parfois stressantes ou imprévues. Votre sécurité physique et émotionnelle est primordiale. Connaître les bons réflexes vous permet de prévenir les risques et d'agir sereinement.
+                    </p>
+                    <ul>
+                        <li><strong>Identifiez vos signes :</strong> Apprenez à reconnaître les signaux de stress chez vous (fatigue, irritabilité, maux de tête, tensions musculaires).</li>
+                        <li><strong>Techniques de respiration :</strong> En cas de tension, prenez quelques grandes inspirations et expirations lentes. Cela aide à calmer le système nerveux.</li>
+                        <li><strong>Petites pauses :</strong> Si possible, accordez-vous de courtes pauses entre deux interventions.</li>
+                        <li><strong>Décompression :</strong> Après votre journée, pratiquez une activité qui vous détend (lecture, marche, musique, parler à un proche).</li>
+                        <li><strong>Parlez-en :</strong> Ne restez pas seul(e) face au stress. Échangez avec des collègues, votre responsable ou des proches. Le soutien est crucial.</li>
+                    </ul>
+                </div>
+
+                <!-- Onglet Comportements Agressifs -->
+                <div id="comportements" class="tab-content">
+                    <div class="section-card">
+                        <h3><i class="fas fa-exclamation-triangle"></i> Signaux d'Alerte Verbaux</h3>
+                        <ul>
+                            <li>Voix forte, ton menaçant, hurlements.</li>
+                            <li>Insultes, propos dénigrants.</li>
+                            <li>Répétition insistante des mêmes phrases.</li>
+                            <li>Menaces directes ou indirectes.</li>
+                        </ul>
+                    </div>
+                    <div class="section-card">
+                        <h3><i class="fas fa-hand-paper"></i> Signaux d'Alerte Non Verbaux</h3>
+                        <ul>
+                            <li>Regard fixe, posture rigide, poings serrés.</li>
+                            <li>Mouvements brusques, agitation, déambulation.</li>
+                            <li>Proximité excessive, envahissement de l'espace personnel.</li>
+                            <li>Refus de coopérer, opposition systématique.</li>
+                            <li>Crispation des mâchoires, rougissement du visage.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Onglet Réflexes de Protection -->
+                <div id="reflexes" class="tab-content">
+                    <div class="section-card">
+                        <h3><i class="fas fa-comments"></i> PRÉVENIR (Désescalade Verbale)</h3>
+                        <ul>
+                            <li><strong>Gardez votre calme :</strong> Votre sérénité peut apaiser la situation.</li>
+                            <li><strong>Parlez calmement :</strong> Utilisez un ton de voix bas et posé.</li>
+                            <li><strong>Écoute active :</strong> Laissez la personne s'exprimer, même si ce qu'elle dit est irrationnel. Montrez que vous écoutez.</li>
+                            <li><strong>Reformulez :</strong> "Si je comprends bien, vous êtes en colère parce que..."</li>
+                            <li><strong>Proposez des alternatives :</strong> "Peut-être pourrions-nous faire ceci plutôt ?"</li>
+                            <li><strong>Évitez les jugements, les défis, et la confrontation directe.</strong></li>
+                            <li><strong>Respectez l'espace personnel :</strong> Ne vous approchez pas trop.</li>
+                        </ul>
+                    </div>
+                    <div class="section-card">
+                        <h3><i class="fas fa-shield-alt"></i> AGIR (Sécurité Physique)</h3>
+                        <ul>
+                            <li><strong>Position de sécurité :</strong> Tenez-vous légèrement de côté par rapport à la personne, jamais face à elle de manière agressive.</li>
+                            <li><strong>Distance de sécurité :</strong> Maintenez une distance d'au moins un bras tendu.</li>
+                            <li><strong>Voie de sortie :</strong> Assurez-vous d'avoir toujours un chemin dégagé vers la sortie. Ne vous calez pas dans un coin.</li>
+                            <li><strong>Ne pas isoler :</strong> Évitez de vous retrouver seul(e) avec la personne si la situation s'envenime.</li>
+                            <li><strong>Protégez-vous :</strong> Utilisez vos bras pour parer les coups si nécessaire (protection du visage et de la tête).</li>
+                        </ul>
+                    </div>
+                    <div class="section-card">
+                        <h3><i class="fas fa-phone-alt"></i> ALERTER (Quand la situation l'exige)</h3>
+                        <ul>
+                            <li><strong>Si la désescalade échoue :</strong> Si la personne reste agressive ou si la violence est physique.</li>
+                            <li><strong>Quitter le lieu :</strong> Si vous vous sentez en danger, quittez la pièce ou le domicile. Votre sécurité est prioritaire.</li>
+                            <li><strong>Contacter immédiatement :</strong>
+                                <ul>
+                                    <li>Votre <strong>employeur/responsable</strong> (votre ligne hiérarchique).</li>
+                                    <li>Les <strong>forces de l'ordre (17)</strong> en cas de menace ou d'agression physique avérée.</li>
+                                </ul>
+                            </li>
+                            <li><strong>Signaler :</strong> Remplir un rapport d'incident détaillé après l'événement, même si cela ne semble pas grave sur le moment.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Onglet Conclusion -->
+                <div id="conclusion" class="tab-content">
+                    <footer>
+                        <p>Être un(e) ADVF, c'est aussi savoir se préserver. En appliquant ces conseils, vous renforcez votre capacité à gérer les situations complexes et assurez la pérennité de votre engagement professionnel.</p>
+                    </footer>
+                </div>
+
+                <!-- Bouton de retour en bas de page -->
+                <div style="text-align: center;">
+                    <a href="javascript:window.close();" class="back-button">
+                        <i class="fas fa-arrow-left"></i> Retour au rapport de stage
+                    </a>
+                </div>
+            </main>
+        </div>
     </div>
+
+    <!-- Bouton flottant -->
+    <div class="floating-button" onclick="window.close(); return false;" title="Retour au rapport de stage">
+        <i class="fas fa-arrow-left"></i> Retour au rapport de stage
+    </div>
+
+    <!-- Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Gestion des onglets
+            const tabButtons = document.querySelectorAll('.tab-nav button');
+            const tabContents = document.querySelectorAll('.tab-content');
+            const tocLinks = document.querySelectorAll('.toc a');
+            const floatingButton = document.querySelector('.floating-button');
+
+            // Activation des onglets via les boutons
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const tabId = button.getAttribute('data-tab');
+                    switchTab(tabId);
+                });
+            });
+
+            // Activation des onglets via le menu latéral
+            tocLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const tabId = link.getAttribute('data-tab');
+                    switchTab(tabId);
+                });
+            });
+
+            // Fonction pour basculer d'onglet
+            function switchTab(tabId) {
+                tabContents.forEach(content => content.classList.remove('active'));
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                tocLinks.forEach(link => link.classList.remove('active'));
+
+                document.getElementById(tabId).classList.add('active');
+                document.querySelector(`.tab-nav button[data-tab="${tabId}"]`).classList.add('active');
+                document.querySelector(`.toc a[data-tab="${tabId}"]`).classList.add('active');
+            }
+
+            // Gestion du bouton flottant
+            window.addEventListener('scroll', () => {
+                const scrollPosition = window.scrollY;
+                const windowHeight = window.innerHeight;
+                const documentHeight = document.body.scrollHeight;
+
+                if (scrollPosition > 100) {
+                    if (scrollPosition < 100 || (scrollPosition + windowHeight) >= documentHeight - 100) {
+                        floatingButton.classList.remove('show');
+                        floatingButton.classList.add('hide');
+                    } else {
+                        floatingButton.classList.add('show');
+                        floatingButton.classList.remove('hide');
+                    }
+                } else {
+                    floatingButton.classList.remove('show');
+                    floatingButton.classList.add('hide');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
