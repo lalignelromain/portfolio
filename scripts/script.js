@@ -217,3 +217,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+// Google Analytics 4
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+if (!window.location.search.includes('exclude=1')) {
+  gtag('config', 'G-LV90JK69JB');
+}
+
