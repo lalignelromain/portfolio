@@ -1,0 +1,8 @@
+BEGIN:VCARD
+VERSION:4.0
+FN:Romain L.
+ORG:Ton Organisation
+TEL;TYPE=work,voice:+33XXXXXXXX
+EMAIL:ton.email@example.com
+URL:https://tonportfolio.fr
+END:VCARD

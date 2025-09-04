@@ -9,7 +9,6 @@ class PerformanceManager {
         this.root = document.documentElement;
         this.init();
     }
-
     async detectDeviceCapabilities() {
         const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
         const isTablet = /iPad|Android(?=.*Mobile)/i.test(navigator.userAgent);
@@ -30,7 +29,6 @@ class PerformanceManager {
         }
         return { isMobile, isTablet, lowMemory, lowCores, slowConnection, reducedMotion, batteryLow };
     }
-
     async setPerformanceLevel() {
         const capabilities = await this.detectDeviceCapabilities();
         if (capabilities.reducedMotion) {
@@ -57,7 +55,6 @@ class PerformanceManager {
             this.startPerformanceMonitoring();
         }
     }
-
     updateCSSVariables(level) {
         const settings = {
             none: { animationDuration: '0s', backgroundOpacity: '0.01', particlesOpacity: '0.02', playState: 'paused' },
@@ -71,7 +68,6 @@ class PerformanceManager {
         this.root.style.setProperty('--particles-opacity', config.particlesOpacity);
         this.root.style.setProperty('--animation-play-state', config.playState);
     }
-
     startPerformanceMonitoring() {
         if (this.monitoringActive || this.performanceLevel !== 'high') return;
         this.monitoringActive = true;
@@ -104,7 +100,6 @@ class PerformanceManager {
             }
         }, 3000);
     }
-
     handleVisibilityChange() {
         if (document.hidden) {
             this.root.style.setProperty('--animation-play-state', 'paused');
@@ -116,7 +111,6 @@ class PerformanceManager {
             }
         }
     }
-
     handleResize() {
         this.root.style.setProperty('--animation-play-state', 'paused');
         clearTimeout(this.resizeTimeout);
@@ -126,7 +120,6 @@ class PerformanceManager {
             }
         }, 300);
     }
-
     init() {
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', () => this.setup());
@@ -134,7 +127,6 @@ class PerformanceManager {
             this.setup();
         }
     }
-
     async setup() {
         await this.setPerformanceLevel();
         document.addEventListener('visibilitychange', () => this.handleVisibilityChange());
@@ -146,7 +138,6 @@ class PerformanceManager {
         });
         console.log('✅ Gestionnaire de performance initialisé');
     }
-
     setMode(mode) {
         if (['none', 'low', 'medium', 'high'].includes(mode)) {
             this.performanceLevel = mode;
@@ -191,13 +182,32 @@ function closeMindset() {
     document.getElementById("mindsetModal").style.display = "none";
 }
 
-// Fermeture modale en cliquant à l'extérieur
-window.onclick = function(event) {
-    const cvModal = document.getElementById("cvModal");
-    const mindsetModal = document.getElementById("mindsetModal");
-    if (event.target === cvModal) closeCV();
-    if (event.target === mindsetModal) closeMindset();
-};
+function openBusinessCard() {
+    document.getElementById("businessCardModal").style.display = "block";
+}
+
+function closeBusinessCard() {
+    document.getElementById("businessCardModal").style.display = "none";
+}
+
+// Retourner la carte de visite
+function flipCard() {
+    const cardInner = document.getElementById("cardInner");
+    cardInner.style.transform = cardInner.style.transform === "rotateY(180deg)" ? "rotateY(0deg)" : "rotateY(180deg)";
+}
+
+// Télécharger la carte de visite (PDF)
+function downloadBusinessCard() {
+    window.open("assets/pdf/carte-visite.pdf", "_blank");
+}
+
+// Ajouter aux contacts (exemple avec téléchargement VCF)
+function addToContacts() {
+    const link = document.createElement('a');
+    link.href = "assets/carte-de-visite.vcf";
+    link.download = "RomainL.vcf";
+    link.click();
+}
 
 // Gestion des onglets Mind-Set
 function showMindsetTab(tabName, event) {
@@ -206,6 +216,16 @@ function showMindsetTab(tabName, event) {
     document.getElementById('mindset-tab-' + tabName).classList.add('active');
     event.currentTarget.classList.add('active');
 }
+
+// Fermeture modale en cliquant à l'extérieur (version unifiée)
+document.addEventListener('click', function(event) {
+    const cvModal = document.getElementById("cvModal");
+    const mindsetModal = document.getElementById("mindsetModal");
+    const businessCardModal = document.getElementById("businessCardModal");
+    if (event.target === cvModal) closeCV();
+    if (event.target === mindsetModal) closeMindset();
+    if (event.target === businessCardModal) closeBusinessCard();
+});
 
 // Force les transitions sur les boutons de l'en-tête
 document.addEventListener('DOMContentLoaded', () => {
@@ -223,6 +243,5 @@ window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 if (!window.location.search.includes('exclude=1')) {
-  gtag('config', 'G-LV90JK69JB');
+    gtag('config', 'G-LV90JK69JB');
 }
-
