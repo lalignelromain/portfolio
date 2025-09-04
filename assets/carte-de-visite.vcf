@@ -1,8 +1,15 @@
 BEGIN:VCARD
 VERSION:4.0
-FN:Romain L.
-ORG:Ton Organisation
-TEL;TYPE=work,voice:+33XXXXXXXX
-EMAIL:ton.email@example.com
-URL:https://tonportfolio.fr
+FN:Romain LALIGNEL
+N:LALIGNEL;Romain;;;
+TITLE:Formateur & Consultant Pédagogique | Développeur Senior (Frontend)
+NOTE:Spécialisé dans la conception d'expériences d'apprentissage immersives et le développement web.\nDevise : "Là où d'autres voient des barrières, je vois des possibilités infinies."
+TEL;TYPE=cell,voice:+33 6 95 19 00 09
+EMAIL;TYPE=work:romainlalignel@outlook.fr
+URL:https://lalignelromain.github.io/portfolio/
+ADR;TYPE=work:;;;France;;;
+ROLE:Expert en transformation digitale et pédagogie inclusive
+SKILLS:Formation;Consulting;Développement Web;HTML/CSS;JavaScript;Accessibilité;Neurosciences Pédagogiques;Outils Collaboratifs
+SOCIALPROFILE;TYPE=linkedin:https://linkedin.com/in/romainlalignel
+SOCIALPROFILE;TYPE=github:https://github.com/lalignelromain
 END:VCARD
