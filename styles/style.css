@@ -246,7 +246,7 @@ header {
     backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: var(--border-radius);
-    padding: 40px;
+    padding: 30px;
     margin: 50px 0;
     box-shadow: var(--shadow);
     transition: var(--transition);
@@ -291,6 +291,24 @@ header {
     width: 60px;
     height: 2px;
     background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
+}
+
+/* Espacement réduit pour le bouton CV dans "À propos de moi" */
+.card > .btn-container {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.card > .btn-container .btn {
+    width: auto;
+    min-width: 180px;
+    height: 48px;
+    padding: 12px 20px;
+}
+
+/* Ajustement spécifique pour la section "À propos de moi" */
+.card:first-of-type {
+    padding: 25px;
 }
 
 /* Grille futuriste */
