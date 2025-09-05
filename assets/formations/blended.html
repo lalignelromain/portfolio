@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="apple-touch-icon" sizes="180x180" href="icon-formation/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="icon-formation/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="icon-formation/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="icon-blended/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="icon-blended/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="icon-blended/favicon-16x16.png">
 <link rel="manifest" href="/site.webmanifest">
     <title>Blended Learning: Transformez les Barrières en Opportunités | Romain L.</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -670,11 +670,6 @@
                         <li>Un site fonctionnel (HTML/CSS).</li>
                         <li>Un rapport de projet (collaboratif via Google Docs).</li>
                     </ul>
-                    <div style="text-align: center; margin-top: 20px;">
-                        <div style="background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple)); color: white; padding: 10px 20px; border-radius: 50px; display: inline-block;">
-                            Projet type "Faiseur d'Impossible" 🚀
-                        </div>
-                    </div>
                 </div>
                 <!-- Bouton pour ouvrir la modale "Pourquoi ce projet ?" -->
                 <div style="text-align: center; margin: 20px 0;">
@@ -904,7 +899,6 @@
                     <i class="fas fa-download btn-icon"></i>
                     Télécharger en CSV
                 </button>
-                <!-- Bouton "Fermer" supprimé -->
             </div>
         </div>
     </div>
@@ -921,7 +915,6 @@
         });
     }, { threshold: 0.1 });
     sections.forEach(section => observer.observe(section));
-
     // Quiz interactif
     const correctAnswers = [3, 0, 1];
     const quizButtons = document.querySelectorAll('.quiz-btn');
@@ -942,7 +935,6 @@
             }
         });
     });
-
     // Gestion du bouton "Remonter en haut"
     const scrollTopButton = document.getElementById('scrollTopButton');
     window.addEventListener('scroll', () => {
@@ -958,7 +950,6 @@
             behavior: 'smooth'
         });
     });
-
     // Animation des camemberts au scroll
     const charts = document.querySelectorAll('.chart');
     function animateChart(chart) {
@@ -985,7 +976,6 @@
         });
     }, { threshold: 0.5 });
     charts.forEach(chart => chartObserver.observe(chart));
-
     // Gestion de la modale "Pourquoi ce projet ?"
     const whyModal = document.getElementById("whyModal");
     const openWhyModalBtn = document.getElementById("openWhyModal");
@@ -1000,19 +990,16 @@
             document.body.style.overflow = "auto";
         };
     });
-
     // Gestion de la modale Template
     const templateModal = document.getElementById("templateModal");
     const openTemplateModalBtn = document.getElementById("downloadTemplate");
     const closeTemplateModalBtns = templateModal.querySelectorAll(".close-modal");
     const downloadFromTemplateModalBtn = document.getElementById("downloadTemplateFromModal");
-
     // Ouvre la modale Template
     openTemplateModalBtn.onclick = function() {
         templateModal.style.display = "block";
         document.body.style.overflow = "hidden";
     };
-
     // Ferme la modale Template via la croix
     closeTemplateModalBtns.forEach(btn => {
         btn.onclick = function() {
@@ -1020,7 +1007,6 @@
             document.body.style.overflow = "auto";
         };
     });
-
     // Ferme les modales si clic en dehors
     window.onclick = function(event) {
         if (event.target == templateModal) {
@@ -1032,7 +1018,6 @@
             document.body.style.overflow = "auto";
         }
     };
-
     // Téléchargement du CSV depuis la modale Template
     downloadFromTemplateModalBtn.onclick = function() {
         const csvData = [
@@ -1075,7 +1060,6 @@
         }, 2000);
     };
 });
-
     </script>
 </body>
 </html>

@@ -3,8 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Classes inversées | Romain L. - Formateur Futuriste</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="apple-touch-icon" sizes="180x180" href="icon-classe/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="icon-classe/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="icon-classe/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <title>Pédagogie des Classes Inversées | Romain L.</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -12,389 +16,1010 @@
             --neon-purple: #8a2be2;
             --neon-pink: #ff2a6d;
             --dark-bg: #0a0a1a;
-            --glass-bg: rgba(10, 10, 26, 0.7);
+            --glass-bg: rgba(15, 15, 30, 0.6);
+            --shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            --transition: all 0.4s cubic-bezier(0.2, 0.8, 0.4, 1);
             --border-radius: 12px;
-            --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-            --footer-bg: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            --button-blue: #00d4aa;
+            --text-light: #f0f0f0;
+            --text-gray: #a0a0b0;
         }
-
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
         body {
             font-family: 'Montserrat', sans-serif;
             background: var(--dark-bg);
-            color: white;
-            margin: 0;
-            padding: 0;
-            line-height: 1.6;
+            color: var(--text-light);
+            line-height: 1.7;
+            overflow-x: hidden;
+            position: relative;
         }
-
+        /* Effet de grille cyberpunk */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                linear-gradient(90deg, transparent 98%, rgba(0, 245, 255, 0.05) 100%),
+                linear-gradient(0deg, transparent 98%, rgba(138, 43, 226, 0.05) 100%);
+            background-size: 50px 50px;
+            z-index: -1;
+            animation: grid-move 15s linear infinite;
+        }
+        @keyframes grid-move {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(100px, 100px); }
+        }
+        /* Particules lumineuses */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(circle at 10% 20%, var(--neon-blue) 0%, transparent 30%),
+                radial-gradient(circle at 90% 80%, var(--neon-purple) 0%, transparent 30%);
+            filter: blur(120px);
+            opacity: 0.3;
+            z-index: -2;
+        }
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
         }
-
+        /* En-tête futuriste */
         header {
             text-align: center;
-            margin-bottom: 3rem;
-            position: relative;
+            padding: 100px 0 80px;
         }
-
-        h1 {
+        .header-title {
             font-family: 'Playfair Display', serif;
-            font-size: 3rem;
-            background: linear-gradient(90deg, var(--neon-purple), var(--neon-blue));
+            font-size: 3.5rem;
+            font-weight: 600;
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            margin-bottom: 1rem;
-        }
-
-        .subtitle {
-            font-size: 1.2rem;
-            color: #ccc;
-            max-width: 800px;
-            margin: 0 auto 2rem;
-        }
-
-        /* Cartes interactives */
-        .cards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
-        }
-
-        .card {
-            background: var(--glass-bg);
-            border: 1px solid var(--neon-purple);
-            border-radius: var(--border-radius);
-            padding: 2rem;
-            transition: var(--transition);
-            backdrop-filter: blur(10px);
-        }
-
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 20px rgba(138, 43, 226, 0.3);
-        }
-
-        .card h3 {
-            color: var(--neon-blue);
-            margin-top: 0;
-            font-size: 1.5rem;
-        }
-
-        .card p {
-            color: #ddd;
-        }
-
-        .card-button {
-            background: var(--neon-pink);
-            color: white;
-            border: none;
-            padding: 0.5rem 1.5rem;
-            border-radius: var(--border-radius);
-            cursor: pointer;
-            margin-top: 1rem;
-            transition: var(--transition);
-        }
-
-        .card-button:hover {
-            background: #ff00aa;
-            transform: scale(1.05);
-        }
-
-        /* Timeline */
-        .timeline {
-            margin: 4rem 0;
+            margin-bottom: 20px;
             position: relative;
+            display: inline-block;
         }
-
-        .timeline::before {
+        .header-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
+        }
+        .header-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-gray);
+            max-width: 900px;
+            margin: 0 auto 50px;
+            font-weight: 400;
+            line-height: 1.4;
+            white-space: nowrap;
+        }
+        /* Boutons holographiques */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 180px;
+            height: 56px;
+            padding: 14px 28px;
+            background: transparent;
+            color: var(--neon-blue);
+            text-decoration: none;
+            border: 1px solid rgba(0, 245, 255, 0.3);
+            border-radius: 50px;
+            font-weight: 500;
+            transition: var(--transition);
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            margin: 0 7.5px;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            background: rgba(0, 245, 255, 0.05);
+            box-sizing: border-box;
+            white-space: nowrap;
+        }
+        .btn:hover {
+            color: white;
+            box-shadow: 0 0 15px rgba(0, 245, 255, 0.3);
+            border-color: rgba(0, 245, 255, 0.6);
+            background: rgba(0, 245, 255, 0.1);
+        }
+        .btn::before {
             content: '';
             position: absolute;
             top: 0;
-            bottom: 0;
-            left: 50%;
-            width: 2px;
-            background: var(--neon-blue);
-            transform: translateX(-50%);
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 245, 255, 0.2), transparent);
+            transition: left 0.6s;
         }
-
-        .timeline-item {
-            display: flex;
-            margin-bottom: 2rem;
-            position: relative;
+        .btn:hover::before {
+            left: 100%;
         }
-
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            width: 20px;
-            height: 20px;
-            background: var(--neon-purple);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 1;
-        }
-
-        .timeline-content {
-            background: var(--glass-bg);
-            border: 1px solid var(--neon-blue);
-            border-radius: var(--border-radius);
-            padding: 1.5rem;
-            width: 45%;
-            backdrop-filter: blur(10px);
-        }
-
-        .timeline-content h4 {
-            color: var(--neon-pink);
-            margin-top: 0;
-        }
-
-        /* Quiz */
-        .quiz {
-            margin: 4rem 0;
-            background: var(--glass-bg);
-            border: 1px solid var(--neon-pink);
-            border-radius: var(--border-radius);
-            padding: 2rem;
-            backdrop-filter: blur(10px);
-        }
-
-        .quiz-question {
-            margin-bottom: 1.5rem;
+        .btn-primary {
+            background: transparent;
+            border: 1px solid rgba(0, 245, 255, 0.3);
             color: var(--neon-blue);
         }
-
+        .btn-primary:hover {
+            box-shadow: 0 0 15px rgba(0, 245, 255, 0.3);
+            border-color: rgba(0, 245, 255, 0.6);
+            background: rgba(0, 245, 255, 0.1);
+        }
+        .btn-icon {
+            margin-right: 10px;
+            font-size: 0.9rem;
+        }
+        /* Conteneur des boutons */
+        .btn-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0;
+            justify-content: center;
+            align-items: center;
+            margin: 40px auto;
+            max-width: 100%;
+            z-index: 2;
+        }
+        .btn-item {
+            flex: 0 0 auto;
+            text-align: center;
+            margin: 0;
+        }
+        /* Cartes futuristes */
+        .card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--border-radius);
+            padding: 40px;
+            margin: 50px 0;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 245, 255, 0.05), transparent);
+            transition: left 0.8s;
+        }
+        .card:hover::before {
+            left: 100%;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 245, 255, 0.1);
+        }
+        .card h2 {
+            font-family: 'Playfair Display', serif;
+            color: var(--text-light);
+            margin-bottom: 25px;
+            font-size: 2rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        .card h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
+        }
+        /* Listes stylisées */
+        .expertise-list {
+            list-style: none;
+            margin: 30px 0;
+        }
+        .expertise-list li {
+            padding: 12px 0;
+            position: relative;
+            padding-left: 30px;
+            color: var(--text-light);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .expertise-list li:before {
+            content: "✦";
+            position: absolute;
+            left: 0;
+            color: var(--neon-pink);
+            font-size: 1.2rem;
+        }
+        /* Quiz */
+        .quiz-question {
+            background: rgba(20, 20, 40, 0.3);
+            border-left: 3px solid var(--neon-pink);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: var(--border-radius);
+        }
         .quiz-options {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: 1fr 1fr;
             gap: 1rem;
+            margin-top: 1rem;
         }
-
-        .quiz-button {
-            background: var(--neon-purple);
-            color: white;
-            border: none;
-            padding: 0.75rem;
+        .quiz-btn {
+            background: rgba(20, 20, 40, 0.5);
+            border: 1px solid var(--neon-blue);
+            color: var(--text-light);
+            padding: 10px;
             border-radius: var(--border-radius);
             cursor: pointer;
             transition: var(--transition);
         }
-
-        .quiz-button:hover {
-            background: #6a0dad;
+        .quiz-btn:hover {
+            background: var(--neon-purple);
+            border-color: var(--neon-purple);
         }
-
-        .quiz-button.correct {
-            background: #28a745;
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: 80px;
         }
-
-        .quiz-button.incorrect {
-            background: #dc3545;
-        }
-
-        /* Bouton retour portfolio */
-        .back-to-portfolio {
+        /* Bouton flottant pour remonter en haut */
+        .scroll-top-button {
             position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            background: var(--button-blue);
-            color: white;
-            border: none;
-            border-radius: 50%;
+            bottom: 30px;
+            right: 30px;
             width: 50px;
             height: 50px;
-            font-size: 1.3rem;
-            cursor: pointer;
+            background: rgba(15, 15, 30, 0.7);
+            color: var(--neon-blue);
+            border: 1px solid rgba(0, 245, 255, 0.3);
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 0 15px rgba(0, 212, 170, 0.5);
+            cursor: pointer;
+            font-size: 1.2rem;
             transition: var(--transition);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 10px rgba(0, 245, 255, 0.2);
+            opacity: 0;
+            visibility: hidden;
             z-index: 1000;
         }
-
-        .back-to-portfolio:hover {
-            background: #00b894;
-            transform: scale(1.1);
+        .scroll-top-button:hover {
+            background: rgba(0, 245, 255, 0.1);
+            color: white;
+            border-color: rgba(0, 245, 255, 0.6);
+            box-shadow: 0 0 15px rgba(0, 245, 255, 0.4);
         }
-
-        /* Footer */
-        footer {
-            background: var(--footer-bg);
-            padding: 1.5rem;
-            text-align: center;
-            margin-top: 4rem;
-            color: #aaa;
-            font-size: 0.9rem;
+        .scroll-top-button.show {
+            opacity: 1;
+            visibility: visible;
         }
-
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-title {
+                font-size: 2.5rem;
+            }
+            .header-subtitle {
+                white-space: normal;
+                line-height: 1.6;
+                font-size: 1.1rem;
+            }
+            .card {
+                padding: 25px;
+            }
+            .btn-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            .btn-item {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+            .btn {
+                width: 100%;
+                max-width: 300px;
+                margin: 5px 0;
+            }
+            .quiz-options {
+                grid-template-columns: 1fr;
+            }
+            .scroll-top-button {
+                bottom: 20px;
+                right: 20px;
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+        }
         /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* Styles pour les camemberts animés */
+        .chart-container {
+            text-align: center;
+            margin: 0 15px;
+        }
+        .chart {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            position: relative;
+            margin: 0 auto 10px;
+            background: conic-gradient(var(--neon-blue) 0%, rgba(138, 43, 226, 0.1) 0%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 1s ease-in-out;
+        }
+        .chart-distanciel {
+            background: conic-gradient(var(--neon-purple) 0%, rgba(0, 245, 255, 0.1) 0%);
+        }
+        .chart-value {
+            position: absolute;
+            color: white;
+            font-weight: bold;
+            z-index: 2;
+        }
+        .chart::before {
+            content: '';
+            position: absolute;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: var(--dark-bg);
+            z-index: 1;
+        }
+        .chart:hover {
+            box-shadow: 0 0 15px rgba(0, 245, 255, 0.5);
+        }
+        .chart-distanciel:hover {
+            box-shadow: 0 0 15px rgba(138, 43, 226, 0.5);
+        }
+        /* Modale */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+        }
+        .modal-content {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 245, 255, 0.3);
+            border-radius: var(--border-radius);
+            margin: 5% auto;
+            padding: 0;
+            width: 90%;
+            max-width: 900px;
+            box-shadow: var(--shadow);
+            animation: modalFadeIn 0.5s;
+        }
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
-        .animate-on-scroll {
-            opacity: 0;
-            animation: fadeIn 0.6s ease forwards;
+        .modal-header {
+            padding: 20px;
+            border-bottom: 1px solid rgba(0, 245, 255, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(90deg, rgba(0, 245, 255, 0.1), rgba(138, 43, 226, 0.1));
         }
-
-        .animate-on-scroll.visible {
-            opacity: 1;
+        .modal-header h3 {
+            color: var(--neon-blue);
+            font-family: 'Playfair Display', serif;
+        }
+        .close-modal {
+            color: var(--text-light);
+            font-size: 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        .close-modal:hover {
+            color: var(--neon-pink);
+        }
+        .modal-body {
+            padding: 20px;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+        .modal-footer {
+            padding: 15px 20px;
+            border-top: 1px solid rgba(0, 245, 255, 0.2);
+            display: flex;
+            justify-content: flex-end;
+            background: linear-gradient(90deg, rgba(0, 245, 255, 0.05), rgba(138, 43, 226, 0.05));
+        }
+        .template-table-container {
+            overflow-x: auto;
+            margin-bottom: 1.5rem;
+        }
+        .template-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(20, 20, 40, 0.3);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+        }
+        .template-table th, .template-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid rgba(0, 245, 255, 0.1);
+        }
+        .template-table th {
+            background: rgba(0, 245, 255, 0.1);
+            color: var(--neon-blue);
+            font-weight: 600;
+        }
+        .template-table tr:nth-child(even) {
+            background: rgba(0, 245, 255, 0.03);
+        }
+        .template-table tr:hover {
+            background: rgba(0, 245, 255, 0.08);
+        }
+        .copy-button {
+            background: var(--neon-purple);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .copy-button:hover {
+            background: #6a1ba9;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <header>
-            <h1>Classes inversées</h1>
-            <p class="subtitle">
-                Transformez la passivité en engagement actif grâce à une pédagogie centrée sur l’apprenant.
+        <header class="fade-in visible">
+            <h1 class="header-title">📚 Pédagogie des Classes Inversées :<br>De la Théorie à l'Application</h1>
+            <p class="header-subtitle">
+                Révolutionnez votre enseignement en transformant le rôle de l'apprenant et du formateur.
             </p>
-            <i class="fas fa-chalkboard-teacher fa-4x" style="color: var(--neon-blue);"></i>
+            <div class="btn-container">
+                <div class="btn-item">
+                    <a href="#comprendre" class="btn">
+                        <i class="fas fa-brain btn-icon"></i>
+                        Comprendre
+                    </a>
+                </div>
+                <div class="btn-item">
+                    <a href="#methode" class="btn">
+                        <i class="fas fa-sitemap btn-icon"></i>
+                        Méthode
+                    </a>
+                </div>
+                <div class="btn-item">
+                    <a href="#cas-pratique" class="btn">
+                        <i class="fas fa-project-diagram btn-icon"></i>
+                        Cas Pratique
+                    </a>
+                </div>
+            </div>
         </header>
-
-        <!-- Cartes interactives -->
-        <section class="cards-grid">
-            <div class="card animate-on-scroll">
-                <h3>📚 Autonomie</h3>
-                <p>Libérez du temps en classe pour l’accompagnement individualisé en externalisant la théorie.</p>
-                <button class="card-button">En savoir plus</button>
-                <div class="card-details" style="display: none; margin-top: 1rem; color: #eee;">
-                    <p>Les apprenants consultent des ressources (vidéos, articles) avant la séance, pour maximiser les interactions en présentiel.</p>
+        <main>
+            <section id="comprendre" class="card fade-in">
+                <h2>🧠 Comprendre la Classe Inversée</h2>
+                <p>
+                    La <strong>classe inversée</strong> est un modèle pédagogique qui inverse les activités d'apprentissage traditionnelles. Le travail individuel se fait à la maison, et le temps en classe est consacré à l'interaction et à la collaboration.
+                </p>
+                <div style="margin: 30px 0;">
+                    <h3 style="color: var(--neon-blue); margin-bottom: 15px;">🔄 Les Principes Clés</h3>
+                    <p>Au lieu de la structure classique "cours magistral en classe, devoirs à la maison", on opte pour :</p>
+                    <ul class="expertise-list">
+                        <li><strong>Phase à la maison (Hors-classe)</strong> : Acquisition des notions de base, souvent via des vidéos ou des lectures.</li>
+                        <li><strong>Phase en classe (Présentiel)</strong> : Approfondissement des concepts, résolution de problèmes, débats et projets de groupe.</li>
+                    </ul>
+                    <div style="background: rgba(20, 20, 40, 0.3); padding: 20px; border-radius: var(--border-radius); margin: 20px 0; border-left: 3px solid var(--neon-purple);">
+                        <h4 style="color: var(--neon-purple); margin-bottom: 10px;">💡 Le rôle de l'enseignant évolue</h4>
+                        <ul class="expertise-list">
+                            <li>De "transmetteur de savoir" à <strong>"facilitateur"</strong> ou <strong>"coach"</strong>.</li>
+                            <li>Il guide les apprenants, répond aux questions complexes et anime les activités.</li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-            <div class="card animate-on-scroll">
-                <h3>🤝 Collaboration</h3>
-                <p>Favorisez les échanges entre pairs grâce à des activités interactives et des projets de groupe.</p>
-                <button class="card-button">En savoir plus</button>
-                <div class="card-details" style="display: none; margin-top: 1rem; color: #eee;">
-                    <p>Ateliers, débats et travaux pratiques renforcent la cohésion et l’entraide.</p>
+                <div style="text-align: center; margin: 30px 0;">
+                    <div style="background: rgba(20, 20, 40, 0.4); padding: 30px; border-radius: var(--border-radius); border: 1px solid rgba(0, 245, 255, 0.2); display: inline-block;">
+                        <div style="font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--neon-blue); margin-bottom: 15px;">Inversion des Temps</div>
+                        <div style="display: flex; justify-content: space-around; align-items: center; flex-wrap: wrap;">
+                            <div class="chart-container">
+                                <div class="chart" data-percent="30" data-color="#8a2be2">
+                                    <div class="chart-value">0%</div>
+                                </div>
+                                <div class="chart-label" style="color: var(--neon-purple);">Cours à la maison</div>
+                            </div>
+                            <div class="chart-container">
+                                <div class="chart chart-distanciel" data-percent="70" data-color="#00f5ff">
+                                    <div class="chart-value">0%</div>
+                                </div>
+                                <div class="chart-label" style="color: var(--neon-blue);">Activités en classe</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="card animate-on-scroll">
-                <h3>💡 Application</h3>
-                <p>Ancrez les savoirs par des projets concrets et des défis adaptés aux besoins réels.</p>
-                <button class="card-button">En savoir plus</button>
-                <div class="card-details" style="display: none; margin-top: 1rem; color: #eee;">
-                    <p>Mise en pratique immédiate des connaissances via des études de cas ou des simulations.</p>
+            </section>
+            <section id="methode" class="card fade-in">
+                <h2>🛠️ La Méthode AGILE appliquée</h2>
+                <p>
+                    La <strong>pédagogie de la classe inversée</strong> peut être enrichie par des approches modernes comme la méthode <strong>AGILE</strong>, qui favorise la flexibilité, la collaboration et l'amélioration continue.
+                </p>
+                <div style="margin: 30px 0;">
+                    <h3 style="color: var(--neon-purple); margin-bottom: 15px;">💻 Les 3 phases du cycle AGILE</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                        <div style="background: rgba(20, 20, 40, 0.3); padding: 20px; border-radius: var(--border-radius); border-left: 3px solid var(--neon-blue);">
+                            <h4 style="color: var(--neon-blue); margin-bottom: 10px;">1. Planification (Sprint Planning)</h4>
+                            <p><strong>But</strong> : Définir les objectifs pour la prochaine période de cours (le "sprint").</p>
+                            <p><strong>Exemple</strong> : Les apprenants choisissent un sujet d'étude et les ressources à utiliser.</p>
+                            <div style="text-align: center; margin-top: 15px;">
+                                <i class="fas fa-calendar-alt" style="font-size: 2rem; color: var(--neon-pink);"></i>
+                            </div>
+                        </div>
+                        <div style="background: rgba(20, 20, 40, 0.3); padding: 20px; border-radius: var(--border-radius); border-left: 3px solid var(--neon-purple);">
+                            <h4 style="color: var(--neon-purple); margin-bottom: 10px;">2. Exécution (Daily Scrum)</h4>
+                            <p><strong>But</strong> : Réaliser les activités en classe et suivre la progression.</p>
+                            <p><strong>Exemple</strong> : Petites réunions quotidiennes pour partager les avancements et les obstacles.</p>
+                            <div style="text-align: center; margin-top: 15px;">
+                                <i class="fas fa-comments" style="font-size: 2rem; color: var(--neon-blue);"></i>
+                            </div>
+                        </div>
+                        <div style="background: rgba(20, 20, 40, 0.3); padding: 20px; border-radius: var(--border-radius); border-left: 3px solid var(--neon-pink);">
+                            <h4 style="color: var(--neon-pink); margin-bottom: 10px;">3. Rétrospective (Retro)</h4>
+                            <p><strong>But</strong> : Analyser le "sprint" pour identifier les points à améliorer.</p>
+                            <p><strong>Exemple</strong> : La classe discute des succès et des échecs pour s'améliorer collectivement.</p>
+                            <div style="text-align: center; margin-top: 15px;">
+                                <i class="fas fa-history" style="font-size: 2rem; color: var(--neon-purple);"></i>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </section>
-
-        <!-- Timeline méthodologie -->
-        <section class="timeline">
-            <div class="timeline-item">
-                <div class="timeline-content animate-on-scroll">
-                    <h4>1. Préparation</h4>
-                    <p>Les apprenants consultent des ressources (vidéos, quiz, articles) avant la séance.</p>
+                <div style="background: rgba(20, 20, 40, 0.3); padding: 20px; border-radius: var(--border-radius); border-left: 3px solid var(--neon-blue);">
+                    <h4 style="color: var(--neon-blue); margin-bottom: 10px;">🌟 Bonnes Pratiques AGILE</h4>
+                    <ul class="expertise-list">
+                        <li><strong>Définir des objectifs clairs</strong> et mesurables pour chaque sprint.</li>
+                        <li><strong>Encourager l'autonomie</strong> des apprenants dans la gestion de leurs tâches.</li>
+                        <li><strong>Utiliser un tableau de bord visuel</strong> (comme Trello) pour suivre les progrès.</li>
+                        <li><strong>Organiser des feedbacks réguliers</strong> pour s'assurer que tout le monde est sur la bonne voie.</li>
+                    </ul>
                 </div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-content animate-on-scroll" style="margin-left: auto;">
-                    <h4>2. Classe</h4>
-                    <p>Ateliers collaboratifs, débats et projets pour appliquer les connaissances.</p>
+            </section>
+            <section id="cas-pratique" class="card fade-in">
+                <h2>🚀 Appliquer avec un Cas Pratique</h2>
+                <p>
+                    Mettez en pratique ces concepts avec un projet concret inspiré de l'AGILE.
+                </p>
+                <div style="margin: 30px 0;">
+                    <h3 style="color: var(--neon-purple); margin-bottom: 15px;">📋 Étapes du Projet</h3>
+                    <ol style="padding-left: 20px; margin-bottom: 20px;">
+                        <li style="margin-bottom: 15px;">
+                            <strong>Phase 1 (Hors-classe)</strong> : Chaque apprenant regarde une vidéo de 10 minutes sur "L'Histoire de la Renaissance".
+                            <div style="background: rgba(20, 20, 40, 0.2); padding: 10px; border-radius: var(--border-radius); margin-top: 10px; border-left: 3px solid var(--neon-pink);">
+                                Outil : YouTube ou une plateforme LMS.
+                            </div>
+                        </li>
+                        <li style="margin-bottom: 15px;">
+                            <strong>Phase 2 (En classe)</strong> : Les apprenants sont divisés en groupes pour créer une frise chronologique interactive sur un thème précis de la Renaissance.
+                            <div style="background: rgba(20, 20, 40, 0.2); padding: 10px; border-radius: var(--border-radius); margin-top: 10px; border-left: 3px solid var(--neon-pink);">
+                                Outil : Mur numérique collaboratif (Padlet, Miro).
+                            </div>
+                        </li>
+                        <li style="margin-bottom: 15px;">
+                            <strong>Phase 3 (Hors-classe)</strong> : Chaque groupe peaufine sa frise et prépare une courte présentation.
+                            <div style="background: rgba(20, 20, 40, 0.2); padding: 10px; border-radius: var(--border-radius); margin-top: 10px; border-left: 3px solid var(--neon-pink);">
+                                Outil : Outil de présentation en ligne (Google Slides).
+                            </div>
+                        </li>
+                        <li style="margin-bottom: 15px;">
+                            <strong>Phase 4 (En classe)</strong> : Présentation des frises, suivie d'une discussion et d'un "Rétrospective" sur le déroulement du projet.
+                            <div style="background: rgba(20, 20, 40, 0.2); padding: 10px; border-radius: var(--border-radius); margin-top: 10px; border-left: 3px solid var(--neon-pink);">
+                                Évaluation : Basée sur la participation et la qualité du travail de groupe.
+                            </div>
+                        </li>
+                    </ol>
                 </div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-content animate-on-scroll">
-                    <h4>3. Évaluation</h4>
-                    <p>Feedback immédiat et ajustements pour ancrer les apprentissages.</p>
+                <div style="text-align: center; margin: 20px 0;">
+                    <button id="openWhyModal" class="btn btn-primary" style="font-size: 1rem; padding: 12px 24px;">
+                        <i class="fas fa-question-circle btn-icon"></i>
+                        Pourquoi cette approche ?
+                    </button>
                 </div>
-            </div>
-        </section>
-
-        <!-- Quiz interactif -->
-        <section class="quiz animate-on-scroll">
-            <h2 style="color: var(--neon-pink); margin-top: 0;">Quiz : Testez vos connaissances !</h2>
-            <div class="quiz-question">
-                <p>Quel outil est idéal pour partager des ressources avant un cours en classe inversée ?</p>
-                <div class="quiz-options">
-                    <button class="quiz-button" data-correct="false">Slack</button>
-                    <button class="quiz-button" data-correct="true">Moodle</button>
-                    <button class="quiz-button" data-correct="false">Trello</button>
+                <div style="background: rgba(20, 20, 40, 0.3); padding: 20px; border-radius: var(--border-radius); border-left: 3px solid var(--neon-blue); margin-top: 2rem;">
+                    <h4 style="color: var(--neon-blue); margin-bottom: 15px;">📥 Template : Planning de Classe Inversée</h4>
+                    <p style="margin-bottom: 1rem;">
+                        Obtenez notre <strong>modèle prêt à l'emploi</strong> pour structurer votre propre cours inversé.
+                    </p>
+                    <div style="text-align: center;">
+                        <button id="openTemplateModal" class="btn btn-primary" style="font-size: 1rem; padding: 12px 24px;">
+                            <i class="fas fa-download btn-icon"></i>
+                            Voir le template
+                        </button>
+                    </div>
                 </div>
-                <div class="quiz-feedback" style="display: none; margin-top: 1rem; color: var(--neon-blue);"></div>
-            </div>
-        </section>
-
-        <!-- Cas pratique -->
-        <section class="animate-on-scroll" style="margin: 4rem 0; background: var(--glass-bg); border: 1px solid var(--neon-blue); border-radius: var(--border-radius); padding: 2rem; backdrop-filter: blur(10px);">
-            <h2 style="color: var(--neon-pink); margin-top: 0;">🚀 Cas pratique</h2>
-            <p>Projet : <strong>Créer une capsule vidéo pour expliquer un concept à ses pairs.</strong></p>
-            <p>Livrables : Storyboard, script, vidéo finale (2-3 min).</p>
-            <a href="#" style="color: var(--neon-blue); text-decoration: none; font-weight: 600;">Télécharger la fiche projet →</a>
-        </section>
-
-        <!-- Conclusion -->
-        <section style="text-align: center; margin: 4rem 0;">
-            <h2 style="color: var(--neon-blue);">Prêt à inverser vos classes ?</h2>
-            <a href="/contact" class="card-button" style="font-size: 1.1rem; padding: 1rem 2rem;">Me contacter pour un accompagnement</a>
-        </section>
+            </section>
+            <section id="quiz" class="card fade-in">
+                <h2>🧠 Quiz : Testez vos Connaissances</h2>
+                <p>Évaluez votre compréhension avec ce quiz interactif !</p>
+                <div class="quiz-question">
+                    <p>Dans la classe inversée, où se fait l'acquisition des notions de base ?</p>
+                    <div class="quiz-options">
+                        <button class="quiz-btn">En classe, avec le professeur</button>
+                        <button class="quiz-btn">À la maison, en autonomie</button>
+                    </div>
+                </div>
+                <div class="quiz-question">
+                    <p>Quel est le rôle principal de l'enseignant en classe inversée ?</p>
+                    <div class="quiz-options">
+                        <button class="quiz-btn">Transmetteur de savoir</button>
+                        <button class="quiz-btn">Facilitateur</button>
+                        <button class="quiz-btn">Évaluateur final</button>
+                        <button class="quiz-btn">Gardien de l'ordre</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <footer>
+            <p>&copy; 2025 Romain L. | Tous droits réservés.</p>
+        </footer>
     </div>
-
-    <!-- Bouton retour portfolio -->
-    <button class="back-to-portfolio" onclick="window.location.href='https://tonportfolio.fr'" aria-label="Retour au portfolio">
-        <i class="fas fa-arrow-up"></i>
-    </button>
-
-    <!-- Footer -->
-    <footer>
-        <p>© 2025 Romain L. | Formation Classes Inversées</p>
-        <p style="margin: 0.5rem 0 0; font-style: italic; color: #ccc;">
-            "Là où d’autres voient des barrières, je vois des possibilités infinies."
-        </p>
-    </footer>
-
+    <a href="#" class="scroll-top-button" id="scrollTopBtn" style="display: none;">
+        <i class="fas fa-chevron-up"></i>
+    </a>
+    <div id="whyModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Pourquoi cette approche ?</h3>
+                <span class="close-modal" data-modal="whyModal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p>
+                    L'approche de la classe inversée, enrichie par la méthode AGILE, offre de nombreux avantages :
+                </p>
+                <ul class="expertise-list">
+                    <li>
+                        <strong>Apprentissage Actif</strong> : Les étudiants ne sont plus des récepteurs passifs mais des acteurs de leur propre apprentissage.
+                    </li>
+                    <li>
+                        <strong>Développement de Compétences</strong> : Cette méthode favorise la collaboration, la résolution de problèmes et la pensée critique.
+                    </li>
+                    <li>
+                        <strong>Personnalisation</strong> : L'enseignant peut se concentrer sur les besoins individuels des apprenants et fournir un soutien ciblé.
+                    </li>
+                    <li>
+                        <strong>Flexibilité</strong> : Le rythme d'apprentissage est plus adaptable, et les outils numériques permettent une plus grande flexibilité.
+                    </li>
+                </ul>
+                <div class="template-table-container">
+                    <table class="template-table">
+                        <thead>
+                            <tr>
+                                <th>Avantages</th>
+                                <th>Classe Traditionnelle</th>
+                                <th>Classe Inversée</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Rôle de l'apprenant</td>
+                                <td>Passif, écoute</td>
+                                <td>Actif, fait, crée</td>
+                            </tr>
+                            <tr>
+                                <td>Temps en classe</td>
+                                <td>Cours magistral</td>
+                                <td>Activités interactives</td>
+                            </tr>
+                            <tr>
+                                <td>Temps à la maison</td>
+                                <td>Devoirs / Exercices</td>
+                                <td>Acquisition de notions</td>
+                            </tr>
+                            <tr>
+                                <td>Évaluation</td>
+                                <td>Souvent sommative</td>
+                                <td>Continue et formative</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+    <div id="templateModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Template de planification de Classe Inversée</h3>
+                <span class="close-modal" data-modal="templateModal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p>Utilisez ce modèle pour structurer votre propre cours inversé en appliquant les principes AGILE.</p>
+                <div class="template-table-container" style="margin-top: 20px;">
+                    <table class="template-table">
+                        <thead>
+                            <tr>
+                                <th>Section</th>
+                                <th>Détails</th>
+                                <th>Exemple / Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>**Objectifs du Sprint**</td>
+                                <td>Définir les objectifs clairs et mesurables pour cette période d'apprentissage.</td>
+                                <td>* Thème: La Renaissance Européenne<br>* Compétences: Analyse de documents, collaboration</td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" style="background: rgba(0, 245, 255, 0.05); color: var(--neon-blue); font-weight: bold;">
+                                    Phase 1 : Hors-classe (Travail individuel)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>**Durée estimée**</td>
+                                <td>Temps que l'apprenant passera en autonomie.</td>
+                                <td>20-30 minutes</td>
+                            </tr>
+                            <tr>
+                                <td>**Ressources**</td>
+                                <td>Matériels à consulter (vidéos, lectures, podcasts).</td>
+                                <td>* Vidéo: "L'Essentiel de la Renaissance" (YouTube)<br>* Article: "Les grands penseurs de l'époque"</td>
+                            </tr>
+                            <tr>
+                                <td>**Tâches de l'apprenant**</td>
+                                <td>Actions attendues (prise de notes, quiz préparatoire).</td>
+                                <td>1. Regarder la vidéo et faire un résumé.<br>2. Répondre à 3 questions de compréhension.</td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" style="background: rgba(0, 245, 255, 0.05); color: var(--neon-blue); font-weight: bold;">
+                                    Phase 2 : En classe (Travail collaboratif)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>**Durée estimée**</td>
+                                <td>Temps passé en présentiel / interaction.</td>
+                                <td>60 minutes</td>
+                            </tr>
+                            <tr>
+                                <td>**Activités**</td>
+                                <td>Exercices, projets, débats, résolution de problèmes en groupe.</td>
+                                <td>* Daily Scrum (5 min): Partage des découvertes/difficultés.<br>* Projet: Création d'une frise chronologique interactive.</td>
+                            </tr>
+                            <tr>
+                                <td>**Rôle du facilitateur**</td>
+                                <td>Comment l'enseignant va guider et soutenir.</td>
+                                <td>* Guider les groupes.<br>* Clarifier les points complexes.<br>* Animer les discussions.</td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" style="background: rgba(0, 245, 255, 0.05); color: var(--neon-blue); font-weight: bold;">
+                                    Phase 3 : Rétrospective & Évaluation
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>**Durée estimée**</td>
+                                <td>Temps dédié à la réflexion et au feedback.</td>
+                                <td>15 minutes</td>
+                            </tr>
+                            <tr>
+                                <td>**Rétrospective**</td>
+                                <td>Questions pour l'amélioration continue.</td>
+                                <td>* Qu'est-ce qui a bien marché ?<br>* Qu'est-ce qui pourrait être amélioré ?<br>* Qu'avons-nous appris ?</td>
+                            </tr>
+                            <tr>
+                                <td>**Critères d'évaluation**</td>
+                                <td>Comment les apprenants seront évalués.</td>
+                                <td>* Participation en groupe.<br>* Qualité de la frise chronologique.<br>* Compréhension des concepts.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div style="text-align: center; margin-top: 15px;">
+               </div>
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
     <script>
-        // Animations au scroll
-        document.addEventListener('DOMContentLoaded', function() {
-            const elements = document.querySelectorAll('.animate-on-scroll');
+        let pieChartsAnimated = false; // Flag pour s'assurer que l'animation ne se déclenche qu'une fois
+
+        // Fonction pour animer les camemberts
+        const animatePieCharts = () => {
+            if (pieChartsAnimated) return; // Ne pas animer si déjà fait
+
+            const charts = document.querySelectorAll('.chart');
+            charts.forEach(chart => {
+                const percent = chart.dataset.percent;
+                const color = chart.dataset.color;
+                const isDistanciel = chart.classList.contains('chart-distanciel');
+                
+                let startColor = isDistanciel ? 'rgba(0, 245, 255, 0.1)' : 'rgba(138, 43, 226, 0.1)';
+                let endColor = isDistanciel ? 'rgba(138, 43, 226, 0.1)' : 'rgba(0, 245, 255, 0.1)';
+
+                chart.style.background = `conic-gradient(${color} 0%, ${startColor} ${percent}%, ${endColor} ${percent}%)`;
+
+                const valueEl = chart.querySelector('.chart-value');
+                let currentPercent = 0;
+                const interval = setInterval(() => {
+                    if (currentPercent < percent) {
+                        currentPercent++;
+                        valueEl.textContent = `${currentPercent}%`;
+                    } else {
+                        clearInterval(interval);
+                    }
+                }, 20); // Vitesse de l'animation
+            });
+            pieChartsAnimated = true; // Marquer l'animation comme déclenchée
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('.fade-in');
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('visible');
+                        // Déclencher l'animation des camemberts quand la section #comprendre est visible
+                        if (entry.target.id === 'comprendre' && !pieChartsAnimated) {
+                            animatePieCharts();
+                        }
+                        observer.unobserve(entry.target);
                     }
                 });
-            }, { threshold: 0.1 });
-            elements.forEach(el => observer.observe(el));
-
-            // Interaction cartes
-            const buttons = document.querySelectorAll('.card-button');
-            buttons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const details = this.parentElement.querySelector('.card-details');
-                    if (details.style.display === 'none' || !details.style.display) {
-                        details.style.display = 'block';
-                        this.textContent = 'Masquer';
-                    } else {
-                        details.style.display = 'none';
-                        this.textContent = 'En savoir plus';
-                    }
-                });
+            }, {
+                threshold: 0.1 // L'animation se déclenche quand 10% de l'élément est visible
+            });
+            sections.forEach(section => {
+                observer.observe(section);
             });
 
-            // Quiz
-            const quizButtons = document.querySelectorAll('.quiz-button');
-            quizButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const isCorrect = this.getAttribute('data-correct') === 'true';
-                    const feedback = this.parentElement.nextElementSibling;
-                    if (isCorrect) {
-                        this.classList.add('correct');
-                        feedback.textContent = '✅ Exact ! Moodle est parfait pour centraliser les ressources.';
-                    } else {
-                        this.classList.add('incorrect');
-                        feedback.textContent = '❌ Presque ! Moodle est plus adapté pour ce besoin.';
+            // Bouton de retour en haut de page
+            const scrollTopBtn = document.getElementById('scrollTopBtn');
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 300) {
+                    scrollTopBtn.style.display = 'flex';
+                    setTimeout(() => scrollTopBtn.classList.add('show'), 10);
+                } else {
+                    scrollTopBtn.classList.remove('show');
+                    setTimeout(() => scrollTopBtn.style.display = 'none', 500);
+                }
+            });
+            scrollTopBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            // Gestion des modals (popups)
+            const modalWhy = document.getElementById('whyModal');
+            const openModalBtnWhy = document.getElementById('openWhyModal');
+            const modalTemplate = document.getElementById('templateModal');
+            const openModalBtnTemplate = document.getElementById('openTemplateModal');
+            const closeModalBtns = document.querySelectorAll('.close-modal');
+            
+            // Ouvrir la modale "Pourquoi cette approche ?"
+            if (openModalBtnWhy) {
+                openModalBtnWhy.onclick = () => {
+                    modalWhy.style.display = 'block';
+                };
+            }
+            
+            // Ouvrir la modale "Template"
+            if (openModalBtnTemplate) {
+                openModalBtnTemplate.onclick = () => {
+                    modalTemplate.style.display = 'block';
+                };
+            }
+
+            // Fermer les modales
+            closeModalBtns.forEach(btn => {
+                btn.onclick = () => {
+                    const modalId = btn.dataset.modal;
+                    if (modalId) {
+                        document.getElementById(modalId).style.display = 'none';
                     }
-                    feedback.style.display = 'block';
-                    quizButtons.forEach(b => b.setAttribute('disabled', true));
+                };
+            });
+
+            window.onclick = (event) => {
+                if (event.target === modalWhy) {
+                    modalWhy.style.display = 'none';
+                }
+                if (event.target === modalTemplate) {
+                    modalTemplate.style.display = 'none';
+                }
+            };
+            
+            // Fonction de copie du template (pour le tableau)
+            window.copyTemplateContent = async () => {
+                const table = document.querySelector('#templateModal .template-table');
+                let textToCopy = "## 📋 Planification de Classe Inversée AGILE\n\n";
+
+                table.querySelectorAll('tr').forEach(row => {
+                    const headers = row.querySelectorAll('th');
+                    const cells = row.querySelectorAll('td');
+
+                    if (headers.length > 0) {
+                        textToCopy += headers[0].textContent + '\t' + headers[1].textContent + '\t' + headers[2].textContent + '\n';
+                    } else if (cells.length > 0) {
+                        if (cells.length === 3) {
+                            textToCopy += cells[0].textContent + '\t' + cells[1].textContent + '\t' + cells[2].textContent + '\n';
+                        } else if (cells.length === 1) { // Ligne de titre de section
+                            textToCopy += '\n--- ' + cells[0].textContent.replace(/\*\*/g, '') + ' ---\n\n';
+                        }
+                    }
+                });
+
+                try {
+                    await navigator.clipboard.writeText(textToCopy.trim());
+                    alert('Le template a été copié dans votre presse-papier !');
+                } catch (err) {
+                    console.error('Erreur lors de la copie du template : ', err);
+                    alert('Erreur lors de la copie. Veuillez copier le texte manuellement.');
+                }
+            };
+
+
+            // Gestion du quiz
+            const quizQuestions = document.querySelectorAll('.quiz-question');
+            quizQuestions.forEach(question => {
+                const options = question.querySelectorAll('.quiz-btn');
+                options.forEach(option => {
+                    option.addEventListener('click', () => {
+                        options.forEach(opt => opt.disabled = true);
+                        const isCorrect = option.textContent.includes('À la maison, en autonomie') || option.textContent.includes('Facilitateur');
+                        if (isCorrect) {
+                            option.style.background = 'green';
+                            option.style.borderColor = 'green';
+                        } else {
+                            option.style.background = 'red';
+                            option.style.borderColor = 'red';
+                            const correctOption = Array.from(options).find(opt => opt.textContent.includes('À la maison, en autonomie') || opt.textContent.includes('Facilitateur'));
+                            if (correctOption) {
+                                correctOption.style.background = 'green';
+                                correctOption.style.borderColor = 'green';
+                            }
+                        }
+                    });
                 });
             });
         });
