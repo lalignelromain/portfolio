@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blended Learning: Transformez les Barrières en Opportunités | Romain L.</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --neon-blue: #00f5ff;
+            --neon-purple: #8a2be2;
+            --neon-pink: #ff2a6d;
+            --dark-bg: #0a0a1a;
+            --glass-bg: rgba(15, 15, 30, 0.6);
+            --shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            --transition: all 0.4s cubic-bezier(0.2, 0.8, 0.4, 1);
+            --border-radius: 12px;
+            --text-light: #f0f0f0;
+            --text-gray: #a0a0b0;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-light);
+            line-height: 1.7;
+            overflow-x: hidden;
+            position: relative;
+        }
+        /* Effet de grille cyberpunk */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                linear-gradient(90deg, transparent 98%, rgba(0, 245, 255, 0.05) 100%),
+                linear-gradient(0deg, transparent 98%, rgba(138, 43, 226, 0.05) 100%);
+            background-size: 50px 50px;
+            z-index: -1;
+            animation: grid-move 15s linear infinite;
+        }
+        @keyframes grid-move {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(100px, 100px); }
+        }
+        /* Particules lumineuses */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(circle at 10% 20%, var(--neon-blue) 0%, transparent 30%),
+                radial-gradient(circle at 90% 80%, var(--neon-purple) 0%, transparent 30%);
+            filter: blur(120px);
+            opacity: 0.3;
+            z-index: -2;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+        /* En-tête futuriste */
+        header {
+            text-align: center;
+            padding: 100px 0 80px;
+        }
+        .header-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 600;
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+        .header-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
+        }
+        .header-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-gray);
+            max-width: 900px;
+            margin: 0 auto 50px;
+            font-weight: 400;
+            line-height: 1.4;
+            white-space: nowrap;
+        }
+        /* Boutons holographiques */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 180px;
+            height: 56px;
+            padding: 14px 28px;
+            background: transparent;
+            color: var(--neon-blue);
+            text-decoration: none;
+            border: 1px solid rgba(0, 245, 255, 0.3);
+            border-radius: 50px;
+            font-weight: 500;
+            transition: var(--transition);
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            margin: 0 7.5px;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            background: rgba(0, 245, 255, 0.05);
+            box-sizing: border-box;
+            white-space: nowrap;
+        }
+        .btn:hover {
+            color: white;
+            box-shadow: 0 0 15px rgba(0, 245, 255, 0.3);
+            border-color: rgba(0, 245, 255, 0.6);
+            background: rgba(0, 245, 255, 0.1);
+        }
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 245, 255, 0.2), transparent);
+            transition: left 0.6s;
+        }
+        .btn:hover::before {
+            left: 100%;
+        }
+        .btn-primary {
+            background: transparent;
+            border: 1px solid rgba(0, 245, 255, 0.3);
+            color: var(--neon-blue);
+        }
+        .btn-primary:hover {
+            box-shadow: 0 0 15px rgba(0, 245, 255, 0.3);
+            border-color: rgba(0, 245, 255, 0.6);
+            background: rgba(0, 245, 255, 0.1);
+        }
+        .btn-icon {
+            margin-right: 10px;
+            font-size: 0.9rem;
+        }
+        /* Conteneur des boutons */
+        .btn-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0;
+            justify-content: center;
+            align-items: center;
+            margin: 40px auto;
+            max-width: 100%;
+            z-index: 2;
+        }
+        .btn-item {
+            flex: 0 0 auto;
+            text-align: center;
+            margin: 0;
+        }
+        /* Cartes futuristes */
+        .card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--border-radius);
+            padding: 40px;
+            margin: 50px 0;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 245, 255, 0.05), transparent);
+            transition: left 0.8s;
+        }
+        .card:hover::before {
+            left: 100%;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 245, 255, 0.1);
+        }
+        .card h2 {
+            font-family: 'Playfair Display', serif;
+            color: var(--text-light);
+            margin-bottom: 25px;
+            font-size: 2rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        .card h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
+        }
+        /* Listes stylisées */
+        .expertise-list {
+            list-style: none;
+            margin: 30px 0;
+        }
+        .expertise-list li {
+            padding: 12px 0;
+            position: relative;
+            padding-left: 30px;
+            color: var(--text-light);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .expertise-list li:before {
+            content: "✦";
+            position: absolute;
+            left: 0;
+            color: var(--neon-pink);
+            font-size: 1.2rem;
+        }
+        /* Quiz */
+        .quiz-question {
+            background: rgba(20, 20, 40, 0.3);
+            border-left: 3px solid var(--neon-pink);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: var(--border-radius);
+        }
+        .quiz-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .quiz-btn {
+            background: rgba(20, 20, 40, 0.5);
+            border: 1px solid var(--neon-blue);
+            color: var(--text-light);
+            padding: 10px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .quiz-btn:hover {
+            background: var(--neon-purple);
+            border-color: var(--neon-purple);
+        }
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: 80px;
+        }
+        /* Bouton flottant pour remonter en haut */
+        .scroll-top-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: rgba(15, 15, 30, 0.7);
+            color: var(--neon-blue);
+            border: 1px solid rgba(0, 245, 255, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 10px rgba(0, 245, 255, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            z-index: 1000;
+        }
+        .scroll-top-button:hover {
+            background: rgba(0, 245, 255, 0.1);
+            color: white;
+            border-color: rgba(0, 245, 255, 0.6);
+            box-shadow: 0 0 15px rgba(0, 245, 255, 0.4);
+        }
+        .scroll-top-button.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-title {
+                font-size: 2.5rem;
+            }
+            .header-subtitle {
+                white-space: normal;
+                line-height: 1.6;
+                font-size: 1.1rem;
+            }
+            .card {
+                padding: 25px;
+            }
+            .btn-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            .btn-item {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+            .btn {
+                width: 100%;
+                max-width: 300px;
+                margin: 5px 0;
+            }
+            .quiz-options {
+                grid-template-columns: 1fr;
+            }
+            .scroll-top-button {
+                bottom: 20px;
+                right: 20px;
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+        }
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- En-tête -->
+        <header class="fade-in visible">
+            <h1 class="header-title">🌟 Blended Learning: Transformez les Barrières en Opportunités</h1>
+            <p class="header-subtitle">
+                Une formation immersive pour repenser l'apprentissage et briser les limites.
+            </p>
+            <div class="btn-container">
+                <div class="btn-item">
+                    <a href="#comprendre" class="btn">
+                        <i class="fas fa-brain btn-icon"></i>
+                        Comprendre
+                    </a>
+                </div>
+                <div class="btn-item">
+                    <a href="#outils" class="btn">
+                        <i class="fas fa-tools btn-icon"></i>
+                        Outils
+                    </a>
+                </div>
+                <div class="btn-item">
+                    <a href="#cas-pratique" class="btn">
+                        <i class="fas fa-project-diagram btn-icon"></i>
+                        Cas Pratique
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <!-- Contenu principal -->
+        <main>
+            <!-- Section 1 : Comprendre le Blended Learning -->
+            <section id="comprendre" class="card fade-in">
+                <h2>🧠 Comprendre le Blended Learning</h2>
+                <p>
+                    Le <strong style="color: var(--neon-blue);">Blended Learning</strong> (ou apprentissage hybride) est une approche pédagogique qui combine <strong style="color: var(--neon-purple);">présentiel</strong> et <strong style="color: var(--neon-pink);">distanciel</strong> pour offrir une expérience d'apprentissage flexible, personnalisée et engageante.
+                </p>
+                <div style="margin: 30px 0;">
+                    <h3 style="color: var(--neon-blue); margin-bottom: 15px;">📚 Définition et Principes Clés</h3>
+                    <p>Cette méthode repose sur l'alternance entre :</p>
+                    <ul class="expertise-list">
+                        <li><strong>Séances en présentiel</strong> : Pour les échanges directs, les ateliers pratiques et le renforcement des liens.</li>
+                        <li><strong>Modules en ligne</strong> : Pour l'autonomie, la flexibilité et l'accès à des ressources variées (vidéos, quiz, forums).</li>
+                        <li><strong>Outils collaboratifs</strong> : Pour favoriser l'interaction et le travail d'équipe à distance.</li>
+                    </ul>
+                    <div style="background: rgba(20, 20, 40, 0.3); padding: 20px; border-radius: var(--border-radius); margin: 20px 0; border-left: 3px solid var(--neon-purple);">
+                        <h4 style="color: var(--neon-purple); margin-bottom: 10px;">⚖️ Avantages</h4>
+                        <ul class="expertise-list">
+                            <li><strong>Flexibilité</strong> : Adapté aux emplois du temps chargés.</li>
+                            <li><strong>Personnalisation</strong> : Chaque apprenant avance à son rythme.</li>
+                            <li><strong>Engagement</strong> : Variété des formats pour maintenir l'attention.</li>
+                            <li><strong>Efficacité</strong> : Meilleure rétention grâce à la répétition espacée et l'interactivité.</li>
+                        </ul>
+                    </div>
+                    <div style="background: rgba(20, 20, 40, 0.3); padding: 20px; border-radius: var(--border-radius); border-left: 3px solid var(--neon-blue);">
+                        <h4 style="color: var(--neon-blue); margin-bottom: 10px;">⚠️ Enjeux</h4>
+                        <ul class="expertise-list">
+                            <li><strong>Équilibre</strong> : Trouver le bon mix entre présentiel et distanciel.</li>
+                            <li><strong>Accessibilité</strong> : Garantir un accès équitable aux outils numériques.</li>
+                            <li><strong>Motivation</strong> : Maintenir l'engagement sur le long terme.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div style="text-align: center; margin: 30px 0;">
+                    <div style="background: rgba(20, 20, 40, 0.4); padding: 30px; border-radius: var(--border-radius); border: 1px solid rgba(0, 245, 255, 0.2); display: inline-block;">
+                        <div style="font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--neon-blue); margin-bottom: 15px;">Exemple de Répartition</div>
+                        <div style="display: flex; justify-content: space-around; align-items: center; flex-wrap: wrap;">
+                            <div style="text-align: center;">
+                                <div style="width: 80px; height: 80px; background: conic-gradient(var(--neon-blue) 0deg 120deg, var(--neon-purple) 120deg 240deg, var(--neon-pink) 240deg 360deg); border-radius: 50%; margin: 0 auto 10px; position: relative;">
+                                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-weight: bold;">60%</div>
+                                </div>
+                                <div style="color: var(--neon-blue);">Présentiel</div>
+                            </div>
+                            <div style="text-align: center;">
+                                <div style="width: 80px; height: 80px; background: conic-gradient(var(--neon-purple) 0deg 240deg, var(--neon-blue) 240deg 360deg); border-radius: 50%; margin: 0 auto 10px; position: relative;">
+                                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-weight: bold;">40%</div>
+                                </div>
+                                <div style="color: var(--neon-purple);">Distanciel</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 2 : Maîtriser les Outils Collaboratifs -->
+            <section id="outils" class="card fade-in">
+                <h2>🛠️ Maîtriser les Outils Collaboratifs</h2>
+                <p>
+                    Pour dynamiser une formation en Blended Learning, il est essentiel de maîtriser des <strong style="color: var(--neon-blue);">outils collaboratifs</strong> qui facilitent la communication, la gestion de projet et l'apprentissage à distance.
+                </p>
+                <div style="margin: 30px 0;">
+                    <h3 style="color: var(--neon-purple); margin-bottom: 15px;">💻 Outils Indispensables</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                        <div style="background: rgba(20, 20, 40, 0.3); padding: 20px; border-radius: var(--border-radius); border-left: 3px solid var(--neon-blue);">
+                            <h4 style="color: var(--neon-blue); margin-bottom: 10px;">📌 Slack</h4>
+                            <p><strong>Utilisation</strong> : Communication instantanée, création de canaux thématiques, partage de fichiers.</p>
+                            <p><strong>Exemple</strong> : Un canal dédié aux questions des apprenants, un autre pour les ressources.</p>
+                            <div style="text-align: center; margin-top: 15px;">
+                                <i class="fab fa-slack" style="font-size: 2rem; color: var(--neon-pink);"></i>
+                            </div>
+                        </div>
+                        <div style="background: rgba(20, 20, 40, 0.3); padding: 20px; border-radius: var(--border-radius); border-left: 3px solid var(--neon-purple);">
+                            <h4 style="color: var(--neon-purple); margin-bottom: 10px;">📊 Trello</h4>
+                            <p><strong>Utilisation</strong> : Gestion des tâches et suivi des projets en équipe.</p>
+                            <p><strong>Exemple</strong> : Un tableau pour organiser les étapes d'un projet de groupe.</p>
+                            <div style="text-align: center; margin-top: 15px;">
+                                <i class="fab fa-trello" style="font-size: 2rem; color: var(--neon-blue);"></i>
+                            </div>
+                        </div>
+                        <div style="background: rgba(20, 20, 40, 0.3); padding: 20px; border-radius: var(--border-radius); border-left: 3px solid var(--neon-pink);">
+                            <h4 style="color: var(--neon-pink); margin-bottom: 10px;">🎓 Moodle</h4>
+                            <p><strong>Utilisation</strong> : Plateforme LMS pour héberger cours, quiz et ressources.</p>
+                            <p><strong>Exemple</strong> : Un module avec vidéos, PDF et forum de discussion.</p>
+                            <div style="text-align: center; margin-top: 15px;">
+                                <i class="fas fa-graduation-cap" style="font-size: 2rem; color: var(--neon-purple);"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="background: rgba(20, 20, 40, 0.3); padding: 20px; border-radius: var(--border-radius); margin: 20px 0; border-left: 3px solid var(--neon-blue);">
+                    <h4 style="color: var(--neon-blue); margin-bottom: 10px;">🌟 Bonnes Pratiques</h4>
+                    <ul class="expertise-list">
+                        <li><strong>Former les apprenants</strong> à l'utilisation des outils dès le début.</li>
+                        <li><strong>Créer des guides visuels</strong> (captures d'écran, vidéos tutos).</li>
+                        <li><strong>Encourager l'interaction</strong> via des défis ou des discussions thématiques.</li>
+                        <li><strong>Centraliser les ressources</strong> pour éviter la dispersion.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section 3 : Appliquer avec un Cas Pratique -->
+            <section id="cas-pratique" class="card fade-in">
+                <h2>🚀 Appliquer avec un Cas Pratique</h2>
+                <p>
+                    Nothing beats <strong style="color: var(--neon-blue);">learning by doing</strong> ! Voici comment mettre en pratique le Blended Learning avec un projet concret.
+                </p>
+                <div style="margin: 30px 0;">
+                    <h3 style="color: var(--neon-purple); margin-bottom: 15px;">📋 Étapes Clés</h3>
+                    <ol style="padding-left: 20px; margin-bottom: 20px;">
+                        <li style="margin-bottom: 15px;">
+                            <strong>Définir les objectifs</strong> : Quelles compétences les apprenants doivent-ils acquérir ?
+                            <div style="background: rgba(20, 20, 40, 0.2); padding: 10px; border-radius: var(--border-radius); margin-top: 10px; border-left: 3px solid var(--neon-pink);">
+                                Exemple : "Créer un module e-learning sur les bases du HTML/CSS."
+                            </div>
+                        </li>
+                        <li style="margin-bottom: 15px;">
+                            <strong>Choisir les outils</strong> : Slack pour la communication, Trello pour la gestion, Moodle pour l'hébergement.
+                        </li>
+                        <li style="margin-bottom: 15px;">
+                            <strong>Alterner les formats</strong> :
+                            <ul class="expertise-list" style="margin-top: 10px;">
+                                <li>Séance en présentiel pour lancer le projet.</li>
+                                <li>Modules en ligne pour les bases théoriques.</li>
+                                <li>Ateliers en visio pour les questions techniques.</li>
+                            </ul>
+                        </li>
+                        <li style="margin-bottom: 15px;">
+                            <strong>Évaluer et ajuster</strong> : Quiz en ligne, feedbacks réguliers, débriefing final.
+                        </li>
+                    </ol>
+                </div>
+                <div style="background: rgba(20, 20, 40, 0.3); padding: 20px; border-radius: var(--border-radius); border-left: 3px solid var(--neon-blue);">
+                    <h4 style="color: var(--neon-blue); margin-bottom: 15px;">💡 Exemple de Projet</h4>
+                    <p><strong>Thème</strong> : "Créer un site web pour une association locale."</p>
+                    <p><strong>Livrables</strong> :</p>
+                    <ul class="expertise-list">
+                        <li>Une maquette (Figma).</li>
+                        <li>Un site fonctionnel (HTML/CSS).</li>
+                        <li>Un rapport de projet (collaboratif via Google Docs).</li>
+                    </ul>
+                    <div style="text-align: center; margin-top: 20px;">
+                        <div style="background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple)); color: white; padding: 10px 20px; border-radius: 50px; display: inline-block;">
+                            Projet type "Faiseur d'Impossible" 🚀
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section Quiz -->
+            <section id="quiz" class="card fade-in">
+                <h2>🧠 Quiz : Testez vos Connaissances</h2>
+                <p>Évaluez votre compréhension avec ce quiz interactif !</p>
+                <div class="quiz-question">
+                    <p>Quel est l'avantage principal du Blended Learning ?</p>
+                    <div class="quiz-options">
+                        <button class="quiz-btn">Flexibilité</button>
+                        <button class="quiz-btn">Coût réduit</button>
+                        <button class="quiz-btn">Interaction accrue</button>
+                        <button class="quiz-btn">Toutes ces réponses</button>
+                    </div>
+                </div>
+                <div class="quiz-question">
+                    <p>Quel outil est souvent utilisé pour la gestion de projet en Blended Learning ?</p>
+                    <div class="quiz-options">
+                        <button class="quiz-btn">Trello</button>
+                        <button class="quiz-btn">Photoshop</button>
+                        <button class="quiz-btn">Excel</button>
+                        <button class="quiz-btn">Word</button>
+                    </div>
+                </div>
+                <div class="quiz-question">
+                    <p>Quelle méthode favorise l'engagement en Blended Learning ?</p>
+                    <div class="quiz-options">
+                        <button class="quiz-btn">Apprentissage passif</button>
+                        <button class="quiz-btn">Gamification</button>
+                        <button class="quiz-btn">Cours magistraux</button>
+                        <button class="quiz-btn">Mémorisation</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section Conclusion -->
+            <section id="conclusion" class="card fade-in">
+                <h2>🎉 Conclusion</h2>
+                <p>
+                    Vous avez maintenant toutes les clés pour <strong style="color: var(--neon-blue);">intégrer le Blended Learning</strong> dans vos formations.
+                    Pour aller plus loin, je vous propose un <strong style="color: var(--neon-purple);">accompagnement personnalisé</strong> ou des <strong style="color: var(--neon-pink);">ressources supplémentaires</strong>.
+                </p>
+                <div style="text-align: center; margin: 2rem 0;">
+                    <a href="mailto:romainlalignel@outlook.fr" class="btn btn-primary">
+                        <i class="fas fa-envelope btn-icon"></i>
+                        Me contacter
+                    </a>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer>
+            <p>© 2025 Romain L. | Formation Blended Learning</p>
+            <p style="margin-top: 10px; font-size: 0.8rem;">
+                "Là où d'autres voient des barrières, je vois des possibilités infinies."
+            </p>
+        </footer>
+    </div>
+
+    <!-- Bouton flottant pour remonter en haut -->
+    <div class="scroll-top-button" id="scrollTopButton" title="Remonter en haut">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animations au scroll
+            const sections = document.querySelectorAll('.card');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            sections.forEach(section => observer.observe(section));
+
+            // Quiz interactif
+            const correctAnswers = [3, 0, 1];
+            const quizButtons = document.querySelectorAll('.quiz-btn');
+            quizButtons.forEach((button, index) => {
+                button.addEventListener('click', function() {
+                    const questionIndex = Math.floor(index / 4);
+                    const isCorrect = (index % 4) === correctAnswers[questionIndex];
+                    this.style.backgroundColor = isCorrect ? '#2ecc71' : '#e74c3c';
+                    this.style.borderColor = isCorrect ? '#2ecc71' : '#e74c3c';
+                    this.textContent += isCorrect ? ' ✓' : ' ✗';
+                    const questionButtons = Array.from(quizButtons).slice(questionIndex * 4, (questionIndex + 1) * 4);
+                    questionButtons.forEach(btn => btn.disabled = true);
+                    if (!isCorrect) {
+                        const correctButtonIndex = correctAnswers[questionIndex] + (questionIndex * 4);
+                        quizButtons[correctButtonIndex].style.backgroundColor = '#2ecc71';
+                        quizButtons[correctButtonIndex].style.borderColor = '#2ecc71';
+                        quizButtons[correctButtonIndex].textContent += ' ✓';
+                    }
+                });
+            });
+
+            // Gestion du bouton "Remonter en haut"
+            const scrollTopButton = document.getElementById('scrollTopButton');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    scrollTopButton.classList.add('show');
+                } else {
+                    scrollTopButton.classList.remove('show');
+                }
+            });
+            scrollTopButton.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
