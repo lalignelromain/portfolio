@@ -904,172 +904,178 @@
                     <i class="fas fa-download btn-icon"></i>
                     Télécharger en CSV
                 </button>
-                <button class="btn close-modal">
-                    <i class="fas fa-times btn-icon"></i>
-                    Fermer
-                </button>
+                <!-- Bouton "Fermer" supprimé -->
             </div>
         </div>
     </div>
     <!-- JavaScript -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Animations au scroll pour les sections
-            const sections = document.querySelectorAll('.card');
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, { threshold: 0.1 });
-            sections.forEach(section => observer.observe(section));
-            // Quiz interactif
-            const correctAnswers = [3, 0, 1];
-            const quizButtons = document.querySelectorAll('.quiz-btn');
-            quizButtons.forEach((button, index) => {
-                button.addEventListener('click', function() {
-                    const questionIndex = Math.floor(index / 4);
-                    const isCorrect = (index % 4) === correctAnswers[questionIndex];
-                    this.style.backgroundColor = isCorrect ? '#2ecc71' : '#e74c3c';
-                    this.style.borderColor = isCorrect ? '#2ecc71' : '#e74c3c';
-                    this.textContent += isCorrect ? ' ✓' : ' ✗';
-                    const questionButtons = Array.from(quizButtons).slice(questionIndex * 4, (questionIndex + 1) * 4);
-                    questionButtons.forEach(btn => btn.disabled = true);
-                    if (!isCorrect) {
-                        const correctButtonIndex = correctAnswers[questionIndex] + (questionIndex * 4);
-                        quizButtons[correctButtonIndex].style.backgroundColor = '#2ecc71';
-                        quizButtons[correctButtonIndex].style.borderColor = '#2ecc71';
-                        quizButtons[correctButtonIndex].textContent += ' ✓';
-                    }
-                });
-            });
-            // Gestion du bouton "Remonter en haut"
-            const scrollTopButton = document.getElementById('scrollTopButton');
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 300) {
-                    scrollTopButton.classList.add('show');
-                } else {
-                    scrollTopButton.classList.remove('show');
-                }
-            });
-            scrollTopButton.addEventListener('click', () => {
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
-            });
-            // Animation des camemberts au scroll
-            const charts = document.querySelectorAll('.chart');
-            function animateChart(chart) {
-                const percent = parseInt(chart.getAttribute('data-percent'));
-                const valueDisplay = chart.querySelector('.chart-value');
-                let currentPercent = 0;
-                const color = chart.classList.contains('chart-distanciel') ? 'var(--neon-purple)' : 'var(--neon-blue)';
-                const interval = setInterval(() => {
-                    if (currentPercent >= percent) {
-                        clearInterval(interval);
-                    } else {
-                        currentPercent++;
-                        valueDisplay.textContent = `${currentPercent}%`;
-                        chart.style.background = `conic-gradient(${color} ${currentPercent * 3.6}deg, rgba(138, 43, 226, 0.1) 0deg)`;
-                    }
-                }, 20);
+<script>
+ document.addEventListener('DOMContentLoaded', function() {
+    // Animations au scroll pour les sections
+    const sections = document.querySelectorAll('.card');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
             }
-            const chartObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        animateChart(entry.target);
-                        chartObserver.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.5 });
-            charts.forEach(chart => chartObserver.observe(chart));
-            // Gestion de la modale "Pourquoi ce projet ?"
-            const whyModal = document.getElementById("whyModal");
-            const openWhyModalBtn = document.getElementById("openWhyModal");
-            const closeWhyModalBtns = document.querySelectorAll("#whyModal .close-modal");
-            openWhyModalBtn.onclick = function() {
-                whyModal.style.display = "block";
-                document.body.style.overflow = "hidden";
-            };
-            closeWhyModalBtns.forEach(btn => {
-                btn.onclick = function() {
-                    whyModal.style.display = "none";
-                    document.body.style.overflow = "auto";
-                };
-            });
-            // Gestion de la modale Template
-            const templateModal = document.getElementById("templateModal");
-            const openTemplateModalBtn = document.getElementById("downloadTemplate");
-            const closeTemplateModalBtns = document.querySelectorAll(".close-modal");
-            const downloadFromTemplateModalBtn = document.getElementById("downloadTemplateFromModal");
-            // Ouvre la modale Template
-            openTemplateModalBtn.onclick = function() {
-                templateModal.style.display = "block";
-                document.body.style.overflow = "hidden";
-            };
-            // Ferme les modales
-            closeTemplateModalBtns.forEach(btn => {
-                btn.onclick = function() {
-                    templateModal.style.display = "none";
-                    whyModal.style.display = "none";
-                    document.body.style.overflow = "auto";
-                };
-            });
-            // Ferme les modales si clic en dehors
-            window.onclick = function(event) {
-                if (event.target == templateModal) {
-                    templateModal.style.display = "none";
-                    document.body.style.overflow = "auto";
-                }
-                if (event.target == whyModal) {
-                    whyModal.style.display = "none";
-                    document.body.style.overflow = "auto";
-                }
-            };
-            // Téléchargement du CSV depuis la modale Template
-            downloadFromTemplateModalBtn.onclick = function() {
-                const csvData = [
-                    ["Semaine,Activité,Format,Outils,Durée,Responsable"],
-                    ["1,Lancement du projet & définition des objectifs,Présentiel,Tableau blanc - Slack,2h,Formateur"],
-                    ["1,Introduction aux bases du HTML,Distanciel,Moodle (vidéo + quiz),1h30,Apprenant"],
-                    ["2,Atelier pratique : Structure HTML,Présentiel,VS Code - Trello,3h,Formateur"],
-                    ["2,Exercices en autonomie (balises, liens),Distanciel,Moodle - Google Docs,2h,Apprenant"],
-                    ["3,CSS : Mise en forme de base,Distanciel,Moodle (tutoriel vidéo),1h,Apprenant"],
-                    ["3,Atelier CSS en groupe,Présentiel,VS Code - Figma,3h,Formateur"],
-                    ["4,Projet final : Intégration d'une page,Présentiel,VS Code - Slack,4h,Formateur/Apprenant"],
-                    ["4,Feedback & ajustements,Distanciel,Slack - Google Meet,1h,Formateur"],
-                    ["", "", "", "", "", ""],
-                    ["Outils recommandés", "", "", "", "", ""],
-                    ["Communication,Slack,Créer un canal #projet-html", "", "", ""],
-                    ["Gestion de projet,Trello,Tableau avec colonnes : À faire - En cours - Terminé", "", "", ""],
-                    ["Ressources,Moodle,Dépôt des vidéos - quiz - supports PDF", "", "", ""],
-                    ["", "", "", "", "", ""],
-                    ["Checklist avant lancement", "", "", "", "", ""],
-                    ["✅ Définir les objectifs pédagogiques", "", "", "", "", ""],
-                    ["✅ Créer les canaux Slack et le tableau Trello", "", "", "", "", ""],
-                    ["✅ Préparer les ressources Moodle (vidéos, quiz)", "", "", "", "", ""],
-                    ["✅ Planifier les séances en présentiel (salle, matériel)", "", "", "", "", ""],
-                    ["✅ Envoyer un e-mail de bienvenue aux apprenants", "", "", "", "", ""]
-                ];
-                let csvContent = "data:text/csv;charset=utf-8,";
-                csvData.forEach(row => {
-                    csvContent += row.join(",") + "\r\n";
-                });
-                const encodedUri = encodeURI(csvContent);
-                const link = document.createElement("a");
-                link.setAttribute("href", encodedUri);
-                link.setAttribute("download", "Template_Planning_Blended_Learning_RomainL.csv");
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-                this.textContent = "✓ Téléchargement terminé !";
-                setTimeout(() => {
-                    this.innerHTML = '<i class="fas fa-download btn-icon"></i> Télécharger en CSV';
-                }, 2000);
-            };
         });
+    }, { threshold: 0.1 });
+    sections.forEach(section => observer.observe(section));
+
+    // Quiz interactif
+    const correctAnswers = [3, 0, 1];
+    const quizButtons = document.querySelectorAll('.quiz-btn');
+    quizButtons.forEach((button, index) => {
+        button.addEventListener('click', function() {
+            const questionIndex = Math.floor(index / 4);
+            const isCorrect = (index % 4) === correctAnswers[questionIndex];
+            this.style.backgroundColor = isCorrect ? '#2ecc71' : '#e74c3c';
+            this.style.borderColor = isCorrect ? '#2ecc71' : '#e74c3c';
+            this.textContent += isCorrect ? ' ✓' : ' ✗';
+            const questionButtons = Array.from(quizButtons).slice(questionIndex * 4, (questionIndex + 1) * 4);
+            questionButtons.forEach(btn => btn.disabled = true);
+            if (!isCorrect) {
+                const correctButtonIndex = correctAnswers[questionIndex] + (questionIndex * 4);
+                quizButtons[correctButtonIndex].style.backgroundColor = '#2ecc71';
+                quizButtons[correctButtonIndex].style.borderColor = '#2ecc71';
+                quizButtons[correctButtonIndex].textContent += ' ✓';
+            }
+        });
+    });
+
+    // Gestion du bouton "Remonter en haut"
+    const scrollTopButton = document.getElementById('scrollTopButton');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+            scrollTopButton.classList.add('show');
+        } else {
+            scrollTopButton.classList.remove('show');
+        }
+    });
+    scrollTopButton.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+
+    // Animation des camemberts au scroll
+    const charts = document.querySelectorAll('.chart');
+    function animateChart(chart) {
+        const percent = parseInt(chart.getAttribute('data-percent'));
+        const valueDisplay = chart.querySelector('.chart-value');
+        let currentPercent = 0;
+        const color = chart.classList.contains('chart-distanciel') ? 'var(--neon-purple)' : 'var(--neon-blue)';
+        const interval = setInterval(() => {
+            if (currentPercent >= percent) {
+                clearInterval(interval);
+            } else {
+                currentPercent++;
+                valueDisplay.textContent = `${currentPercent}%`;
+                chart.style.background = `conic-gradient(${color} ${currentPercent * 3.6}deg, rgba(138, 43, 226, 0.1) 0deg)`;
+            }
+        }, 20);
+    }
+    const chartObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                animateChart(entry.target);
+                chartObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.5 });
+    charts.forEach(chart => chartObserver.observe(chart));
+
+    // Gestion de la modale "Pourquoi ce projet ?"
+    const whyModal = document.getElementById("whyModal");
+    const openWhyModalBtn = document.getElementById("openWhyModal");
+    const closeWhyModalBtns = whyModal.querySelectorAll(".close-modal");
+    openWhyModalBtn.onclick = function() {
+        whyModal.style.display = "block";
+        document.body.style.overflow = "hidden";
+    };
+    closeWhyModalBtns.forEach(btn => {
+        btn.onclick = function() {
+            whyModal.style.display = "none";
+            document.body.style.overflow = "auto";
+        };
+    });
+
+    // Gestion de la modale Template
+    const templateModal = document.getElementById("templateModal");
+    const openTemplateModalBtn = document.getElementById("downloadTemplate");
+    const closeTemplateModalBtns = templateModal.querySelectorAll(".close-modal");
+    const downloadFromTemplateModalBtn = document.getElementById("downloadTemplateFromModal");
+
+    // Ouvre la modale Template
+    openTemplateModalBtn.onclick = function() {
+        templateModal.style.display = "block";
+        document.body.style.overflow = "hidden";
+    };
+
+    // Ferme la modale Template via la croix
+    closeTemplateModalBtns.forEach(btn => {
+        btn.onclick = function() {
+            templateModal.style.display = "none";
+            document.body.style.overflow = "auto";
+        };
+    });
+
+    // Ferme les modales si clic en dehors
+    window.onclick = function(event) {
+        if (event.target == templateModal) {
+            templateModal.style.display = "none";
+            document.body.style.overflow = "auto";
+        }
+        if (event.target == whyModal) {
+            whyModal.style.display = "none";
+            document.body.style.overflow = "auto";
+        }
+    };
+
+    // Téléchargement du CSV depuis la modale Template
+    downloadFromTemplateModalBtn.onclick = function() {
+        const csvData = [
+            ["Semaine,Activité,Format,Outils,Durée,Responsable"],
+            ["1,Lancement du projet & définition des objectifs,Présentiel,Tableau blanc - Slack,2h,Formateur"],
+            ["1,Introduction aux bases du HTML,Distanciel,Moodle (vidéo + quiz),1h30,Apprenant"],
+            ["2,Atelier pratique : Structure HTML,Présentiel,VS Code - Trello,3h,Formateur"],
+            ["2,Exercices en autonomie (balises, liens),Distanciel,Moodle - Google Docs,2h,Apprenant"],
+            ["3,CSS : Mise en forme de base,Distanciel,Moodle (tutoriel vidéo),1h,Apprenant"],
+            ["3,Atelier CSS en groupe,Présentiel,VS Code - Figma,3h,Formateur"],
+            ["4,Projet final : Intégration d'une page,Présentiel,VS Code - Slack,4h,Formateur/Apprenant"],
+            ["4,Feedback & ajustements,Distanciel,Slack - Google Meet,1h,Formateur"],
+            ["", "", "", "", "", ""],
+            ["Outils recommandés", "", "", "", "", ""],
+            ["Communication,Slack,Créer un canal #projet-html", "", "", ""],
+            ["Gestion de projet,Trello,Tableau avec colonnes : À faire - En cours - Terminé", "", "", ""],
+            ["Ressources,Moodle,Dépôt des vidéos - quiz - supports PDF", "", "", ""],
+            ["", "", "", "", "", ""],
+            ["Checklist avant lancement", "", "", "", "", ""],
+            ["✅ Définir les objectifs pédagogiques", "", "", "", "", ""],
+            ["✅ Créer les canaux Slack et le tableau Trello", "", "", "", "", ""],
+            ["✅ Préparer les ressources Moodle (vidéos, quiz)", "", "", "", "", ""],
+            ["✅ Planifier les séances en présentiel (salle, matériel)", "", "", "", "", ""],
+            ["✅ Envoyer un e-mail de bienvenue aux apprenants", "", "", "", "", ""]
+        ];
+        let csvContent = "data:text/csv;charset=utf-8,";
+        csvData.forEach(row => {
+            csvContent += row.join(",") + "\r\n";
+        });
+        const encodedUri = encodeURI(csvContent);
+        const link = document.createElement("a");
+        link.setAttribute("href", encodedUri);
+        link.setAttribute("download", "Template_Planning_Blended_Learning_RomainL.csv");
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        this.textContent = "✓ Téléchargement terminé !";
+        setTimeout(() => {
+            this.innerHTML = '<i class="fas fa-download btn-icon"></i> Télécharger en CSV';
+        }, 2000);
+    };
+});
+
     </script>
 </body>
 </html>
