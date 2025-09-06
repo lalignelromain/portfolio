@@ -3,8 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="apple-touch-icon" sizes="180x180" href="icon-game/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="icon-game/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="icon-game/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
     <title>Gamification | Romain L. - Formateur Futuriste</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -12,179 +16,387 @@
             --neon-purple: #8a2be2;
             --neon-pink: #ff2a6d;
             --dark-bg: #0a0a1a;
-            --glass-bg: rgba(10, 10, 26, 0.7);
+            --glass-bg: rgba(15, 15, 30, 0.6);
+            --shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            --transition: all 0.4s cubic-bezier(0.2, 0.8, 0.4, 1);
             --border-radius: 12px;
-            --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-            --footer-bg: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            --button-blue: #00d4aa;
+            --text-light: #f0f0f0;
+            --text-gray: #a0a0b0;
         }
-
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
         body {
             font-family: 'Montserrat', sans-serif;
             background: var(--dark-bg);
-            color: white;
-            margin: 0;
-            padding: 0;
-            line-height: 1.6;
+            color: var(--text-light);
+            line-height: 1.7;
+            overflow-x: hidden;
+            position: relative;
         }
-
+        /* Effet de grille cyberpunk */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                linear-gradient(90deg, transparent 98%, rgba(0, 245, 255, 0.05) 100%),
+                linear-gradient(0deg, transparent 98%, rgba(138, 43, 226, 0.05) 100%);
+            background-size: 50px 50px;
+            z-index: -1;
+            animation: grid-move 15s linear infinite;
+        }
+        @keyframes grid-move {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(100px, 100px); }
+        }
+        /* Particules lumineuses */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(circle at 10% 20%, var(--neon-blue) 0%, transparent 30%),
+                radial-gradient(circle at 90% 80%, var(--neon-purple) 0%, transparent 30%);
+            filter: blur(120px);
+            opacity: 0.3;
+            z-index: -2;
+        }
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
         }
-
+        /* En-tête futuriste */
         header {
             text-align: center;
-            margin-bottom: 3rem;
-            position: relative;
+            padding: 100px 0 80px;
         }
-
-        h1 {
+        .header-title {
             font-family: 'Playfair Display', serif;
-            font-size: 3rem;
-            background: linear-gradient(90deg, var(--neon-purple), var(--neon-blue));
+            font-size: 3.5rem;
+            font-weight: 600;
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            margin-bottom: 1rem;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
         }
-
-        .subtitle {
+        .header-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
+        }
+        .header-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-gray);
+            max-width: 900px;
+            margin: 0 auto 50px;
+            font-weight: 400;
+            line-height: 1.4;
+        }
+        /* Boutons holographiques */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 180px;
+            height: 56px;
+            padding: 14px 28px;
+            background: transparent;
+            color: var(--neon-blue);
+            text-decoration: none;
+            border: 1px solid rgba(0, 245, 255, 0.3);
+            border-radius: 50px;
+            font-weight: 500;
+            transition: var(--transition);
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            margin: 0 7.5px;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            background: rgba(0, 245, 255, 0.05);
+            box-sizing: border-box;
+        }
+        .btn:hover {
+            color: white;
+            box-shadow: 0 0 15px rgba(0, 245, 255, 0.3);
+            border-color: rgba(0, 245, 255, 0.6);
+            background: rgba(0, 245, 255, 0.1);
+        }
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 245, 255, 0.2), transparent);
+            transition: left 0.6s;
+        }
+        .btn:hover::before {
+            left: 100%;
+        }
+        .btn-icon {
+            margin-right: 10px;
+            font-size: 0.9rem;
+        }
+        /* Conteneur des boutons */
+        .btn-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0;
+            justify-content: center;
+            align-items: center;
+            margin: 40px auto;
+            max-width: 100%;
+            z-index: 2;
+        }
+        .btn-item {
+            flex: 0 0 auto;
+            text-align: center;
+            margin: 0;
+        }
+        /* Cartes futuristes */
+        .card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--border-radius);
+            padding: 40px;
+            margin: 50px 0;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 245, 255, 0.05), transparent);
+            transition: left 0.8s;
+        }
+        .card:hover::before {
+            left: 100%;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 245, 255, 0.1);
+        }
+        .card h2 {
+            font-family: 'Playfair Display', serif;
+            color: var(--text-light);
+            margin-bottom: 25px;
+            font-size: 2rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        .card h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
+        }
+        .card h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--neon-blue);
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+        /* Listes stylisées */
+        .expertise-list {
+            list-style: none;
+            margin: 30px 0;
+        }
+        .expertise-list li {
+            padding: 12px 0;
+            position: relative;
+            padding-left: 30px;
+            color: var(--text-light);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .expertise-list li:before {
+            content: "✦";
+            position: absolute;
+            left: 0;
+            color: var(--neon-pink);
             font-size: 1.2rem;
-            color: #ccc;
-            max-width: 800px;
-            margin: 0 auto 2rem;
         }
-
-        /* Cartes interactives */
+        /* Grille de cartes */
         .cards-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
-            margin: 3rem 0;
+            margin: 50px 0;
         }
-
-        .card {
+        .card-benefit {
             background: var(--glass-bg);
-            border: 1px solid var(--neon-purple);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: var(--border-radius);
-            padding: 2rem;
+            padding: 30px;
             transition: var(--transition);
-            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
-
-        .card:hover {
+        .card-benefit::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 245, 255, 0.05), transparent);
+            transition: left 0.8s;
+        }
+        .card-benefit:hover::before {
+            left: 100%;
+        }
+        .card-benefit:hover {
             transform: translateY(-10px);
-            box-shadow: 0 10px 20px rgba(138, 43, 226, 0.3);
+            box-shadow: 0 15px 30px rgba(0, 245, 255, 0.1);
         }
-
-        .card h3 {
+        .card-benefit h3 {
             color: var(--neon-blue);
             margin-top: 0;
             font-size: 1.5rem;
+            margin-bottom: 1rem;
         }
-
-        .card p {
-            color: #ddd;
+        .card-benefit p {
+            color: var(--text-gray);
+            flex-grow: 1;
         }
-
+        /* Boutons "En savoir plus" */
         .card-button {
-            background: var(--neon-pink);
-            color: white;
-            border: none;
-            padding: 0.5rem 1.5rem;
+            background: rgba(138, 43, 226, 0.2);
+            color: var(--neon-pink);
+            border: 1px solid rgba(138, 43, 226, 0.4);
+            padding: 12px 24px;
             border-radius: var(--border-radius);
             cursor: pointer;
             margin-top: 1rem;
             transition: var(--transition);
+            font-weight: 500;
+            width: 100%;
+            max-width: 200px;
+            text-align: center;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
-
         .card-button:hover {
-            background: #ff00aa;
-            transform: scale(1.05);
+            background: rgba(138, 43, 226, 0.3);
+            color: white;
+            transform: none;
+            box-shadow: 0 4px 8px rgba(138, 43, 226, 0.2);
         }
-
+        .card-details {
+            display: none;
+            margin-top: 1rem;
+            color: var(--text-gray);
+            padding: 15px;
+            background: rgba(20, 20, 40, 0.3);
+            border-radius: var(--border-radius);
+            border-left: 3px solid var(--neon-purple);
+            animation: fadeIn 0.3s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
         /* Mécaniques de gamification */
         .mechanics {
-            margin: 4rem 0;
+            margin: 80px 0;
         }
-
         .mechanic {
             background: var(--glass-bg);
-            border: 1px solid var(--neon-blue);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 245, 255, 0.2);
             border-radius: var(--border-radius);
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            backdrop-filter: blur(10px);
+            padding: 25px;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
         }
-
+        .mechanic::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(138, 43, 226, 0.05), transparent);
+            transition: left 0.8s;
+        }
+        .mechanic:hover::before {
+            left: 100%;
+        }
+        .mechanic:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(138, 43, 226, 0.2);
+        }
         .mechanic h3 {
             color: var(--neon-pink);
             margin-top: 0;
+            font-size: 1.4rem;
         }
-
         /* Exemple concret */
         .example {
-            margin: 4rem 0;
+            margin: 80px 0;
             background: var(--glass-bg);
-            border: 1px solid var(--neon-pink);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 42, 109, 0.3);
             border-radius: var(--border-radius);
-            padding: 2rem;
-            backdrop-filter: blur(10px);
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
         }
-
-        /* Bouton retour portfolio */
-        .back-to-portfolio {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            background: var(--button-blue);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            font-size: 1.3rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 0 15px rgba(0, 212, 170, 0.5);
-            transition: var(--transition);
-            z-index: 1000;
+        .example::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 42, 109, 0.05), transparent);
+            transition: left 0.8s;
         }
-
-        .back-to-portfolio:hover {
-            background: #00b894;
-            transform: scale(1.1);
+        .example:hover::before {
+            left: 100%;
         }
-
-        /* Footer */
-        footer {
-            background: var(--footer-bg);
-            padding: 1.5rem;
-            text-align: center;
-            margin-top: 4rem;
-            color: #aaa;
-            font-size: 0.9rem;
+        .example h2 {
+            color: var(--neon-pink);
+            margin-top: 0;
+            font-size: 2rem;
         }
-
-        /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .animate-on-scroll {
-            opacity: 0;
-            animation: fadeIn 0.6s ease forwards;
-        }
-
-        .animate-on-scroll.visible {
-            opacity: 1;
-        }
-
         /* Badges */
         .badge {
             display: inline-block;
@@ -199,136 +411,492 @@
             margin-right: 1rem;
             vertical-align: middle;
         }
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: 80px;
+        }
+        /* Bouton retour en haut */
+        .scroll-top-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: rgba(15, 15, 30, 0.7);
+            color: var(--neon-blue);
+            border: 1px solid rgba(0, 245, 255, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 10px rgba(0, 245, 255, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            z-index: 1000;
+        }
+        .scroll-top-button.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .scroll-top-button:hover {
+            background: rgba(0, 245, 255, 0.1);
+            color: white;
+            border-color: rgba(0, 245, 255, 0.6);
+            box-shadow: 0 0 15px rgba(0, 245, 255, 0.4);
+        }
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* Modale pour le quiz gamifié */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+        }
+        .modal-content {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 245, 255, 0.3);
+            border-radius: var(--border-radius);
+            margin: 5% auto;
+            padding: 0;
+            width: 90%;
+            max-width: 900px;
+            box-shadow: var(--shadow);
+            animation: modalFadeIn 0.5s;
+        }
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .modal-header {
+            padding: 20px;
+            border-bottom: 1px solid rgba(0, 245, 255, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(90deg, rgba(0, 245, 255, 0.1), rgba(138, 43, 226, 0.1));
+        }
+        .modal-header h3 {
+            color: var(--neon-blue);
+            font-family: 'Playfair Display', serif;
+            margin: 0;
+        }
+        .close-modal {
+            color: var(--text-light);
+            font-size: 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        .close-modal:hover {
+            color: var(--neon-pink);
+        }
+        .modal-body {
+            padding: 30px;
+            max-height: 70vh;
+            overflow-y: auto;
+            color: var(--text-gray);
+        }
+        .modal-body h4 {
+            color: var(--neon-purple);
+            margin: 25px 0 15px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 8px;
+        }
+        .modal-body h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
+        }
+        .modal-body p, .modal-body li {
+            line-height: 1.6;
+        }
+        .modal-body ul {
+            margin: 15px 0 15px 25px;
+        }
+        .modal-body .expertise-list {
+            margin: 10px 0;
+        }
+        .template-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(20, 20, 40, 0.3);
+            border-radius: var(--border-radius);
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        .template-table th, .template-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid rgba(0, 245, 255, 0.1);
+        }
+        .template-table th {
+            background: rgba(0, 245, 255, 0.1);
+            color: var(--neon-blue);
+            font-weight: 600;
+        }
+        .template-table tr:nth-child(even) {
+            background: rgba(0, 245, 255, 0.03);
+        }
+        .template-table tr:hover {
+            background: rgba(0, 245, 255, 0.08);
+        }
+        /* Barre de progression */
+        .progress-container {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            margin: 15px 0;
+            height: 20px;
+            overflow: hidden;
+        }
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
+            width: 75%;
+            border-radius: 10px;
+            position: relative;
+            text-align: center;
+            line-height: 20px;
+            color: white;
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+        /* Badges dans la modale */
+        .modal-badge {
+            display: inline-block;
+            background: var(--neon-pink);
+            color: white;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            font-weight: bold;
+            margin: 5px;
+            box-shadow: 0 0 10px rgba(255, 42, 109, 0.3);
+        }
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-title {
+                font-size: 2.5rem;
+            }
+            .header-subtitle {
+                font-size: 1.1rem;
+                line-height: 1.6;
+            }
+            .card, .card-benefit, .mechanic, .example {
+                padding: 25px;
+            }
+            .btn-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            .btn-item {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+            .btn {
+                width: 100%;
+                max-width: 300px;
+                margin: 5px 0;
+            }
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+            .scroll-top-button {
+                bottom: 20px;
+                right: 20px;
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+            .modal-body {
+                padding: 20px;
+            }
+            .template-table {
+                font-size: 0.9rem;
+            }
+            .template-table th, .template-table td {
+                padding: 8px 10px;
+            }
+            .modal-body h4 {
+                font-size: 1.4rem;
+                margin: 20px 0 10px;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <header>
-            <h1>Gamification</h1>
-            <p class="subtitle">
+        <header class="fade-in visible">
+            <h1 class="header-title">🎮 Gamification</h1>
+            <p class="header-subtitle">
                 Transformez l’apprentissage en une expérience engageante et motivante grâce aux mécaniques de jeu.
             </p>
-            <i class="fas fa-gamepad fa-4x" style="color: var(--neon-blue);"></i>
+            <div style="font-size: 4rem; color: var(--neon-blue); margin: 20px 0;">
+                <i class="fas fa-gamepad"></i>
+            </div>
         </header>
-
-        <!-- Introduction -->
-        <section class="animate-on-scroll" style="text-align: center; margin-bottom: 3rem;">
-            <p style="font-size: 1.1rem; color: #ccc; max-width: 900px; margin: 0 auto;">
+        <section class="fade-in">
+            <p style="font-size: 1.2rem; text-align: center; max-width: 900px; margin: 0 auto 50px; color: var(--text-gray);">
                 La gamification utilise des éléments inspirés des jeux (badges, classements, défis) pour stimuler la motivation,
                 l’engagement et la rétention des connaissances.
             </p>
         </section>
-
         <!-- Cartes bénéfices -->
         <section class="cards-grid">
-            <div class="card animate-on-scroll">
+            <div class="card-benefit fade-in">
                 <h3>🎮 Motivation</h3>
                 <p>Les apprenants sont incités à progresser par des récompenses et des défis.</p>
                 <button class="card-button">En savoir plus</button>
-                <div class="card-details" style="display: none; margin-top: 1rem; color: #eee;">
+                <div class="card-details">
                     <p>Les mécaniques de jeu activent la dopamine, renforçant la persévérance.</p>
                 </div>
             </div>
-            <div class="card animate-on-scroll">
+            <div class="card-benefit fade-in">
                 <h3>🏆 Engagement</h3>
                 <p>Les apprenants deviennent acteurs de leur formation, avec un sentiment d’accomplissement.</p>
                 <button class="card-button">En savoir plus</button>
-                <div class="card-details" style="display: none; margin-top: 1rem; color: #eee;">
+                <div class="card-details">
                     <p>Le suivi visuel des progrès (barres, badges) maintient l’intérêt.</p>
                 </div>
             </div>
-            <div class="card animate-on-scroll">
+            <div class="card-benefit fade-in">
                 <h3>📊 Feedback immédiat</h3>
                 <p>Les retours instantanés aident à identifier les forces et les axes d’amélioration.</p>
                 <button class="card-button">En savoir plus</button>
-                <div class="card-details" style="display: none; margin-top: 1rem; color: #eee;">
+                <div class="card-details">
                     <p>Les apprenants savent toujours où ils en sont et ce qu’il reste à accomplir.</p>
                 </div>
             </div>
         </section>
-
         <!-- Mécaniques de gamification -->
-        <section class="mechanics">
-            <h2 style="text-align: center; color: var(--neon-blue); margin-bottom: 2rem;">Mécaniques clés</h2>
-            <div class="mechanic animate-on-scroll">
+        <section class="mechanics fade-in">
+            <h2 style="text-align: center; color: var(--neon-blue); margin-bottom: 40px;">Mécaniques clés</h2>
+            <div class="mechanic fade-in">
                 <h3><span class="badge">🥇</span> Badges et récompenses</h3>
                 <p>Validez les acquis et les efforts avec des badges thématiques (ex: "Expert Excel", "Maître de la communication").</p>
             </div>
-            <div class="mechanic animate-on-scroll">
+            <div class="mechanic fade-in">
                 <h3><span class="badge">🏆</span> Classements</h3>
                 <p>Stimulez l’émulation avec des tableaux de bord (top 3, progression individuelle).</p>
             </div>
-            <div class="mechanic animate-on-scroll">
+            <div class="mechanic fade-in">
                 <h3><span class="badge">⚡</span> Défis</h3>
                 <p>Proposez des missions chronométrées ou collaboratives pour dynamiser l’apprentissage.</p>
             </div>
-            <div class="mechanic animate-on-scroll">
+            <div class="mechanic fade-in">
                 <h3><span class="badge">📈</span> Niveaux</h3>
                 <p>Structurez la progression en paliers (débutant → expert) pour marquer les étapes.</p>
             </div>
         </section>
-
         <!-- Exemple concret -->
-        <section class="example animate-on-scroll">
-            <h2 style="color: var(--neon-pink); margin-top: 0;">📌 Exemple : Quiz interactif avec feedback visuel</h2>
+        <section class="example fade-in">
+            <h2>📌 Exemple : Quiz interactif avec feedback visuel</h2>
             <p><strong>Outils</strong> : Google Forms + intégration de badges personnalisés.</p>
             <p><strong>Mécaniques</strong> :</p>
-            <ul style="color: #ddd; margin: 1rem 0 1rem 2rem;">
+            <ul class="expertise-list">
                 <li>Badges pour chaque module validé.</li>
                 <li>Barre de progression visible en temps réel.</li>
                 <li>Classement anonyme pour motiver sans stress.</li>
             </ul>
             <p><strong>Résultat</strong> : +40% de participation et de rétention.</p>
-            <a href="#" style="color: var(--neon-blue); text-decoration: none; font-weight: 600;">Voir un exemple de quiz gamifié →</a>
+            <a href="#" id="openQuizModal" style="color: var(--neon-blue); text-decoration: none; font-weight: 600;">Voir un exemple de quiz gamifié →</a>
         </section>
-
         <!-- Conclusion -->
-        <section style="text-align: center; margin: 4rem 0;">
+        <section style="text-align: center; margin: 80px 0;" class="fade-in">
             <h2 style="color: var(--neon-blue);">Prêt à jouer avec la formation ?</h2>
-            <a href="/contact" class="card-button" style="font-size: 1.1rem; padding: 1rem 2rem;">Me contacter pour un accompagnement</a>
         </section>
     </div>
-
-    <!-- Bouton retour portfolio -->
-    <button class="back-to-portfolio" onclick="window.location.href='https://tonportfolio.fr'" aria-label="Retour au portfolio">
-        <i class="fas fa-arrow-up"></i>
-    </button>
-
-    <!-- Footer -->
-    <footer>
+    <!-- Modale pour le quiz gamifié -->
+    <div id="quizModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>📋 Template : Quiz Gamifié avec Google Forms</h3>
+                <span class="close-modal" id="closeQuizModal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <h4>🎯 Description du Quiz</h4>
+                <p>
+                    Ce template utilise <strong>Google Forms</strong> pour créer un quiz interactif, avec :
+                </p>
+                <ul class="expertise-list">
+                    <li><strong>Badges</strong> pour chaque module validé (ex: 🥇, 🥈, 🥉).</li>
+                    <li><strong>Barre de progression</strong> en temps réel (intégration via Apps Script ou image dynamique).</li>
+                    <li><strong>Classement anonyme</strong> pour motiver sans stress (affiché après soumission).</li>
+                    <li><strong>Feedback immédiat</strong> avec explications pour chaque réponse.</li>
+                </ul>
+                <h4>📌 Exemple de badges</h4>
+                <div style="text-align: center; margin: 20px 0;">
+                    <div class="modal-badge">📊</div>
+                    <div class="modal-badge">💡</div>
+                    <div class="modal-badge">🚀</div>
+                    <div class="modal-badge">🏅</div>
+                </div>
+                <h4>📊 Barre de progression</h4>
+                <p>Affichée en haut du quiz, mise à jour après chaque question :</p>
+                <div class="progress-container">
+                    <div class="progress-bar">75% complété</div>
+                </div>
+                <h4>🏆 Classement anonyme (Top 3)</h4>
+                <table class="template-table">
+                    <thead>
+                        <tr>
+                            <th>Position</th>
+                            <th>Score</th>
+                            <th>Pseudo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>95%</td>
+                            <td>Apprenant·e A</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>92%</td>
+                            <td>Apprenant·e B</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>88%</td>
+                            <td>Apprenant·e C</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <h4>🔧 Intégration technique</h4>
+                <p><strong>Outils nécessaires</strong> :</p>
+                <ul class="expertise-list">
+                    <li>Google Forms (pour le quiz).</li>
+                    <li>Google Sheets (pour le classement).</li>
+                    <li>Apps Script (pour automatiser les badges et la barre de progression).</li>
+                    <li>Canva ou Figma (pour créer les visuels des badges).</li>
+                </ul>
+                <p><strong>Étapes</strong> :</p>
+                <ol style="margin: 15px 0 15px 25px;">
+                    <li>Créer le quiz dans Google Forms.</li>
+                    <li>Ajouter une section "Résultats" avec le classement (lié à Google Sheets).</li>
+                    <li>Personnaliser les badges et les intégrer via des images ou un script.</li>
+                    <li>Partager le lien du quiz avec les apprenants.</li>
+                </ol>
+                <h4>📄 Exemple de feedback</h4>
+                <div style="background: rgba(0, 245, 255, 0.1); padding: 15px; border-radius: var(--border-radius); margin: 15px 0;">
+                    <p style="color: var(--neon-blue);"><strong>Bravo !</strong> Vous avez obtenu le badge <span class="modal-badge" style="display: inline-block; width: 30px; height: 30px; line-height: 30px; font-size: 0.8rem;">📊</span> pour le module "Analyse de données".</p>
+                    <p style="margin: 10px 0 0;">Votre score : <strong>8/10</strong>. Continuez ainsi pour débloquer le prochain niveau !</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="fade-in">
         <p>© 2025 Romain L. | Formation Gamification</p>
-        <p style="margin: 0.5rem 0 0; font-style: italic; color: #ccc;">
+        <p style="margin: 0.5rem 0 0; font-style: italic; color: var(--text-gray);">
             "Là où d’autres voient des barrières, je vois des possibilités infinies."
         </p>
     </footer>
-
+    <a href="#" class="scroll-top-button" id="scrollTopBtn">
+        <i class="fas fa-chevron-up"></i>
+    </a>
     <script>
-        // Animations au scroll
-        document.addEventListener('DOMContentLoaded', function() {
-            const elements = document.querySelectorAll('.animate-on-scroll');
+        document.addEventListener('DOMContentLoaded', () => {
+            // Animations au scroll
+            const sections = document.querySelectorAll('.fade-in');
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
                     }
                 });
             }, { threshold: 0.1 });
-            elements.forEach(el => observer.observe(el));
-
-            // Interaction cartes
+            sections.forEach(section => observer.observe(section));
+            // Bouton retour en haut
+            const scrollTopBtn = document.getElementById('scrollTopBtn');
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 300) {
+                    scrollTopBtn.style.display = 'flex';
+                    setTimeout(() => scrollTopBtn.classList.add('show'), 10);
+                } else {
+                    scrollTopBtn.classList.remove('show');
+                    setTimeout(() => scrollTopBtn.style.display = 'none', 500);
+                }
+            });
+            scrollTopBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+            // Interaction cartes bénéfices
             const buttons = document.querySelectorAll('.card-button');
             buttons.forEach(button => {
                 button.addEventListener('click', function() {
-                    const details = this.parentElement.querySelector('.card-details');
-                    if (details.style.display === 'none' || !details.style.display) {
+                    const card = this.closest('.card-benefit');
+                    const details = card.querySelector('.card-details');
+                    const isVisible = details.style.display === 'block';
+                    // Masquer tous les détails ouverts
+                    document.querySelectorAll('.card-details').forEach(detail => {
+                        detail.style.display = 'none';
+                    });
+                    document.querySelectorAll('.card-button').forEach(btn => {
+                        btn.textContent = 'En savoir plus';
+                    });
+                    // Afficher/masquer uniquement les détails de la carte cliquée
+                    if (!isVisible) {
                         details.style.display = 'block';
                         this.textContent = 'Masquer';
-                    } else {
-                        details.style.display = 'none';
-                        this.textContent = 'En savoir plus';
                     }
                 });
             });
+            // Gestion de la modale "Quiz Gamifié"
+            const quizModal = document.getElementById('quizModal');
+            const openQuizModalBtn = document.getElementById('openQuizModal');
+            const closeQuizModalBtn = document.getElementById('closeQuizModal');
+            // Ouvrir la modale
+            openQuizModalBtn.onclick = (e) => {
+                e.preventDefault();
+                quizModal.style.display = 'block';
+            };
+            // Fermer la modale
+            closeQuizModalBtn.onclick = () => {
+                quizModal.style.display = 'none';
+            };
+            // Fermer si clic en dehors
+            window.onclick = (event) => {
+                if (event.target === quizModal) {
+                    quizModal.style.display = 'none';
+                }
+            };
         });
     </script>
 </body>
