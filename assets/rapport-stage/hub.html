@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<link rel="apple-touch-icon" sizes="180x180" href="icon-formation/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="icon-formation/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="icon-formation/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+    <title>Mes Rapports de Stage | Romain L.</title>
+    <link rel="stylesheet" href="../../styles/style.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&amp;family=Playfair+Display:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+    <style>
+        :root {
+            --neon-blue: #00f5ff;
+            --neon-purple: #8a2be2;
+            --neon-pink: #2ecc71;  /* Vert nature pour CFPPA */
+            --neon-green: #00ff9d;
+            --neon-orange: #ff8c00;
+            --text-gray: #c0c0c0;
+            --border-radius: 10px;
+        }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #0a0a1a;
+            color: white;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .formation-header {
+            text-align: center;
+            padding: 60px 20px 40px;
+            background: linear-gradient(135deg, rgba(10, 10, 26, 0.9), rgba(20, 20, 40, 0.9));
+            margin-bottom: 50px;
+        }
+        .neon-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 15px;
+        }
+        .neon-subtitle {
+    color: #e0e0e0; /* Gris plus clair pour un meilleur contraste */
+    font-size: 1.1rem;
+    max-width: 700px;
+    margin: 0 auto 30px;
+    line-height: 1.7;
+    font-weight: 300;
+    text-shadow:
+        0 0 10px rgba(0, 245, 255, 0.6),  /* Glow bleu intense et visible */
+        0 0 3px rgba(0, 0, 0, 0.2);       /* Ombre légère pour ancrer le texte */
+    letter-spacing: 0.3px;
+}
+
+        .intro-section {
+            max-width: 800px;
+            margin: 0 auto 60px;
+            text-align: center;
+            padding: 0 20px;
+        }
+        .intro-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        .devis {
+            font-style: italic;
+            color: var(--neon-pink);
+            font-size: 1.2rem;
+            margin: 30px 0;
+        }
+        /* Carrousel Container */
+        .carousel-container {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto 80px;
+            overflow: hidden;
+            border-radius: var(--border-radius);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        /* Carrousel Track */
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            height: 400px;
+        }
+        /* Carrousel Slide */
+        .carousel-slide {
+            min-width: 100%;
+            position: relative;
+            background: rgba(20, 20, 40, 0.6);
+            border-left: 4px solid var(--slide-color);
+            backdrop-filter: blur(5px);
+            padding: 40px 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        .slide-icon {
+            font-size: 3.5rem;
+            color: var(--slide-color);
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px rgba(var(--slide-color-rgb), 0.3);
+        }
+        .carousel-slide h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            background: linear-gradient(90deg, var(--slide-color), rgba(var(--slide-color-rgb), 0.7));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .carousel-slide p {
+            color: var(--text-gray);
+            max-width: 600px;
+            margin: 0 auto 30px;
+            line-height: 1.6;
+        }
+        /* Bouton "Découvrir" */
+        .discover-btn {
+            background: rgba(var(--slide-color-rgb), 0.2);
+            color: white;
+            padding: 14px 35px;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(var(--slide-color-rgb), 0.2);
+            border: 1px solid rgba(var(--slide-color-rgb), 0.5);
+            font-weight: 600;
+            font-size: 1.1rem;
+            backdrop-filter: blur(5px);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        .discover-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(var(--slide-color-rgb), 0.3), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.4s ease;
+            z-index: -1;
+        }
+        .discover-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(var(--slide-color-rgb), 0.4);
+            color: white;
+        }
+        .discover-btn:hover::before {
+            transform: translateX(100%);
+        }
+        .discover-btn i {
+            transition: transform 0.3s ease;
+        }
+        .discover-btn:hover i {
+            transform: translateX(5px);
+        }
+        /* Carrousel Navigation */
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            padding: 0 20px;
+            z-index: 10;
+        }
+        .carousel-button {
+            background: rgba(20, 20, 40, 0.7);
+            border: none;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2); /* Bordure neutre par défaut */
+        }
+        .carousel-button:hover {
+            background: rgba(20, 20, 40, 0.9);
+            transform: scale(1.1);
+        }
+        /* Indicators */
+        .carousel-indicators {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+        .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .indicator.active {
+            background: white;
+            transform: scale(1.3);
+        }
+        .why-choose {
+            max-width: 900px;
+            margin: 0 auto 80px;
+            text-align: center;
+            padding: 0 20px;
+        }
+        .why-choose h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 40px;
+            text-shadow: 0 0 8px rgba(78, 205, 196, 0.3);
+            letter-spacing: 0.5px;
+        }
+        .arguments-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        .argument {
+            text-align: center;
+        }
+        .argument i {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .argument h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+        .argument p {
+            color: var(--text-gray);
+            line-height: 1.6;
+        }
+        .highlight {
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 600;
+        }
+        .sous-titre {
+            font-size: 0.9em;
+            opacity: 0.9;
+            display: block;
+            margin-top: 10px;
+        }
+        .formation-footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--text-gray);
+            border-top: 1px solid rgba(138, 43, 226, 0.2);
+        }
+        .formation-footer a {
+            color: var(--neon-blue);
+            text-decoration: none;
+        }
+        /* Bouton flottant */
+        #backToPortfolio {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--neon-purple), var(--neon-blue));
+            color: white;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 15px rgba(138, 43, 226, 0.4);
+            transition: all 0.4s cubic-bezier(0.2, 0.8, 0.4, 1);
+            opacity: 0;
+            visibility: hidden;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(138, 43, 226, 0.3);
+        }
+        #backToPortfolio:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(138, 43, 226, 0.7);
+        }
+        #backToPortfolio.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .hide-button {
+            opacity: 0 !important;
+            visibility: hidden !important;
+        }
+        @media (max-width: 768px) {
+            .neon-title {
+                font-size: 2rem;
+            }
+            .carousel-slide {
+                height: 350px;
+                padding: 30px 20px;
+            }
+            .slide-icon {
+                font-size: 3rem;
+            }
+            .carousel-slide h3 {
+                font-size: 1.5rem;
+            }
+            .why-choose h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="formation-header">
+            <h1 class="neon-title">Mes Rapports de Stage</h1>
+            <p class="neon-subtitle">
+                Plongez dans mes rapports de stage, où chaque page raconte une histoire de défis relevés, de compétences acquises et de projets menés avec passion.
+            </p>
+        </header>
+        <div class="intro-section">
+            <p class="intro-text">
+            </p>
+            <div class="devis">
+            </div>
+        </div>
+        <!-- Carrousel -->
+        <div class="carousel-container">
+            <div class="carousel-track" id="carouselTrack">
+                <!-- 1. Stage ADVF -->
+                <div class="carousel-slide" style="--slide-color: var(--neon-purple); --slide-color-rgb: 138, 43, 226;">
+                    <div class="slide-icon">
+                        <i class="fas fa-hands-helping"></i>
+                    </div>
+                    <h3>Stage ADVF - SST</h3>
+                    <p>Clips Formation - Site LILLEBONNE - 23/06/2025 au 04/07/2025</p>
+                    <a href="index.html" class="discover-btn" target="_blank" rel="noopener noreferrer">
+                        Découvrir <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                <!-- 2. Stage CFPPA -->
+                <div class="carousel-slide" style="--slide-color: var(--neon-pink); --slide-color-rgb: 46, 204, 113;">
+                    <div class="slide-icon">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <h3>CFPPA Yvetot - 22/09/2025 au 03/10/2025</h3>
+                    <p></p>
+                    <a href="#" class="discover-btn" target="_blank" rel="noopener noreferrer">
+                        Découvrir <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="carousel-nav">
+                <button class="carousel-button" id="prevButton">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="carousel-button" id="nextButton">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+            <div class="carousel-indicators" id="carouselIndicators">
+                <!-- Indicators will be added by JavaScript -->
+            </div>
+        </div>
+        <div class="why-choose">
+            <h2>Plongez dans des expériences qui inspirent et transforment</h2>
+            <div class="arguments-grid">
+                <div class="argument">
+                    <i class="fas fa-globe"></i>
+                    <h4>Expérience variée</h4>
+                    <p>3 stages en entreprises innovantes, couvrant des secteurs comme <span class="highlight">le numérique, la pédagogie et l’ingénierie</span>.</p>
+                    <p><span class="sous-titre">Une vision polyvalente des enjeux professionnels.</span></p>
+                </div>
+                <div class="argument">
+                    <i class="fas fa-lightbulb"></i>
+                    <h4>Innovation et créativité</h4>
+                    <p>Intégration d’outils modernes et de méthodes originales pour des rapports <span class="highlight">uniques et percutants</span>.</p>
+                    <p><span class="sous-titre">Des analyses qui se distinguent par leur originalité.</span></p>
+                </div>
+                <div class="argument">
+                    <i class="fas fa-heart"></i>
+                    <h4>Engagement personnel</h4>
+                    <p>Implication totale dans chaque mission, avec <span class="highlight">rigueur et passion</span>.</p>
+                    <p><span class="sous-titre">Des rapports qui reflètent mon investissement.</span></p>
+                </div>
+            </div>
+        </div>
+        <footer class="formation-footer">
+            <p>© 2025 Romain L. | Formateur
+        </footer>
+    </div>
+    <button id="backToPortfolio" title="Retour au portfolio">
+        <i class="fas fa-home"></i>
+    </button>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const track = document.getElementById('carouselTrack');
+            const slides = document.querySelectorAll('.carousel-slide');
+            const prevButton = document.getElementById('prevButton');
+            const nextButton = document.getElementById('nextButton');
+            const indicatorsContainer = document.getElementById('carouselIndicators');
+            let currentIndex = 0;
+            const slideCount = slides.length;
+
+            // Create indicators
+            slides.forEach((_, index) => {
+                const indicator = document.createElement('div');
+                indicator.classList.add('indicator');
+                if (index === 0) indicator.classList.add('active');
+                indicator.addEventListener('click', () => goToSlide(index));
+                indicatorsContainer.appendChild(indicator);
+            });
+
+            const indicators = document.querySelectorAll('.indicator');
+
+            // Back to portfolio button
+            const backToPortfolioBtn = document.getElementById('backToPortfolio');
+
+            // Show/hide back to portfolio button on scroll
+            window.addEventListener('scroll', function() {
+                const scrollPosition = window.scrollY;
+                const windowHeight = window.innerHeight;
+                const bodyHeight = document.body.scrollHeight;
+                if (scrollPosition > 200) {
+                    backToPortfolioBtn.classList.add('show');
+                } else {
+                    backToPortfolioBtn.classList.remove('show');
+                }
+                if (scrollPosition + windowHeight >= bodyHeight - 100) {
+                    backToPortfolioBtn.classList.add('hide-button');
+                } else {
+                    backToPortfolioBtn.classList.remove('hide-button');
+                }
+            });
+
+            // Navigate to portfolio
+            backToPortfolioBtn.addEventListener('click', function() {
+                window.location.href = '../../index.html';
+            });
+
+            // Update carousel UI (including button borders)
+            function updateCarousel() {
+                track.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+                // Get the current slide's color
+                const currentSlide = slides[currentIndex];
+                const slideColorRGB = currentSlide.style.getPropertyValue('--slide-color-rgb');
+
+                // Update navigation button borders
+                prevButton.style.border = `1px solid rgba(${slideColorRGB}, 0.3)`;
+                nextButton.style.border = `1px solid rgba(${slideColorRGB}, 0.3)`;
+
+                // Update indicators
+                indicators.forEach((indicator, index) => {
+                    if (index === currentIndex) {
+                        indicator.classList.add('active');
+                    } else {
+                        indicator.classList.remove('active');
+                    }
+                });
+            }
+
+            function goToSlide(index) {
+                currentIndex = index;
+                updateCarousel();
+            }
+
+            function nextSlide() {
+                currentIndex = (currentIndex + 1) % slideCount;
+                updateCarousel();
+            }
+
+            function prevSlide() {
+                currentIndex = (currentIndex - 1 + slideCount) % slideCount;
+                updateCarousel();
+            }
+
+            // Event listeners
+            nextButton.addEventListener('click', nextSlide);
+            prevButton.addEventListener('click', prevSlide);
+
+            // Touch support for mobile
+            let touchStartX = 0;
+            let touchEndX = 0;
+            track.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+            }, {passive: true});
+            track.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            }, {passive: true});
+
+            function handleSwipe() {
+                if (touchEndX < touchStartX - 50) {
+                    nextSlide();
+                }
+                if (touchEndX > touchStartX + 50) {
+                    prevSlide();
+                }
+            }
+
+            // Initialize carousel
+            updateCarousel();
+        });
+    </script>
+</body>
+</html>
