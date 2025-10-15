@@ -1,0 +1,1374 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kanban Storybook - Grilles d'Évaluation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+    <style>
+        :root {
+            --bg-dark: #1a1a2e;
+            --bg-card: rgba(20, 20, 40, 0.3);
+            --neon-blue: #00f5ff;
+            --neon-purple: #8a2be2;
+            --neon-blue-light: #00b8ff;
+            --neon-purple-light: #b388ff;
+            --neon-green: #00ff88;
+            --neon-orange: #ff8800;
+            --neon-pink: #ff66b2;
+            --neon-yellow: #ffff00;
+            --text-light: #e0e0e0;
+            --text-gray: #a0a0a0;
+            --border-radius: 8px;
+        }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        /* Conteneur du titre et des actions */
+        .header-actions {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        h1 {
+            font-family: 'Playfair Display', serif;
+            text-align: center;
+            color: var(--neon-purple);
+            margin: 0;
+            font-size: 28px;
+        }
+
+        /* Icône d'aide */
+        .help-icon {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--neon-blue);
+            font-size: 24px;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .help-icon:hover {
+            color: var(--neon-purple);
+        }
+        .apprenant-selector {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        .btn-apprenant {
+            padding: 8px 15px;
+            background: var(--bg-card);
+            border: 1px solid var(--neon-purple);
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            color: var(--text-light);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            transition: all 0.2s;
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        .btn-apprenant:hover {
+            opacity: 0.9;
+            transform: scale(1.02);
+        }
+        /* ... (Styles pour les apprenants 1 à 8) ... */
+        .btn-apprenant.apprenant1 { border-color: var(--neon-blue); background: rgba(0, 245, 255, 0.1); }
+        .btn-apprenant.apprenant2 { border-color: var(--neon-blue-light); background: rgba(0, 184, 255, 0.1); }
+        .btn-apprenant.apprenant3 { border-color: var(--neon-purple); background: rgba(138, 43, 226, 0.1); }
+        .btn-apprenant.apprenant4 { border-color: var(--neon-purple-light); background: rgba(179, 136, 255, 0.1); }
+        .btn-apprenant.apprenant5 { border-color: var(--neon-green); background: rgba(0, 255, 136, 0.1); }
+        .btn-apprenant.apprenant6 { border-color: var(--neon-orange); background: rgba(255, 136, 0, 0.1); }
+        .btn-apprenant.apprenant7 { border-color: var(--neon-pink); background: rgba(255, 102, 178, 0.1); }
+        .btn-apprenant.apprenant8 { border-color: var(--neon-yellow); background: rgba(255, 255, 0, 0.1); }
+        /* ... (Fin Styles pour les apprenants 1 à 8) ... */
+        .btn-apprenant.active {
+            opacity: 1;
+            transform: scale(1.05);
+        }
+        .btn-delete-apprenant {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #ff4444;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 10px;
+            cursor: pointer;
+            display: none;
+        }
+        .btn-apprenant:hover .btn-delete-apprenant {
+            display: block;
+        }
+        .apprenant-name {
+            margin-right: 5px;
+            outline: none;
+            user-select: text;
+            cursor: text;
+        }
+        .apprenant-name[contenteditable="true"] {
+            border-bottom: 1px dashed var(--neon-blue);
+            padding: 0 2px;
+        }
+        .btn-rename {
+            margin-left: 5px;
+            background: none;
+            border: none;
+            color: var(--neon-blue);
+            cursor: pointer;
+            font-size: 12px;
+        }
+        /* Boutons pour les grilles d'évaluation */
+        .evaluation-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        .btn-evaluation {
+            padding: 8px 15px;
+            background: var(--bg-card);
+            border: 1px solid var(--neon-blue);
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            color: var(--text-light);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+        .btn-evaluation:hover {
+            opacity: 0.9;
+            transform: scale(1.02);
+        }
+        .btn-evaluation.formative {
+            border-color: var(--neon-blue);
+            background: rgba(0, 245, 255, 0.1);
+        }
+        .btn-evaluation.sommative {
+            border-color: var(--neon-purple);
+            background: rgba(138, 43, 226, 0.1);
+        }
+        /* Séparateur visuel entre les groupes de boutons */
+        .separator {
+            width: 100%;
+            height: 1px;
+            background: rgba(138, 43, 226, 0.3);
+            margin: 15px 0;
+        }
+        /* Bandeau statistiques horizontal */
+        .stats-bandeau {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0;
+            overflow-x: auto;
+            padding-bottom: 10px;
+        }
+        .stat-apprenant {
+            flex: 1;
+            min-width: 200px;
+            background: var(--bg-card);
+            padding: 12px;
+            border-radius: var(--border-radius);
+            border-top: 3px solid;
+        }
+        /* ... (Styles pour les stats 1 à 8) ... */
+        .stat-apprenant.apprenant1 { border-top-color: var(--neon-blue); }
+        .stat-apprenant.apprenant2 { border-top-color: var(--neon-blue-light); }
+        .stat-apprenant.apprenant3 { border-top-color: var(--neon-purple); }
+        .stat-apprenant.apprenant4 { border-top-color: var(--neon-purple-light); }
+        .stat-apprenant.apprenant5 { border-top-color: var(--neon-green); }
+        .stat-apprenant.apprenant6 { border-top-color: var(--neon-orange); }
+        .stat-apprenant.apprenant7 { border-top-color: var(--neon-pink); }
+        .stat-apprenant.apprenant8 { border-top-color: var(--neon-yellow); }
+        /* ... (Fin Styles pour les stats 1 à 8) ... */
+        .stat-apprenant h4 {
+            color: var(--neon-purple);
+            margin: 0 0 10px 0;
+            font-size: 14px;
+            text-align: center;
+        }
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            font-size: 12px;
+        }
+        .progress-line {
+            display: flex;
+            margin-bottom: 5px;
+            align-items: center;
+        }
+        .progress-label {
+            width: 80px;
+            font-size: 11px;
+            color: var(--text-gray);
+        }
+        .progress-container {
+            flex: 1;
+            height: 8px;
+            background: rgba(20, 20, 40, 0.5);
+            border-radius: var(--border-radius);
+            margin: 0 5px;
+            overflow: hidden;
+        }
+        .progress-bar {
+            height: 100%;
+            border-radius: var(--border-radius);
+            transition: width 0.3s ease;
+        }
+        .progress-afaire { background: var(--neon-blue); }
+        .progress-encours { background: var(--neon-blue-light); }
+        .progress-valider { background: var(--neon-purple); }
+        .progress-termine { background: var(--neon-purple-light); }
+        /* Kanban */
+        .kanban-board {
+            display: flex;
+            gap: 15px;
+            margin: 20px 0;
+            overflow-x: auto;
+            padding-bottom: 10px;
+        }
+        .kanban-column {
+            flex: 1;
+            min-width: 300px;
+            background: var(--bg-card);
+            padding: 0;
+            border-radius: var(--border-radius);
+            height: fit-content;
+        }
+        .kanban-column h3 {
+            text-align: center;
+            color: var(--text-light);
+            margin: 0;
+            padding: 10px;
+            border-radius: var(--border-radius) var(--border-radius) 0 0;
+            font-size: 16px;
+            font-family: 'Montserrat', sans-serif;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+        }
+        .entete-afaire { background-color: var(--neon-blue); }
+        .entete-encours { background-color: var(--neon-blue-light); }
+        .entete-valider { background-color: var(--neon-purple); }
+        .entete-termine { background-color: var(--neon-purple-light); }
+        .contenu-colonne {
+            padding: 15px;
+            min-height: 100px;
+        }
+        .kanban-card {
+            background: rgba(20, 20, 40, 0.4);
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: var(--border-radius);
+            border-left: 4px solid;
+            font-size: 14px;
+            cursor: grab;
+            touch-action: none;
+            transition: all 0.2s;
+            display: block; /* S'assurer que la carte est un bloc */
+        }
+        .kanban-card:active {
+            cursor: grabbing;
+        }
+        .kanban-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        /* ... (Styles pour les cartes 1 à 8) ... */
+        .kanban-card.apprenant1 { border-left-color: var(--neon-blue); }
+        .kanban-card.apprenant2 { border-left-color: var(--neon-blue-light); }
+        .kanban-card.apprenant3 { border-left-color: var(--neon-purple); }
+        .kanban-card.apprenant4 { border-left-color: var(--neon-purple-light); }
+        .kanban-card.apprenant5 { border-left-color: var(--neon-green); }
+        .kanban-card.apprenant6 { border-left-color: var(--neon-orange); }
+        .kanban-card.apprenant7 { border-left-color: var(--neon-pink); }
+        .kanban-card.apprenant8 { border-left-color: var(--neon-yellow); }
+        /* ... (Fin Styles pour les cartes 1 à 8) ... */
+        .kanban-card h4 {
+            margin: 0 0 8px 0;
+            font-size: 15px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+        }
+        .kanban-card p {
+            margin: 5px 0;
+            font-size: 13px;
+            color: var(--text-gray);
+        }
+        .compteur-colonne {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            padding: 2px 8px;
+            margin-left: 8px;
+            font-size: 12px;
+        }
+        .champ {
+            margin-bottom: 0.8em;
+        }
+        .champ-editable {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 0.3em;
+            border: 1px solid #555;
+            border-radius: 4px;
+            margin-bottom: 0.5em;
+            font-family: inherit;
+            font-size: 0.9em;
+            background: rgba(20, 20, 40, 0.6);
+            color: var(--text-light);
+            border: 1px solid var(--neon-purple);
+        }
+        .champ-editable:focus {
+            outline: none;
+            border-color: var(--neon-blue);
+        }
+
+        /* Correction du style pour le champ de titre dans l'en-tête de carte */
+        .card-header .champ-editable {
+            flex-grow: 1;
+            margin: 0 0 0 10px;
+            width: auto;
+            border: none;
+            background: none;
+            padding: 0;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-light);
+            border-radius: 0;
+            margin-bottom: 0;
+        }
+        .kanban-card:not(.collapsed) .card-header .champ-editable {
+            border: 1px solid var(--neon-purple);
+            background: rgba(20, 20, 40, 0.6);
+            padding: 0.3em;
+            border-radius: 4px;
+        }
+        /* FIN STYLE CARTE */
+        .select-assigne {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 0.3em;
+            border: 1px solid #555;
+            border-radius: 4px;
+            font-family: inherit;
+            background: rgba(20, 20, 40, 0.6);
+            color: var(--text-light);
+            border: 1px solid var(--neon-purple);
+        }
+        label {
+            display: block;
+            font-size: 0.9em;
+            color: var(--neon-blue);
+            margin-bottom: 0.2em;
+            font-weight: bold;
+        }
+        /* --- STYLES MODALES (Optimisés pour la hauteur) --- */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            overflow-y: auto;
+        }
+        .modal-content {
+            background-color: var(--bg-dark);
+            margin: 5vh auto;
+            padding: 20px;
+            border-radius: var(--border-radius);
+            width: 95%;
+            max-width: 1100px;
+            max-height: 80vh;
+            overflow-y: auto;
+            font-family: 'Montserrat', sans-serif;
+            border: 2px solid var(--neon-purple);
+            box-shadow: 0 0 20px rgba(138, 43, 226, 0.5);
+            position: relative;
+        }
+        .close {
+            position: sticky;
+            top: 0;
+            right: 15px;
+            font-size: 28px;
+            cursor: pointer;
+            color: var(--text-gray);
+            background: rgba(20, 20, 40, 0.5);
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1001;
+        }
+        .close:hover {
+            color: var(--neon-purple);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 12px;
+            border: 1px solid var(--neon-purple);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+        }
+        th, td {
+            padding: 8px 10px;
+            text-align: left;
+            border-bottom: 1px solid rgba(138, 43, 226, 0.2);
+        }
+        th {
+            color: var(--neon-blue);
+            background: rgba(0, 245, 255, 0.1);
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        /* S'assurer que le select ne soit pas tassé */
+        .status-select {
+            background: var(--bg-dark);
+            color: var(--text-light);
+            border: 1px solid var(--neon-purple);
+            padding: 8px;
+            border-radius: 4px;
+            width: 100%;
+            font-size: 12px;
+            font-family: 'Montserrat', sans-serif;
+            height: auto;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: var(--bg-card);
+            color: var(--text-light);
+            text-decoration: none;
+            border-radius: var(--border-radius);
+            border-left: 3px solid var(--neon-purple);
+            margin: 10px 5px;
+            cursor: pointer;
+            text-align: center;
+            font-size: 14px;
+            font-family: 'Montserrat', sans-serif;
+            transition: all 0.2s;
+        }
+        .btn:hover {
+            background: rgba(20, 20, 40, 0.5);
+        }
+
+        /* Styles de la Modale d'Aide */
+        .help-section {
+            background: rgba(20, 20, 40, 0.5);
+            padding: 15px;
+            border-radius: var(--border-radius);
+            margin-top: 15px;
+            border-left: 4px solid var(--neon-blue);
+        }
+        .help-section h3 {
+            color: var(--neon-blue);
+            border-bottom: 1px dashed var(--neon-purple);
+            padding-bottom: 6px;
+            margin-top: 0;
+            font-size: 16px;
+        }
+        .help-section ul, .help-section ol {
+            padding-left: 18px;
+            margin-top: 8px;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+        .help-section li {
+            margin-bottom: 10px;
+        }
+        /* Représentation des boutons/code dans le texte pour la Modale d'Aide (Clarté accrue) */
+        .btn-representation {
+            display: inline-block;
+            padding: 2px 6px;
+            margin: 0 4px;
+            background-color: var(--neon-purple);
+            color: var(--text-light);
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+        .help-section i {
+            color: var(--neon-blue);
+            margin: 0 5px;
+        }
+        /* FIN STYLES MODALES */
+        /* --- STYLES CARTE (Inchangé) --- */
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        .collapse-toggle {
+            cursor: pointer;
+            color: var(--neon-blue-light);
+            font-size: 16px;
+            transition: transform 0.2s ease-in-out;
+            flex-shrink: 0;
+            margin-left: 8px;
+        }
+        .delete-card-toggle {
+            cursor: pointer;
+            color: #ff6666;
+            font-size: 16px;
+            transition: color 0.2s;
+            flex-shrink: 0;
+            margin-left: 10px;
+        }
+        .delete-card-toggle:hover {
+            color: #ff0000;
+        }
+        /* Masquer les détails par défaut */
+        .kanban-card .card-details {
+            max-height: 500px;
+            opacity: 1;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+        }
+        /* Styles de la carte lorsqu'elle est réduite */
+        .kanban-card.collapsed {
+            padding-bottom: 8px;
+        }
+
+        .kanban-card.collapsed .card-details {
+            max-height: 0;
+            opacity: 0;
+            margin-bottom: 0;
+        }
+        /* Icône basculée vers le bas quand la carte est réduite */
+        .kanban-card.collapsed .collapse-toggle {
+            transform: rotate(180deg);
+        }
+        /* Bouton Ajouter Carte dans colonne */
+        .btn-add-card {
+            width: 100%;
+            box-sizing: border-box;
+            background: rgba(0, 245, 255, 0.1);
+            border: 1px dashed var(--neon-blue);
+            color: var(--neon-blue);
+            margin: 10px 0 0 0;
+            font-weight: bold;
+            border-left: none;
+            transition: background 0.2s, color 0.2s;
+        }
+        .btn-add-card:hover {
+            background: rgba(0, 245, 255, 0.2);
+            color: var(--text-light);
+        }
+        .step-number {
+            background: var(--neon-purple);
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            margin-right: 8px;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header-actions">
+            <h1>📚 Kanban Storybook</h1>
+            <i
+                class="fas fa-question-circle help-icon"
+                onclick="openModal('helpModal')"
+                title="Instructions d'utilisation et aide (Cliquez)"
+            ></i>
+        </div>
+        <div class="apprenant-selector" id="apprenant-selector">
+            </div>
+        <div class="separator"></div>
+        <div class="evaluation-buttons">
+            <button class="btn-evaluation formative" onclick="openModal('formativeModal')">
+                <i class="fas fa-chart-bar"></i> Grille Formative
+            </button>
+            <button class="btn-evaluation sommative" onclick="openModal('sommativeModal')">
+                <i class="fas fa-chart-line"></i> Grille Sommative
+            </button>
+            <button class="btn-evaluation" onclick="reinitialiserCartes()">
+                <i class="fas fa-undo"></i> Réinitialiser les cartes
+            </button>
+        </div>
+        <div class="stats-bandeau" id="stats-bandeau">
+            </div>
+        <div class="kanban-board">
+            <div class="kanban-column" id="todo">
+                <h3 class="entete-afaire">✏️ À faire <span class="compteur-colonne" id="count-todo">0</span></h3>
+                <div class="contenu-colonne" data-statut="À FAIRE">
+                    <button class="btn btn-add-card" onclick="ajouterTache(this.closest('.contenu-colonne').dataset.statut, getActiveApprenantId())">
+                        <i class="fas fa-plus"></i> Ajouter une carte
+                    </button>
+                </div>
+            </div>
+            <div class="kanban-column" id="in-progress">
+                <h3 class="entete-encours">🔄 En cours <span class="compteur-colonne" id="count-in-progress">0</span></h3>
+                <div class="contenu-colonne" data-statut="EN COURS">
+                    <button class="btn btn-add-card" onclick="ajouterTache(this.closest('.contenu-colonne').dataset.statut, getActiveApprenantId())">
+                        <i class="fas fa-plus"></i> Ajouter une carte
+                    </button>
+                </div>
+            </div>
+            <div class="kanban-column" id="to-validate">
+                <h3 class="entete-valider">🔍 À valider <span class="compteur-colonne" id="count-to-validate">0</span></h3>
+                <div class="contenu-colonne" data-statut="À VALIDER">
+                    <button class="btn btn-add-card" onclick="ajouterTache(this.closest('.contenu-colonne').dataset.statut, getActiveApprenantId())">
+                        <i class="fas fa-plus"></i> Ajouter une carte
+                    </button>
+                </div>
+            </div>
+            <div class="kanban-column" id="done">
+                <h3 class="entete-termine">✅ Terminé <span class="compteur-colonne" id="count-done">0</span></h3>
+                <div class="contenu-colonne" data-statut="TERMINÉ">
+                    <button class="btn btn-add-card" onclick="ajouterTache(this.closest('.contenu-colonne').dataset.statut, getActiveApprenantId())">
+                        <i class="fas fa-plus"></i> Ajouter une carte
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="helpModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('helpModal')">&times;</span>
+            <h2>💡 Aide & Instructions d'Utilisation</h2>
+            <div class="help-section">
+                <h3>Gestion des Cartes de Tâches <i class="fas fa-tasks"></i></h3>
+                <ul>
+                    <li>
+                        <strong>Ajouter une carte :</strong> Cliquez sur le bouton <code class="btn-representation">+ Ajouter une carte</code> présent au bas de chaque colonne. La nouvelle tâche sera automatiquement assignée à l'**Apprenant** actuellement sélectionné.
+                    </li>
+                    <li>
+                        <strong>Supprimer une carte :</strong> Cliquez sur l'icône **corbeille** (<i class="fas fa-trash-alt"></i>) en haut à droite de la carte. Une confirmation sera demandée.
+                    </li>
+                    <li>
+                        <strong>Impact sur l'Évaluation Formative :</strong> Si vous supprimez une des **12 tâches initiales** (liées aux critères 1 à 12), le critère correspondant dans la grille formative de cet apprenant sera automatiquement marqué comme <code class="btn-representation">Supprimée</code>. Les cartes supplémentaires (étape 13 et suivantes) ne sont pas liées aux critères fixes de la grille.
+                    </li>
+                    <li>
+                        <strong>Réinitialiser toutes les cartes :</strong> Le bouton <code class="btn-evaluation"><i class="fas fa-undo"></i> Réinitialiser les cartes</code> remet toutes les cartes de *tous* les apprenants dans la colonne "À faire" et garantit que chaque apprenant possède **exactement 12 tâches de base**. Le statut <code class="btn-representation">Supprimée</code> est également effacé de la grille formative.
+                    </li>
+                </ul>
+            </div>
+
+            <div class="help-section">
+                <h3>Gestion des Apprenants <i class="fas fa-user-friends"></i></h3>
+                <p>Les boutons Apprenant en haut vous permettent de gérer votre liste :</p>
+                <ul>
+                    <li>
+                        <strong>Ajouter un apprenant :</strong> Cliquez sur le bouton <code class="btn-representation"><i class="fas fa-plus"></i> Ajouter un apprenant</code> pour créer un nouvel apprenant avec ses 12 tâches initiales.
+                    </li>
+                    <li>
+                        <strong>Modifier le nom :</strong>
+                        <ol>
+                            <li>Cliquez sur l'icône **crayon** (<i class="fas fa-pen"></i>) à côté du nom.</li>
+                            <li>Modifiez le nom directement.</li>
+                            <li>Cliquez en dehors du champ ou appuyez sur **Entrée** pour valider.</li>
+                        </ol>
+                    </li>
+                    <li>
+                        <strong>Supprimer un apprenant :</strong> Survolez le bouton de l'apprenant, puis cliquez sur l'icône **croix** (<i class="fas fa-times"></i>) qui apparaît en haut à droite. Attention : cette action supprime toutes ses cartes de façon définitive.
+                    </li>
+                </ul>
+            </div>
+
+            <div class="help-section">
+                <h3>Navigation & Interaction <i class="fas fa-mouse-pointer"></i></h3>
+                <ul>
+                    <li>
+                        <strong>Glisser-Déposer :</strong> Utilisez le glisser-déposer pour déplacer les cartes entre les colonnes.
+                    </li>
+                    <li>
+                        <strong>Édition :</strong> Éditez les champs (Titre, Description, Assigné) directement sur les cartes.
+                    </li>
+                    <li>
+                        <strong>Réduire les cartes :</strong> Cliquez sur le chevron (<i class="fas fa-chevron-up"></i>) pour masquer/afficher les détails de la carte.
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div id="formativeModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('formativeModal')">&times;</span>
+            <h2>📊 Évaluation Formative (12 critères)</h2>
+            <table id="formative-table">
+                <thead>
+                    <tr>
+                        <th>Critères</th>
+                        </tr>
+                </thead>
+                <tbody>
+                    <tr><td>1. Participation au tour de table</td></tr>
+                    <tr><td>2. Compréhension des objectifs</td></tr>
+                    <tr><td>3. Maîtrise de Gemini</td></tr>
+                    <tr><td>4. Formulation de prompts clairs</td></tr>
+                    <tr><td>5. Originalité du thème</td></tr>
+                    <tr><td>6. Pertinence des personnages</td></tr>
+                    <tr><td>7. Cohérence de la structure</td></tr>
+                    <tr><td>8. Utilisation des feedbacks</td></tr>
+                    <tr><td>9. Qualité du storybook</td></tr>
+                    <tr><td>10. Clarté de la présentation</td></tr>
+                    <tr><td>11. Respect des consignes (8 pages max)</td></tr>
+                    <tr><td>12. Autonomie dans l'utilisation des outils</td></tr>
+                </tbody>
+            </table>
+            <p style="font-size: 11px; margin-top: 15px;">
+                <strong>Légende</strong>:
+                <br>- <code class="btn-representation" style="background-color: var(--neon-blue);">Acquis</code>: Compétence maîtrisée sans aide.
+                <br>- <code class="btn-representation" style="background-color: var(--neon-purple);">En cours</code>: Besoin d'accompagnement ponctuel.
+                <br>- <code class="btn-representation" style="background-color: #ff6666;">Non acquis</code>: À retravailler prioritairement.
+                <br>- <code class="btn-representation" style="background-color: #555;">Supprimée</code>: La tâche correspondante a été retirée du Kanban.
+            </p>
+        </div>
+    </div>
+    <div id="sommativeModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('sommativeModal')">&times;</span>
+            <h2>📈 Évaluation Sommative (4 objectifs)</h2>
+            <table id="sommative-table">
+                <thead>
+                    <tr>
+                        <th>Critères</th>
+                        </tr>
+                </thead>
+                <tbody>
+                    <tr><td>1. Conception d'un projet complet avec Gemini</td></tr>
+                    <tr><td>2. Formulation de prompts précis et adaptés</td></tr>
+                    <tr><td>3. Présentation claire et structurée du projet</td></tr>
+                    <tr><td>4. Respect des 4 objectifs pédagogiques (scénarisation)</td></tr>
+                </tbody>
+            </table>
+            <p style="font-size: 11px; margin-top: 15px;">
+                <strong>Légende</strong>:
+                <br>- <code class="btn-representation" style="background-color: var(--neon-blue);">Excellent</code>: Objectif dépassé.
+                <br>- <code class="btn-representation" style="background-color: var(--neon-purple);">Bon</code>: Objectif atteint.
+                <br>- <code class="btn-representation" style="background-color: #ff6666;">À améliorer</code>: Objectif partiellement atteint.
+            </p>
+        </div>
+    </div>
+    <script>
+        const STATUTS = [
+            { id: 'À FAIRE', libelle: 'À faire' },
+            { id: 'EN COURS', libelle: 'En cours' },
+            { id: 'À VALIDER', libelle: 'À valider' },
+            { id: 'TERMINÉ', libelle: 'Terminé' }
+        ];
+        let APPRENANTS = JSON.parse(localStorage.getItem('APPRENANTS')) || [
+            { id: '1', nom: 'Apprenant 1' },
+            { id: '2', nom: 'Apprenant 2' },
+            { id: '3', nom: 'Apprenant 3' },
+            { id: '4', nom: 'Apprenant 4' }
+        ];
+        let ASSIGNES = ['Non assigné'].concat(APPRENANTS.map(a => a.nom));
+        let taches = JSON.parse(localStorage.getItem('tachesStorybook')) || [];
+        // NOUVEAU: Stockage des statuts d'évaluation formative
+        let EVALUATIONS_FORMATIVES = JSON.parse(localStorage.getItem('EVALUATIONS_FORMATIVES')) || {};
+        const EVALUATION_OPTIONS_FORMATIVE = ['Acquis', 'En cours', 'Non acquis', 'Supprimée'];
+        const EVALUATION_OPTIONS_SOMMATIVE = ['Excellent', 'Bon', 'À améliorer'];
+        const COULEURS_APPRENANTS = [
+            '--neon-blue', '--neon-blue-light', '--neon-purple', '--neon-purple-light',
+            '--neon-green', '--neon-orange', '--neon-pink', '--neon-yellow'
+        ];
+
+        // Nouvelle fonction pour créer les 12 tâches par défaut
+        function creerNouvelleTacheDefaut(apprenant) {
+            let tasks = [];
+            const defaultTasks = [
+                { etape: 1, titre: "Tour de table", description: "Présenter ses compétences et attentes." },
+                { etape: 2, titre: "Lire la fiche scénarisation", description: "Noter les 4 objectifs principaux." },
+                { etape: 3, titre: "Découvrir Gemini", description: "Tester 3 prompts simples." },
+                { etape: 4, titre: "Exercice guidé", description: "Créer un prompt pour générer une idée d'histoire." },
+                { etape: 5, titre: "Définir le thème", description: "Choisir parmi: Amitié, Courage, Entraide, Persévérance." },
+                { etape: 6, titre: "Créer les personnages", description: "1 héros + 1 mentor + 1 antagoniste." },
+                { etape: 7, titre: "Structurer le récit", description: "Début/Milieu/Fin avec 1 phrase par partie." },
+                { etape: 8, titre: "Générer le storybook", description: "Utiliser Gemini pour créer texte + images." },
+                { etape: 9, titre: "Partager ses progrès", description: "Présenter son thème, personnages et structure en 2 min." },
+                { etape: 10, titre: "Recevoir des feedbacks", description: "Noter 2 conseils de l'animateur ou des pairs." },
+                { etape: 11, titre: "Relire et corriger", description: "Vérifier: orthographe, cohérence, originalité." },
+                { etape: 12, titre: "Présenter le projet", description: "Préparer une présentation de 5-10 min." },
+            ];
+
+            // Pour garantir des IDs uniques même après une réinitialisation
+            const maxCurrentId = taches.length > 0 ? Math.max(...taches.map(t => t.id)) : 0;
+            const maxNewId = APPRENANTS.reduce((max, a) => Math.max(max, ...taches.filter(t => t.apprenant === a.id).map(t => t.id)), maxCurrentId) + 1;
+            let id = maxNewId;
+            defaultTasks.forEach((task) => {
+                tasks.push({
+                    id: id++,
+                    titre: task.titre,
+                    description: task.description,
+                    statut: "À FAIRE",
+                    assigne: apprenant.nom,
+                    apprenant: apprenant.id,
+                    etape: task.etape, // Etape 1-12 est le lien vers le critère
+                    isCoreTask: true // Marqueur pour les tâches par défaut
+                });
+            });
+
+            return tasks;
+        }
+        // Fonction d'initialisation des tâches
+        function initTaches() {
+            if (taches.length === 0) {
+                APPRENANTS.forEach(apprenant => {
+                    taches.push(...creerNouvelleTacheDefaut(apprenant));
+                });
+                localStorage.setItem('tachesStorybook', JSON.stringify(taches));
+                localStorage.setItem('APPRENANTS', JSON.stringify(APPRENANTS));
+                localStorage.setItem('EVALUATIONS_FORMATIVES', JSON.stringify(EVALUATIONS_FORMATIVES));
+            }
+        }
+        initTaches(); // Appel initial pour s'assurer que les tâches existent
+        // Helper pour l'apprenant actif
+        function getActiveApprenantId() {
+            const activeBtn = document.querySelector('.btn-apprenant.active');
+            return activeBtn ? activeBtn.dataset.apprenant : APPRENANTS[0]?.id || '1';
+        }
+        // --- CRUD TACHES ---
+        function creerCarteTache(tache) {
+            const carte = document.createElement('div');
+            carte.className = `kanban-card apprenant${tache.apprenant} collapsed`;
+            carte.dataset.idTache = tache.id;
+            const titreInput = creerChampEditable(tache, 'titre', tache.titre);
+            const descriptionInput = creerChampEditable(tache, 'description', tache.description, 'textarea');
+            const assigneSelect = creerSelectAssigne(tache);
+
+            const collapseToggle = document.createElement('i');
+            collapseToggle.className = 'fas fa-chevron-up collapse-toggle';
+
+            // Bouton de suppression (NOUVEAU)
+            const deleteBtn = document.createElement('i');
+            deleteBtn.className = 'fas fa-trash-alt delete-card-toggle';
+            deleteBtn.title = 'Supprimer la carte';
+            deleteBtn.onclick = function(event) {
+                event.stopPropagation();
+                supprimerTache(tache.id);
+            };
+            const header = document.createElement('div');
+            header.className = 'card-header';
+
+            const titleContainer = document.createElement('div');
+            titleContainer.style.display = 'flex';
+            titleContainer.style.alignItems = 'center';
+            titleContainer.style.flexGrow = '1';
+            titleContainer.style.marginRight = '8px';
+            titleContainer.innerHTML = `<div class="step-number">${tache.etape}</div>`;
+            titleContainer.appendChild(titreInput);
+
+            const actionContainer = document.createElement('div');
+            actionContainer.style.display = 'flex';
+            actionContainer.style.alignItems = 'center';
+            actionContainer.appendChild(collapseToggle);
+            actionContainer.appendChild(deleteBtn);
+
+            header.appendChild(titleContainer);
+            header.appendChild(actionContainer);
+            const details = document.createElement('div');
+            details.className = 'card-details';
+            details.innerHTML = `
+                <div class="champ">
+                    <label>Description</label>
+                </div>
+                <div class="champ">
+                    <label>Assigné à</label>
+                </div>
+            `;
+            details.children[0].appendChild(descriptionInput);
+            details.children[1].appendChild(assigneSelect);
+            carte.appendChild(header);
+            carte.appendChild(details);
+            collapseToggle.onclick = function(event) {
+                event.stopPropagation();
+                toggleCardDetails(carte);
+            };
+
+            return carte;
+        }
+        function ajouterTache(statut, apprenantId) {
+            const apprenant = APPRENANTS.find(a => a.id === apprenantId);
+            if (!apprenant) return;
+            // Trouver le prochain ID et le prochain numéro d'étape pour l'apprenant
+            const maxId = taches.length > 0 ? Math.max(...taches.map(t => t.id)) : 0;
+            // Trouve le max et ajoute 1. Si aucune tâche, utilise 13 pour la première tâche supp.
+            const maxEtape = taches.filter(t => t.apprenant === apprenantId).reduce((max, t) => Math.max(max, t.etape || 0), 12);
+
+            const nouvelleTache = {
+                id: maxId + 1,
+                titre: `Tâche Supplémentaire ${maxEtape + 1}`,
+                description: "Nouvelle tâche à définir. Double-cliquez pour éditer.",
+                statut: statut,
+                assigne: apprenant.nom,
+                apprenant: apprenant.id,
+                etape: maxEtape + 1,
+                isCoreTask: false
+            };
+            taches.push(nouvelleTache);
+            localStorage.setItem('tachesStorybook', JSON.stringify(taches));
+
+            afficherTaches();
+            // Assurez-vous que la nouvelle carte est visible
+            filterByApprenant(apprenantId);
+            mettreAJourGrillesEvaluation(); // Mise à jour après création de carte (synchronisation)
+        }
+        function supprimerTache(idTache) {
+            if (confirm("Voulez-vous vraiment supprimer cette carte ? Cette action est définitive. Si c'est une tâche de base (étape 1 à 12), l'évaluation formative sera marquée 'Supprimée'.")) {
+                const index = taches.findIndex(t => t.id == idTache);
+                if (index !== -1) {
+                    const tache = taches[index];
+
+                    // 1. Mise à jour de l'évaluation si c'est une tâche principale (1-12)
+                    if (tache.isCoreTask && tache.etape >= 1 && tache.etape <= 12) {
+                        const apprenantId = tache.apprenant;
+                        const critere = tache.etape;
+
+                        if (!EVALUATIONS_FORMATIVES[apprenantId]) {
+                            EVALUATIONS_FORMATIVES[apprenantId] = {};
+                        }
+
+                        EVALUATIONS_FORMATIVES[apprenantId][critere] = 'Supprimée';
+                        localStorage.setItem('EVALUATIONS_FORMATIVES', JSON.stringify(EVALUATIONS_FORMATIVES));
+                    }
+                    // 2. Suppression de la tâche
+                    taches.splice(index, 1);
+                    localStorage.setItem('tachesStorybook', JSON.stringify(taches));
+
+                    // 3. Réaffichage
+                    afficherTaches();
+                    mettreAJourGrillesEvaluation(); // Mise à jour après suppression
+                }
+            }
+        }
+
+        function reinitialiserCartes() {
+            if (confirm("ATTENTION : Voulez-vous vraiment réinitialiser toutes les cartes pour TOUS les apprenants ?\n\n- Toutes les cartes seront supprimées et remplacées par les 12 tâches de base.\n- Toutes les cartes seront placées dans 'À faire'.\n- Le statut 'Supprimée' dans l'évaluation formative sera effacé.")) {
+
+                // 1. Réinitialiser les tâches existantes
+                const tachesReinitialisees = [];
+                APPRENANTS.forEach(apprenant => {
+                    tachesReinitialisees.push(...creerNouvelleTacheDefaut(apprenant));
+                });
+                taches = tachesReinitialisees;
+                localStorage.setItem('tachesStorybook', JSON.stringify(taches));
+
+                // 2. Réinitialiser les évaluations formatives (enlever "Supprimée")
+                EVALUATIONS_FORMATIVES = {};
+                localStorage.setItem('EVALUATIONS_FORMATIVES', JSON.stringify(EVALUATIONS_FORMATIVES));
+                // 3. Afficher et informer
+                afficherTaches();
+                mettreAJourGrillesEvaluation();
+                alert("Toutes les cartes ont été réinitialisées dans 'À faire' (12 tâches de base par apprenant).");
+            }
+        }
+        // --- LOGIQUE D'ÉVALUATION ---
+        function creerSelectEvaluation(apprenantId, critereIndex, type, initialValue) {
+            const select = document.createElement('select');
+            select.className = 'status-select';
+            const options = type === 'formative' ? EVALUATION_OPTIONS_FORMATIVE : EVALUATION_OPTIONS_SOMMATIVE;
+
+            options.forEach(optionText => {
+                const option = document.createElement('option');
+                option.value = optionText;
+                option.textContent = optionText;
+                // Si l'évaluation est formative et que la tâche est "Supprimée", la présélectionner
+                option.selected = optionText === initialValue;
+                select.appendChild(option);
+            });
+            select.addEventListener('change', () => {
+                if (type === 'formative') {
+                    mettreAJourEvaluationFormative(apprenantId, critereIndex, select.value);
+                }
+            });
+            return select;
+        }
+        function mettreAJourEvaluationFormative(apprenantId, critereIndex, valeur) {
+            if (!EVALUATIONS_FORMATIVES[apprenantId]) {
+                EVALUATIONS_FORMATIVES[apprenantId] = {};
+            }
+            EVALUATIONS_FORMATIVES[apprenantId][critereIndex] = valeur;
+            localStorage.setItem('EVALUATIONS_FORMATIVES', JSON.stringify(EVALUATIONS_FORMATIVES));
+            // Mettre à jour l'affichage si nécessaire, mais en principe la sélection est faite.
+        }
+        function mettreAJourGrillesEvaluation() {
+            // Table Formative
+            const formativeTable = document.getElementById('formative-table');
+            const formativeThead = formativeTable.querySelector('thead tr');
+            const formativeRows = formativeTable.querySelectorAll('tbody tr');
+            // Nettoyer les colonnes d'en-tête existantes (sauf la première)
+            while (formativeThead.children.length > 1) {
+                formativeThead.removeChild(formativeThead.lastChild);
+            }
+            formativeRows.forEach(row => {
+                while (row.children.length > 1) {
+                    row.removeChild(row.lastChild);
+                }
+            });
+            // Ajouter les colonnes pour chaque apprenant
+            APPRENANTS.forEach(apprenant => {
+                // Thead
+                const thFormative = document.createElement('th');
+                thFormative.textContent = apprenant.nom;
+                formativeThead.appendChild(thFormative);
+                // Tbody Formative
+                formativeRows.forEach((row, index) => {
+                    const critereIndex = index + 1; // 1-based index for criteria
+                    // Charger la valeur sauvegardée ou par défaut 'En cours'
+                    const savedValue = EVALUATIONS_FORMATIVES[apprenant.id] ? EVALUATIONS_FORMATIVES[apprenant.id][critereIndex] : 'En cours';
+
+                    const td = document.createElement('td');
+                    td.appendChild(creerSelectEvaluation(apprenant.id, critereIndex, 'formative', savedValue));
+                    row.appendChild(td);
+                });
+            });
+
+            // Logique Sommative (inchangée)
+            const sommativeTable = document.getElementById('sommative-table');
+            const sommativeThead = sommativeTable.querySelector('thead tr');
+            const sommativeRows = sommativeTable.querySelectorAll('tbody tr');
+
+            while (sommativeThead.children.length > 1) { sommativeThead.removeChild(sommativeThead.lastChild); }
+            sommativeRows.forEach(row => {
+                while (row.children.length > 1) { row.removeChild(row.lastChild); }
+            });
+
+            APPRENANTS.forEach(apprenant => {
+                const thSommative = document.createElement('th');
+                thSommative.textContent = apprenant.nom;
+                sommativeThead.appendChild(thSommative);
+                sommativeRows.forEach(row => {
+                    const td = document.createElement('td');
+                    // Utiliser 'Bon' comme valeur par défaut
+                    td.appendChild(creerSelectEvaluation(apprenant.id, row.rowIndex, 'sommative', 'Bon'));
+                    row.appendChild(td);
+                });
+            });
+        }
+
+        // --- LOGIQUE DE BASE ET INITIALISATION (légèrement modifiée) ---
+
+        function creerChampEditable(tache, champ, valeurInitiale, type = 'text') {
+            const input = document.createElement(type === 'textarea' ? 'textarea' : 'input');
+            input.type = type;
+            input.value = valeurInitiale || '';
+            input.className = 'champ-editable';
+            if (type === 'textarea') {
+                input.style.minHeight = '40px';
+                input.style.resize = 'vertical';
+            }
+            input.addEventListener('change', () => {
+                mettreAJourTache(tache.id, champ, input.value);
+            });
+            return input;
+        }
+        function creerSelectAssigne(tache) {
+            const select = document.createElement('select');
+            select.className = 'select-assigne';
+            ASSIGNES.forEach(personne => {
+                const option = document.createElement('option');
+                option.value = personne;
+                option.textContent = personne;
+                option.selected = tache.assigne === personne;
+                select.appendChild(option);
+            });
+            select.addEventListener('change', () => {
+                mettreAJourTache(tache.id, 'assigne', select.value);
+            });
+            return select;
+        }
+        function toggleCardDetails(carte) {
+            carte.classList.toggle('collapsed');
+        }
+        function mettreAJourTache(id, champ, valeur) {
+            const index = taches.findIndex(t => t.id == id);
+            if (index !== -1) {
+                taches[index][champ] = valeur;
+                localStorage.setItem('tachesStorybook', JSON.stringify(taches));
+            }
+        }
+        function mettreAJourStatutTache(id, nouveauStatut) {
+            const index = taches.findIndex(t => t.id == id);
+            if (index !== -1) {
+                taches[index].statut = nouveauStatut;
+                localStorage.setItem('tachesStorybook', JSON.stringify(taches));
+            }
+        }
+        function filterByApprenant(apprenantId) {
+            document.querySelectorAll('.btn-apprenant').forEach(b => b.classList.remove('active'));
+            const activeBtn = document.querySelector(`.btn-apprenant[data-apprenant="${apprenantId}"]`);
+            if (activeBtn) activeBtn.classList.add('active');
+            document.querySelectorAll('.kanban-card').forEach(card => {
+                card.style.display = card.classList.contains(`apprenant${apprenantId}`) ? 'block' : 'none';
+            });
+            updateStatsBandeau();
+            mettreAJourCompteurs();
+        }
+        function initSortable() {
+            document.querySelectorAll('.contenu-colonne').forEach(contenu => {
+                new Sortable(contenu, {
+                    group: 'taches',
+                    animation: 150,
+                    filter: '.btn-add-card', // Empêche de glisser le bouton d'ajout
+                    onEnd: function(evt) {
+                        const idTache = evt.item.dataset.idTache;
+                        const nouveauStatut = evt.to.dataset.statut;
+                        mettreAJourStatutTache(idTache, nouveauStatut);
+                        afficherTaches();
+                    }
+                });
+            });
+        }
+        function mettreAJourCompteurs() {
+            document.querySelectorAll('.kanban-column').forEach(colonne => {
+                const contenu = colonne.querySelector('.contenu-colonne');
+                const compteur = colonne.querySelector('.compteur-colonne');
+                // Ne compter que les cartes (pas le bouton d'ajout) qui sont visibles
+                const visibleCards = Array.from(contenu.children).filter(el => el.classList.contains('kanban-card') && el.style.display !== 'none');
+                compteur.textContent = visibleCards.length;
+            });
+        }
+        function updateStatsBandeau() {
+            const bandeau = document.getElementById('stats-bandeau');
+            bandeau.innerHTML = '';
+            APPRENANTS.forEach(apprenant => {
+                const statCard = document.createElement('div');
+                statCard.className = `stat-apprenant apprenant${apprenant.id}`;
+                const todoCount = taches.filter(t => t.apprenant === apprenant.id && t.statut === 'À FAIRE').length;
+                const inProgressCount = taches.filter(t => t.apprenant === apprenant.id && t.statut === 'EN COURS').length;
+                const toValidateCount = taches.filter(t => t.apprenant === apprenant.id && t.statut === 'À VALIDER').length;
+                const doneCount = taches.filter(t => t.apprenant === apprenant.id && t.statut === 'TERMINÉ').length;
+                const total = todoCount + inProgressCount + toValidateCount + doneCount;
+                const todoPercent = total > 0 ? (todoCount / total) * 100 : 0;
+                const inProgressPercent = total > 0 ? (inProgressCount / total) * 100 : 0;
+                const toValidatePercent = total > 0 ? (toValidateCount / total) * 100 : 0;
+                const donePercent = total > 0 ? (doneCount / total) * 100 : 0;
+                statCard.innerHTML = `
+                    <h4>${apprenant.nom}</h4>
+                    <div class="progress-line">
+                        <span class="progress-label">À faire</span>
+                        <div class="progress-container">
+                            <div class="progress-bar progress-afaire" style="width: ${todoPercent}%"></div>
+                        </div>
+                        <span>${todoCount}</span>
+                    </div>
+                    <div class="progress-line">
+                        <span class="progress-label">En cours</span>
+                        <div class="progress-container">
+                            <div class="progress-bar progress-encours" style="width: ${inProgressPercent}%"></div>
+                        </div>
+                        <span>${inProgressCount}</span>
+                    </div>
+                    <div class="progress-line">
+                        <span class="progress-label">À valider</span>
+                        <div class="progress-container">
+                            <div class="progress-bar progress-valider" style="width: ${toValidatePercent}%"></div>
+                        </div>
+                        <span>${toValidateCount}</span>
+                    </div>
+                    <div class="progress-line">
+                        <span class="progress-label">Terminé</span>
+                        <div class="progress-container">
+                            <div class="progress-bar progress-termine" style="width: ${donePercent}%"></div>
+                        </div>
+                        <span>${doneCount}</span>
+                    </div>
+                `;
+                bandeau.appendChild(statCard);
+            });
+        }
+        function afficherTaches() {
+            document.querySelectorAll('.contenu-colonne').forEach(contenu => {
+                // Récupère et garde le bouton d'ajout de carte
+                const btnAjout = contenu.querySelector('.btn-add-card');
+                contenu.innerHTML = '';
+                if(btnAjout) {
+                    contenu.appendChild(btnAjout);
+                }
+            });
+
+            const activeApprenantId = getActiveApprenantId();
+            // Ajoute les cartes au début des conteneurs
+            taches.forEach(tache => {
+                const carte = creerCarteTache(tache);
+                const colonne = document.querySelector(`.contenu-colonne[data-statut="${tache.statut}"]`);
+                if (colonne) {
+                    // Insère la carte juste avant le bouton "Ajouter une carte"
+                    const btnAjout = colonne.querySelector('.btn-add-card');
+                    colonne.insertBefore(carte, btnAjout);
+                    // Affiche seulement les cartes de l'apprenant actif
+                    carte.style.display = tache.apprenant === activeApprenantId ? 'block' : 'none';
+                }
+            });
+            mettreAJourCompteurs();
+            updateStatsBandeau();
+        }
+        function ajouterApprenant() {
+            const nextId = APPRENANTS.length > 0 ? (Math.max(...APPRENANTS.map(a => parseInt(a.id))) + 1).toString() : '1';
+            const nouveauNom = `Apprenant ${nextId}`;
+            const nouvelApprenant = { id: nextId, nom: nouveauNom };
+            APPRENANTS.push(nouvelApprenant);
+
+            ASSIGNES = ['Non assigné'].concat(APPRENANTS.map(a => a.nom));
+
+            // Ajouter les 12 cartes pour le nouvel apprenant
+            taches.push(...creerNouvelleTacheDefaut(nouvelApprenant));
+
+            // Mettre à jour le localStorage et l'affichage
+            localStorage.setItem('tachesStorybook', JSON.stringify(taches));
+            localStorage.setItem('APPRENANTS', JSON.stringify(APPRENANTS));
+            afficherApprenants();
+            afficherTaches();
+            filterByApprenant(nextId);
+            mettreAJourGrillesEvaluation();
+        }
+        function supprimerApprenant(apprenantId) {
+            const apprenant = APPRENANTS.find(a => a.id === apprenantId);
+            if (confirm(`Voulez-vous vraiment supprimer l'apprenant "${apprenant.nom}" et toutes ses cartes ? ATTENTION : Cette action est irréversible.`)) {
+                taches = taches.filter(tache => tache.apprenant !== apprenantId);
+                localStorage.setItem('tachesStorybook', JSON.stringify(taches));
+                // Supprimer l'apprenant de la liste
+                const index = APPRENANTS.findIndex(a => a.id === apprenantId);
+                if (index > -1) {
+                    APPRENANTS.splice(index, 1);
+                }
+
+                // Supprimer ses évaluations
+                delete EVALUATIONS_FORMATIVES[apprenantId];
+                localStorage.setItem('EVALUATIONS_FORMATIVES', JSON.stringify(EVALUATIONS_FORMATIVES));
+                ASSIGNES = ['Non assigné'].concat(APPRENANTS.map(a => a.nom));
+                localStorage.setItem('APPRENANTS', JSON.stringify(APPRENANTS));
+                // Réafficher les tâches et les apprenants
+                afficherApprenants();
+                afficherTaches();
+                filterByApprenant(APPRENANTS[0]?.id || '1'); // Filtre sur le premier apprenant restant
+                mettreAJourGrillesEvaluation();
+            }
+        }
+        function renommerApprenant(apprenantId, nouveauNom) {
+            const index = APPRENANTS.findIndex(a => a.id === apprenantId);
+            if (index > -1) {
+                const ancienNom = APPRENANTS[index].nom;
+                APPRENANTS[index].nom = nouveauNom;
+
+                ASSIGNES = ['Non assigné'].concat(APPRENANTS.map(a => a.nom));
+                // Mettre à jour les tâches
+                taches.forEach(tache => {
+                    if (tache.apprenant === apprenantId) {
+                        tache.assigne = nouveauNom;
+                    }
+                });
+                localStorage.setItem('tachesStorybook', JSON.stringify(taches));
+                localStorage.setItem('APPRENANTS', JSON.stringify(APPRENANTS));
+                // Mettre à jour l'affichage
+                afficherApprenants();
+                afficherTaches();
+                mettreAJourGrillesEvaluation();
+            }
+        }
+        function afficherApprenants() {
+            const selector = document.getElementById('apprenant-selector');
+            selector.innerHTML = '';
+            APPRENANTS.forEach(apprenant => {
+                const btnApprenant = document.createElement('button');
+                btnApprenant.className = `btn-apprenant apprenant${apprenant.id}`;
+                btnApprenant.dataset.apprenant = apprenant.id;
+                btnApprenant.innerHTML = `
+                    <span class="apprenant-name" contenteditable="false">${apprenant.nom}</span>
+                    <button class="btn-rename" onclick="event.stopPropagation(); editApprenantName('${apprenant.id}')">✏️</button>
+                    <button class="btn-delete-apprenant" onclick="event.stopPropagation(); supprimerApprenant('${apprenant.id}')">×</button>
+                `;
+                btnApprenant.addEventListener('click', () => filterByApprenant(apprenant.id));
+                selector.appendChild(btnApprenant);
+            });
+            // Bouton pour ajouter un apprenant
+            const btnAjouter = document.createElement('button');
+            btnAjouter.className = 'btn';
+            btnAjouter.innerHTML = '<i class="fas fa-plus"></i> Ajouter un apprenant';
+            btnAjouter.onclick = ajouterApprenant;
+            selector.appendChild(btnAjouter);
+        }
+        function editApprenantName(apprenantId) {
+            const span = document.querySelector(`.btn-apprenant[data-apprenant="${apprenantId}"] .apprenant-name`);
+            span.contentEditable = true;
+            span.focus();
+
+            const range = document.createRange();
+            range.selectNodeContents(span);
+            range.collapse(false);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+
+            span.addEventListener('blur', () => {
+                span.contentEditable = false;
+                const nouveauNom = span.textContent.trim();
+                if (nouveauNom) {
+                    renommerApprenant(apprenantId, nouveauNom);
+                } else {
+                    span.textContent = APPRENANTS.find(a => a.id === apprenantId)?.nom || `Apprenant ${apprenantId}`;
+                }
+            }, { once: true });
+
+            span.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    span.blur();
+                }
+            }, { once: true });
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+            afficherApprenants();
+            afficherTaches();
+            initSortable();
+            if (APPRENANTS.length > 0) {
+                filterByApprenant(APPRENANTS[0].id);
+            }
+            mettreAJourGrillesEvaluation();
+        });
+        function openModal(modalId) { document.getElementById(modalId).style.display = "block"; }
+        function closeModal(modalId) { document.getElementById(modalId).style.display = "none"; }
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = "none";
+            }
+        };
+    </script>
+</body>
+</html>
