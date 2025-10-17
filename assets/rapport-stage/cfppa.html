@@ -11,6 +11,93 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles/style.css">
+    <style>
+        /* Conteneur des boutons sous le titre */
+        .under-title-nav-container {
+            display: flex;
+            justify-content: center;
+            margin: 20px auto;
+            padding: 12px;
+            background: rgba(0, 245, 255, 0.03);
+            border-radius: 30px;
+            border: 1px solid rgba(0, 245, 255, 0.1);
+            backdrop-filter: blur(8px);
+            max-width: 90%;
+            box-shadow: 0 4px 12px rgba(0, 245, 255, 0.05);
+        }
+
+        /* Groupe de boutons */
+        .btn-nav-group {
+            display: inline-flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* Boutons holographiques */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 120px;
+            height: 40px;
+            padding: 8px 16px;
+            background: transparent;
+            color: var(--neon-blue);
+            text-decoration: none;
+            border: 1px solid rgba(0, 245, 255, 0.3);
+            border-radius: 25px;
+            font-weight: 500;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(8px);
+            background: rgba(0, 245, 255, 0.05);
+            box-sizing: border-box;
+            white-space: nowrap;
+        }
+
+        .btn:hover {
+            color: white;
+            box-shadow: 0 0 10px rgba(0, 245, 255, 0.2);
+            border-color: rgba(0, 245, 255, 0.5);
+            background: rgba(0, 245, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 245, 255, 0.15), transparent);
+            transition: left 0.4s ease;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-icon {
+            margin-right: 8px;
+            font-size: 0.8rem;
+        }
+
+        /* Adaptation responsive */
+        @media (max-width: 768px) {
+            .btn {
+                min-width: 100px;
+                height: 36px;
+                font-size: 0.8rem;
+                padding: 6px 12px;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Menu flottant -->
@@ -60,6 +147,44 @@
                 Romain L. | Campus Yvetot - Filière Insertion Professionnelle<br>
                 Un stage au service de l’insertion professionnelle : accompagner, innover, réussir ensemble
             </p>
+            <!-- Navigation sous le titre -->
+            <div class="under-title-nav-container">
+                <div class="btn-nav-group">
+                    <a href="#remerciements" class="btn" onclick="scrollToSection('remerciements')">
+                        <i class="fas fa-hands-helping btn-icon"></i> Remerciements
+                    </a>
+                    <a href="#sommaire" class="btn" onclick="scrollToSection('sommaire')">
+                        <i class="fas fa-list-alt btn-icon"></i> Sommaire
+                    </a>
+                    <a href="#introduction" class="btn" onclick="scrollToSection('introduction')">
+                        <i class="fas fa-rocket btn-icon"></i> Introduction
+                    </a>
+                    <a href="#entreprise" class="btn" onclick="scrollToSection('entreprise')">
+                        <i class="fas fa-building btn-icon"></i> Entreprise
+                    </a>
+                    <a href="#missions" class="btn" onclick="scrollToSection('missions')">
+                        <i class="fas fa-tasks btn-icon"></i> Missions
+                    </a>
+                    <a href="#apports" class="btn" onclick="scrollToSection('apports')">
+                        <i class="fas fa-chart-line btn-icon"></i> Apports
+                    </a>
+                    <a href="#conclusion" class="btn" onclick="scrollToSection('conclusion')">
+                        <i class="fas fa-flag-checkered btn-icon"></i> Conclusion
+                    </a>
+                    <a href="#annexes" class="btn" onclick="scrollToSection('annexes')">
+                        <i class="fas fa-paperclip btn-icon"></i> Annexes
+                    </a>
+                    <a href="fiches/memo.html" target="_blank" class="btn">
+                        <i class="fas fa-sticky-note btn-icon"></i> Fiche Mémo
+                    </a>
+                    <a href="fiches/prompt.html" target="_blank" class="btn">
+                        <i class="fas fa-pencil-alt btn-icon"></i> Fiche Prompt
+                    </a>
+                    <a href="kanban.html" target="_blank" class="btn">
+                        <i class="fas fa-columns btn-icon"></i> Kanban
+                    </a>
+                </div>
+            </div>
         </header>
         <main>
             <!-- Informations générales -->
